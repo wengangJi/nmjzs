@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.ac.dao.SoAuditMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.ac.entity.SoAudit" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="soid" property="soid" jdbcType="VARCHAR" />
+    <result column="audit_type" property="auditType" jdbcType="CHAR" />
+    <result column="audit_tag" property="auditTag" jdbcType="CHAR" />
+    <result column="audit_by" property="auditBy" jdbcType="VARCHAR" />
+    <result column="audit_level" property="auditLevel" jdbcType="CHAR" />
+    <result column="audit_date" property="auditDate" jdbcType="TIMESTAMP" />
+    <result column="audit_info" property="auditInfo" jdbcType="VARCHAR" />
+    <result column="rsrv_str1" property="rsrvStr1" jdbcType="VARCHAR" />
+    <result column="rsrv_str2" property="rsrvStr2" jdbcType="VARCHAR" />
+    <result column="rsrv_str3" property="rsrvStr3" jdbcType="VARCHAR" />
+    <result column="sts" property="sts" jdbcType="CHAR" />
+    <result column="sts_date" property="stsDate" jdbcType="TIMESTAMP" />
+    <result column="so_hours_id" property="soHoursId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, soid, audit_type, audit_tag, audit_by, audit_level, audit_date, audit_info, rsrv_str1, 
+    rsrv_str2, rsrv_str3, sts, sts_date, so_hours_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from so_audit
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from so_audit
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zhongxin.cims.modules.ac.entity.SoAudit" >
+    insert into so_audit (id, soid, audit_type, 
+      audit_tag, audit_by, audit_level, 
+      audit_date, audit_info, rsrv_str1, 
+      rsrv_str2, rsrv_str3, sts, 
+      sts_date,so_hours_id)
+    values (#{id,jdbcType=BIGINT}, #{soid,jdbcType=VARCHAR}, #{auditType,jdbcType=CHAR}, 
+      #{auditTag,jdbcType=CHAR}, #{auditBy,jdbcType=VARCHAR}, #{auditLevel,jdbcType=CHAR}, 
+      #{auditDate,jdbcType=TIMESTAMP}, #{auditInfo,jdbcType=VARCHAR}, #{rsrvStr1,jdbcType=VARCHAR}, 
+      #{rsrvStr2,jdbcType=VARCHAR}, #{rsrvStr3,jdbcType=VARCHAR}, #{sts,jdbcType=CHAR}, 
+      #{stsDate,jdbcType=TIMESTAMP},#{soHoursId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.ac.entity.SoAudit" >
+    insert into so_audit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="soid != null" >
+        soid,
+      </if>
+      <if test="auditType != null" >
+        audit_type,
+      </if>
+      <if test="auditTag != null" >
+        audit_tag,
+      </if>
+      <if test="auditBy != null" >
+        audit_by,
+      </if>
+      <if test="auditLevel != null" >
+        audit_level,
+      </if>
+      <if test="auditDate != null" >
+        audit_date,
+      </if>
+      <if test="auditInfo != null" >
+        audit_info,
+      </if>
+      <if test="rsrvStr1 != null" >
+        rsrv_str1,
+      </if>
+      <if test="rsrvStr2 != null" >
+        rsrv_str2,
+      </if>
+      <if test="rsrvStr3 != null" >
+        rsrv_str3,
+      </if>
+      <if test="sts != null" >
+        sts,
+      </if>
+      <if test="stsDate != null" >
+        sts_date,
+      </if>
+        <if test="soHoursId != null" >
+            so_hours_id,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="soid != null" >
+        #{soid,jdbcType=VARCHAR},
+      </if>
+      <if test="auditType != null" >
+        #{auditType,jdbcType=CHAR},
+      </if>
+      <if test="auditTag != null" >
+        #{auditTag,jdbcType=CHAR},
+      </if>
+      <if test="auditBy != null" >
+        #{auditBy,jdbcType=VARCHAR},
+      </if>
+      <if test="auditLevel != null" >
+        #{auditLevel,jdbcType=CHAR},
+      </if>
+      <if test="auditDate != null" >
+        #{auditDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditInfo != null" >
+        #{auditInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr1 != null" >
+        #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+        <if test="soHoursId != null" >
+            #{soHoursId,jdbcType=BIGINT},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.ac.entity.SoAudit" >
+    update so_audit
+    <set >
+      <if test="soid != null" >
+        soid = #{soid,jdbcType=VARCHAR},
+      </if>
+      <if test="auditType != null" >
+        audit_type = #{auditType,jdbcType=CHAR},
+      </if>
+      <if test="auditTag != null" >
+        audit_tag = #{auditTag,jdbcType=CHAR},
+      </if>
+      <if test="auditBy != null" >
+        audit_by = #{auditBy,jdbcType=VARCHAR},
+      </if>
+      <if test="auditLevel != null" >
+        audit_level = #{auditLevel,jdbcType=CHAR},
+      </if>
+      <if test="auditDate != null" >
+        audit_date = #{auditDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditInfo != null" >
+        audit_info = #{auditInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr1 != null" >
+        rsrv_str1 = #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        rsrv_str2 = #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        rsrv_str3 = #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        sts = #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        sts_date = #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+        <if test="soHoursId != null" >
+            so_hours_id = #{soHoursId,jdbcType=BIGINT},
+        </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.ac.entity.SoAudit" >
+    update so_audit
+    set soid = #{soid,jdbcType=VARCHAR},
+      audit_type = #{auditType,jdbcType=CHAR},
+      audit_tag = #{auditTag,jdbcType=CHAR},
+      audit_by = #{auditBy,jdbcType=VARCHAR},
+      audit_level = #{auditLevel,jdbcType=CHAR},
+      audit_date = #{auditDate,jdbcType=TIMESTAMP},
+      audit_info = #{auditInfo,jdbcType=VARCHAR},
+      rsrv_str1 = #{rsrvStr1,jdbcType=VARCHAR},
+      rsrv_str2 = #{rsrvStr2,jdbcType=VARCHAR},
+      rsrv_str3 = #{rsrvStr3,jdbcType=VARCHAR},
+      sts = #{sts,jdbcType=CHAR},
+      sts_date = #{stsDate,jdbcType=TIMESTAMP},
+      so_hours_id = #{soHoursId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="selectBySoid" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from so_audit
+        where soid = #{soid,jdbcType=VARCHAR} and sts = '0'
+    </select>
+    <select id="findBySoidAndSoHoursId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from so_audit
+        where soid = #{soid,jdbcType=VARCHAR} and so_hours_id = #{soHoursId,jdbcType=BIGINT} and sts = '0'
+    </select>
+</mapper>

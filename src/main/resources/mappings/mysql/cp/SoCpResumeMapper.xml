@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.cp.dao.SoCpResumeMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.cp.entity.SoCpResume" >
+    <result column="SOID" property="soid" jdbcType="VARCHAR" />
+      <result column="SEQ" property="seq" jdbcType="INTEGER" />
+      <result column="ACT_TYPE" property="actType" jdbcType="CHAR" />
+    <result column="COMPANY" property="company" jdbcType="VARCHAR" />
+    <result column="POSITION" property="position" jdbcType="VARCHAR" />
+    <result column="EFF_DATE" property="effDate" jdbcType="DATE" />
+    <result column="EXP_DATE" property="expDate" jdbcType="DATE" />
+    <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+    <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+    <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+  </resultMap>
+    <sql id="Base_Column_List" >
+        SOID, SEQ,ACT_TYPE, COMPANY, POSITION, EFF_DATE, EXP_DATE, RSRV_STR1, RSRV_STR2, RSRV_STR3
+    </sql>
+
+  <insert id="insert" parameterType="com.zhongxin.cims.modules.cp.entity.SoCpResume" >
+    insert into so_cp_resume (SOID,SEQ, ACT_TYPE,
+      COMPANY, POSITION, EFF_DATE, 
+      EXP_DATE, RSRV_STR1, RSRV_STR2, 
+      RSRV_STR3)
+    values (#{soid,jdbcType=VARCHAR}, #{seq,jdbcType=INTEGER}, #{actType,jdbcType=CHAR},
+      #{company,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{effDate,jdbcType=DATE}, 
+      #{expDate,jdbcType=DATE}, #{rsrvStr1,jdbcType=VARCHAR}, #{rsrvStr2,jdbcType=VARCHAR}, 
+      #{rsrvStr3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.cp.entity.SoCpResume" >
+    insert into so_cp_resume
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="soid != null" >
+        SOID,
+      </if>
+        <if test="SEQ != null" >
+            seq,
+        </if>
+      <if test="actType != null" >
+        ACT_TYPE,
+      </if>
+
+      <if test="company != null" >
+        COMPANY,
+      </if>
+      <if test="position != null" >
+        POSITION,
+      </if>
+      <if test="effDate != null" >
+        EFF_DATE,
+      </if>
+      <if test="expDate != null" >
+        EXP_DATE,
+      </if>
+      <if test="rsrvStr1 != null" >
+        RSRV_STR1,
+      </if>
+      <if test="rsrvStr2 != null" >
+        RSRV_STR2,
+      </if>
+      <if test="rsrvStr3 != null" >
+        RSRV_STR3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="soid != null" >
+        #{soid,jdbcType=VARCHAR},
+      </if>
+        <if test="seq != null" >
+            #{seq,jdbcType=INTEGER},
+        </if>
+      <if test="actType != null" >
+        #{actType,jdbcType=CHAR},
+      </if>
+
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="effDate != null" >
+        #{effDate,jdbcType=DATE},
+      </if>
+      <if test="expDate != null" >
+        #{expDate,jdbcType=DATE},
+      </if>
+      <if test="rsrvStr1 != null" >
+        #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+    <!-- 调用见 SoCpController 方法 -->
+    <select id="findSoCpResumeBySoid" resultType="SoCpResume" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from so_cp_resume a
+        where a.soid = #{soid}
+    </select>
+
+    <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.cp.entity.SoCpResume">
+        update so_cp_resume
+        <set >
+            <if test="seq != null" >
+                SEQ = #{seq,jdbcType=INTEGER},
+            </if>
+            <if test="actType != null" >
+                ACT_TYPE = #{actType,jdbcType=CHAR},
+            </if>
+            <if test="company != null" >
+                COMPANY = #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null" >
+                POSITION = #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="effDate != null" >
+                EFF_DATE = #{effDate,jdbcType=DATE},
+            </if>
+            <if test="expDate != null" >
+                EXP_DATE = #{expDate,jdbcType=DATE},
+            </if>
+            <if test="rsrvStr1 != null" >
+                RSRV_STR1 = #{rsrvStr1,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr2 != null" >
+                RSRV_STR2 = #{rsrvStr2,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr3 != null" >
+                RSRV_STR3 = #{rsrvStr3,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where soid = #{soid,jdbcType=VARCHAR} and seq =#{seq,jdbcType=INTEGER}
+
+    </update>
+
+</mapper>

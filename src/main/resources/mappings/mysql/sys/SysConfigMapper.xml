@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.sys.dao.SysConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.sys.entity.SysBatch" >
+    <id column="BATCH_ID" property="batchId" jdbcType="VARCHAR" />
+    <result column="BATCH_TYPE" property="batchType" jdbcType="VARCHAR" />
+    <result column="BATCH_NAME" property="batchName" jdbcType="VARCHAR" />
+    <result column="BEGIN_NO" property="beginNo" jdbcType="INTEGER" />
+    <result column="END_NO" property="endNo" jdbcType="INTEGER" />
+    <result column="APP_ID" property="appId" jdbcType="VARCHAR" />
+    <result column="COMPANY_ID" property="companyId" jdbcType="INTEGER" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="DATE" />
+    <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="DATE" />
+    <result column="DELETE_BY" property="deleteBy" jdbcType="VARCHAR" />
+    <result column="DELETE_DATE" property="deleteDate" jdbcType="DATE" />
+    <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+    <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+    <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+      <result column="STS" property="sts" jdbcType="VARCHAR" />
+      <result column="STS_DATE" property="stsDate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    BATCH_ID, BATCH_TYPE, BATCH_NAME, BEGIN_NO, END_NO, APP_ID, COMPANY_ID,
+    CREATE_BY, CREATE_DATE, UPDATE_BY, UPDATE_DATE, DELETE_BY, DELETE_DATE, RSRV_STR1,
+    RSRV_STR2, RSRV_STR3 ,STS,STS_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_batch
+    where BATCH_ID = #{batchId,jdbcType=VARCHAR}
+  </select>
+<select id="selectBactchList" resultMap="BaseResultMap" parameterType="com.zhongxin.cims.modules.sys.entity.SysBatch" >
+        select
+        <include refid="Base_Column_List" />
+        from sys_batch
+        where     1=1
+        <if test="appId!=null and appId!=''">
+            AND  APP_ID =#{appId,jdbcType=VARCHAR}
+        </if>
+        <if test="batchType!=null and batchType!=''" >
+            AND  BATCH_TYPE=#{batchType,jdbcType=VARCHAR}
+        </if>
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_batch
+    where BATCH_ID = #{batchId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhongxin.cims.modules.sys.entity.SysBatch" >
+    insert into sys_batch (BATCH_ID, BATCH_TYPE, BATCH_NAME, BEGIN_NO, END_NO, APP_ID, COMPANY_ID,
+    CREATE_BY, CREATE_DATE, UPDATE_BY, UPDATE_DATE, DELETE_BY, DELETE_DATE, RSRV_STR1,
+    RSRV_STR2, RSRV_STR3,STS,STS_DATE)
+    values (#{batchId,jdbcType=VARCHAR}, #{batchType,jdbcType=VARCHAR}, #{batchName,jdbcType=VARCHAR},
+      #{beginNo,jdbcType=INTEGER}, #{endNo,jdbcType=INTEGER}, #{appId,jdbcType=VARCHAR},
+      #{companyId,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE},
+      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=DATE}, #{deleteBy,jdbcType=VARCHAR},
+      #{deleteDate,jdbcType=DATE}, #{rsrvStr1,jdbcType=VARCHAR}, #{rsrvStr2,jdbcType=VARCHAR},
+      #{rsrvStr3,jdbcType=VARCHAR},#{sts,jdbcType=VARCHAR},#{stsDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.sys.entity.SysBatch" >
+    insert into sys_batch
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="batchId != null" >
+          BATCH_ID,
+      </if>
+      <if test="batchType != null" >
+          BATCH_TYPE,
+      </if>
+      <if test="batchName != null" >
+          BATCH_NAME,
+      </if>
+      <if test="beginNo != null" >
+          BEGIN_NO,
+      </if>
+      <if test="endNo != null" >
+          END_NO,
+      </if>
+      <if test="appId != null" >
+          APP_ID,
+      </if>
+      <if test="companyId != null" >
+          COMPANY_ID,
+      </if>
+      <if test="createBy != null" >
+          CREATE_BY,
+      </if>
+      <if test="createDate != null" >
+          CREATE_DATE,
+      </if>
+      <if test="updateBy != null" >
+          UPDATE_BY,
+      </if>
+      <if test="updateDate != null" >
+          UPDATE_DATE,
+      </if>
+      <if test="deleteBy != null" >
+          DELETE_BY,
+      </if>
+      <if test="deleteDate != null" >
+          DELETE_DATE,
+      </if>
+      <if test="rsrvStr1 != null" >
+          RSRV_STR1,
+      </if>
+      <if test="rsrvStr2 != null" >
+          RSRV_STR2,
+      </if>
+      <if test="rsrvStr3 != null" >
+          RSRV_STR3,
+      </if>
+        <if test="sts != null" >
+            STS,
+        </if>
+        <if test="stsDate != null" >
+            STS_DATE,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="batchId != null" >
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="batchType != null" >
+        #{batchType,jdbcType=VARCHAR},
+      </if>
+      <if test="batchName != null" >
+        #{batchName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginNo != null" >
+        #{beginNo,jdbcType=INTEGER},
+      </if>
+      <if test="endNo != null" >
+        #{endNo,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null" >
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="deleteBy != null" >
+        #{deleteBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteDate != null" >
+        #{deleteDate,jdbcType=DATE},
+      </if>
+      <if test="rsrvStr1 != null" >
+        #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+        <if test="sts != null" >
+        #{sts,jdbcType=VARCHAR},
+        </if>
+        <if test="stsDate != null" >
+            #{stsDate,jdbcType=DATE},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.sys.entity.SysBatch" >
+    update sys_batch
+    <set >
+      <if test="batchType != null" >
+        BATCH_TYPE = #{batchType,jdbcType=VARCHAR},
+      </if>
+      <if test="batchName != null" >
+        BATCH_NAME = #{batchName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginNo != null" >
+        BEGIN_NO = #{beginNo,jdbcType=INTEGER},
+      </if>
+      <if test="endNo != null" >
+        END_NO = #{endNo,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null" >
+        APP_ID = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE = #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="deleteBy != null" >
+        DELETE_BY = #{deleteBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteDate != null" >
+        DELETE_DATE = #{deleteDate,jdbcType=DATE},
+      </if>
+      <if test="rsrvStr1 != null" >
+        RSRV_STR1 = #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        RSRV_STR2 = #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        RSRV_STR3 = #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+        <if test="sts != null" >
+            STS = #{sts,jdbcType=VARCHAR},
+        </if>
+        <if test="stsDate != null" >
+            STS_DATE = #{stsDate,jdbcType=DATE},
+        </if>
+    </set>
+    where BATCH_ID = #{batchId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.sys.entity.SysBatch" >
+    update sys_batch
+    set BATCH_TYPE = #{batchType,jdbcType=VARCHAR},
+      BATCH_NAME = #{batchName,jdbcType=VARCHAR},
+      BEGIN_NO = #{beginNo,jdbcType=INTEGER},
+      END_NO = #{endNo,jdbcType=INTEGER},
+      APP_ID = #{appId,jdbcType=VARCHAR},
+      COMPANY_ID = #{companyId,jdbcType=INTEGER},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=VARCHAR},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      UPDATE_DATE = #{updateDate,jdbcType=DATE},
+      DELETE_BY = #{deleteBy,jdbcType=VARCHAR},
+      DELETE_DATE = #{deleteDate,jdbcType=DATE},
+      RSRV_STR1 = #{rsrvStr1,jdbcType=VARCHAR},
+      RSRV_STR2 = #{rsrvStr2,jdbcType=VARCHAR},
+      RSRV_STR3 = #{rsrvStr3,jdbcType=VARCHAR}
+      STS = #{sts,jdbcType=VARCHAR},
+      STS_DATE = #{stsDate,jdbcType=DATE}
+    where BATCH_ID = #{batchId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.cp.dao.ServCpPerformanceMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.cp.entity.ServCpPerformance" >
+    <id column="SERVID" property="servid" jdbcType="INTEGER" />
+    <result column="HONOR_CASE" property="honorCase" jdbcType="VARCHAR" />
+    <result column="PENALTY_CASE" property="penaltyCase" jdbcType="VARCHAR" />
+    <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+    <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+    <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+    <result column="STS" property="sts" jdbcType="CHAR" />
+    <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SERVID, HONOR_CASE, PENALTY_CASE, RSRV_STR1, RSRV_STR2, RSRV_STR3, STS, STS_DATE, 
+    REMARKS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from serv_cp_performance
+    where SERVID = #{servid,jdbcType=INTEGER}    and sts='0'
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from serv_cp_performance
+    where SERVID = #{servid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhongxin.cims.modules.cp.entity.ServCpPerformance" >
+    insert into serv_cp_performance (SERVID, HONOR_CASE, PENALTY_CASE, 
+      RSRV_STR1, RSRV_STR2, RSRV_STR3, 
+      STS, STS_DATE, REMARKS)
+    values (#{servid,jdbcType=INTEGER}, #{honorCase,jdbcType=VARCHAR}, #{penaltyCase,jdbcType=VARCHAR}, 
+      #{rsrvStr1,jdbcType=VARCHAR}, #{rsrvStr2,jdbcType=VARCHAR}, #{rsrvStr3,jdbcType=VARCHAR}, 
+      #{sts,jdbcType=CHAR}, #{stsDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.cp.entity.ServCpPerformance" >
+    insert into serv_cp_performance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="servid != null" >
+        SERVID,
+      </if>
+      <if test="honorCase != null" >
+        HONOR_CASE,
+      </if>
+      <if test="penaltyCase != null" >
+        PENALTY_CASE,
+      </if>
+      <if test="rsrvStr1 != null" >
+        RSRV_STR1,
+      </if>
+      <if test="rsrvStr2 != null" >
+        RSRV_STR2,
+      </if>
+      <if test="rsrvStr3 != null" >
+        RSRV_STR3,
+      </if>
+      <if test="sts != null" >
+        STS,
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="servid != null" >
+        #{servid,jdbcType=INTEGER},
+      </if>
+      <if test="honorCase != null" >
+        #{honorCase,jdbcType=VARCHAR},
+      </if>
+      <if test="penaltyCase != null" >
+        #{penaltyCase,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr1 != null" >
+        #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.cp.entity.ServCpPerformance" >
+    update serv_cp_performance
+    <set >
+      <if test="honorCase != null" >
+        HONOR_CASE = #{honorCase,jdbcType=VARCHAR},
+      </if>
+      <if test="penaltyCase != null" >
+        PENALTY_CASE = #{penaltyCase,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr1 != null" >
+        RSRV_STR1 = #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        RSRV_STR2 = #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        RSRV_STR3 = #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        STS = #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE = #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SERVID = #{servid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.cp.entity.ServCpPerformance" >
+    update serv_cp_performance
+    set HONOR_CASE = #{honorCase,jdbcType=VARCHAR},
+      PENALTY_CASE = #{penaltyCase,jdbcType=VARCHAR},
+      RSRV_STR1 = #{rsrvStr1,jdbcType=VARCHAR},
+      RSRV_STR2 = #{rsrvStr2,jdbcType=VARCHAR},
+      RSRV_STR3 = #{rsrvStr3,jdbcType=VARCHAR},
+      STS = #{sts,jdbcType=CHAR},
+      STS_DATE = #{stsDate,jdbcType=TIMESTAMP},
+      REMARKS = #{remarks,jdbcType=VARCHAR}
+    where SERVID = #{servid,jdbcType=INTEGER}
+  </update>
+</mapper>

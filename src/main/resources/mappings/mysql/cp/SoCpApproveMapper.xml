@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.cp.dao.SoCpApproveMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.cp.entity.SoCpApprove" >
+    <result column="SOID" property="soid" jdbcType="VARCHAR" />
+    <result column="APPR_ID" property="apprId" jdbcType="VARCHAR" />
+    <result column="APPR_TYPE" property="apprType" jdbcType="VARCHAR" />
+    <result column="APPR_USER_ID" property="apprUserId" jdbcType="VARCHAR" />
+    <result column="APPR_OFFICE_ID" property="apprOfficeId" jdbcType="VARCHAR" />
+    <result column="APPR_DATE" property="apprDate" jdbcType="TIMESTAMP" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="IN_CONTENT" property="inContent" jdbcType="VARCHAR" />
+    <result column="OUT_CONTENT" property="outContent" jdbcType="VARCHAR" />
+    <result column="SIGNATURE" property="signature" jdbcType="VARCHAR" />
+    <result column="SEAL" property="seal" jdbcType="VARCHAR" />
+    <result column="PATH_ID" property="pathId" jdbcType="VARCHAR" />
+    <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+    <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+    <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+    <result column="STS" property="sts" jdbcType="CHAR" />
+    <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+    <result column="CONSISTENT_ORIGINAL" property="consistentOriginal" jdbcType="VARCHAR" />
+    <result column="TASK_NAME" property="taskName" jdbcType="VARCHAR" />
+  </resultMap>
+    <sql id="Base_Column_List" >
+        SOID, APPR_TYPE, APPR_USER_ID, APPR_OFFICE_ID, APPR_DATE,
+        CONTENT, IN_CONTENT, OUT_CONTENT, SIGNATURE, SEAL, PATH_ID, STS,
+        STS_DATE, REMARKS, RSRV_STR1, RSRV_STR2,RSRV_STR3, CONSISTENT_ORIGINAL,TASK_NAME
+    </sql>
+  <insert id="insert" parameterType="com.zhongxin.cims.modules.cp.entity.SoCpApprove" >
+    insert into so_cp_approve (SOID, APPR_ID,
+      APPR_TYPE, APPR_USER_ID, APPR_OFFICE_ID, 
+      APPR_DATE, CONTENT, IN_CONTENT, 
+      OUT_CONTENT, SIGNATURE, SEAL, 
+      PATH_ID, RSRV_STR1, RSRV_STR2, 
+      RSRV_STR3, STS, STS_DATE, REMARKS, CONSISTENT_ORIGINAL,TASK_NAME
+      )
+    values (#{soid,jdbcType=VARCHAR}, #{apprId,jdbcType=VARCHAR},
+      #{apprType,jdbcType=VARCHAR}, #{apprUserId,jdbcType=VARCHAR}, #{apprOfficeId,jdbcType=VARCHAR}, 
+      #{apprDate,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, #{inContent,jdbcType=VARCHAR},
+      #{outContent,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, #{seal,jdbcType=VARCHAR}, 
+      #{pathId,jdbcType=VARCHAR}, #{rsrvStr1,jdbcType=VARCHAR}, #{rsrvStr2,jdbcType=VARCHAR}, 
+      #{rsrvStr3,jdbcType=VARCHAR}, #{sts,jdbcType=CHAR}, #{stsDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR},
+      #{consistentOriginal,jdbcType=VARCHAR},#{taskName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.cp.entity.SoCpApprove" >
+    insert into so_cp_approve
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="soid != null" >
+        SOID,
+      </if>
+      <if test="apprId != null" >
+        APPR_ID,
+      </if>
+
+      <if test="apprType != null" >
+        APPR_TYPE,
+      </if>
+      <if test="apprUserId != null" >
+        APPR_USER_ID,
+      </if>
+      <if test="apprOfficeId != null" >
+        APPR_OFFICE_ID,
+      </if>
+      <if test="apprDate != null" >
+        APPR_DATE,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="inContent != null" >
+        IN_CONTENT,
+      </if>
+      <if test="outContent != null" >
+        OUT_CONTENT,
+      </if>
+      <if test="signature != null" >
+        SIGNATURE,
+      </if>
+      <if test="seal != null" >
+        SEAL,
+      </if>
+      <if test="pathId != null" >
+        PATH_ID,
+      </if>
+      <if test="rsrvStr1 != null" >
+        RSRV_STR1,
+      </if>
+      <if test="rsrvStr2 != null" >
+        RSRV_STR2,
+      </if>
+      <if test="rsrvStr3 != null" >
+        RSRV_STR3,
+      </if>
+      <if test="sts != null" >
+        STS,
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+      <if test="consistentOriginal !=  null">
+          CONSISTENT_ORIGINAL,
+      </if>
+      <if test="taskName !=  null">
+          TASK_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="soid != null" >
+        #{soid,jdbcType=VARCHAR},
+      </if>
+      <if test="apprId != null" >
+        #{apprId,jdbcType=VARCHAR},
+      </if>
+
+      <if test="apprType != null" >
+        #{apprType,jdbcType=VARCHAR},
+      </if>
+      <if test="apprUserId != null" >
+        #{apprUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="apprOfficeId != null" >
+        #{apprOfficeId,jdbcType=VARCHAR},
+      </if>
+      <if test="apprDate != null" >
+        #{apprDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="inContent != null" >
+        #{inContent,jdbcType=VARCHAR},
+      </if>
+      <if test="outContent != null" >
+        #{outContent,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null" >
+        #{signature,jdbcType=VARCHAR},
+      </if>
+      <if test="seal != null" >
+        #{seal,jdbcType=VARCHAR},
+      </if>
+      <if test="pathId != null" >
+        #{pathId,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr1 != null" >
+        #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="consistentOriginal != null" >
+        #{consistentOriginal,jdbcType=VARCHAR},
+      </if>
+      <if test="taskName != null" >
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+    <!-- 调用见 SoCpController 方法 -->
+    <select id="findSoCpApproveBySoid" resultType="SoCpApprove" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from so_cp_approve a
+        where a.soid = #{soid}
+        order by appr_date DESC
+    </select>
+
+
+    <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.cp.entity.SoCpApprove">
+        update so_cp_approve
+        <set >
+            <if test="apprId != null" >
+                APPR_ID = #{apprId,jdbcType=VARCHAR},
+            </if>
+            <if test="apprType != null" >
+                APPR_TYPE = #{apprType,jdbcType=VARCHAR},
+            </if>
+            <if test="apprUserId != null" >
+                APPR_USER_ID = #{apprUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="apprOfficeId != null" >
+                APPR_OFFICE_ID = #{apprOfficeId,jdbcType=VARCHAR},
+            </if>
+            <if test="apprDate != null" >
+                APPR_DATE = #{apprDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null" >
+                CONTENT = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="inContent != null" >
+                IN_CONTENT = #{inContent,jdbcType=VARCHAR},
+            </if>
+            <if test="outContent != null" >
+                OUT_CONTENT = #{outContent,jdbcType=VARCHAR},
+            </if>
+            <if test="signature != null" >
+                SIGNATURE = #{signature,jdbcType=VARCHAR},
+            </if>
+            <if test="seal != null" >
+                SEAL = #{seal,jdbcType=VARCHAR},
+            </if>
+            <if test="pathId != null" >
+                PATH_ID = #{pathId,jdbcType=VARCHAR},
+            </if>
+            <if test="taskName != null" >
+                task_name = #{taskName,jdbcType=VARCHAR},
+            </if>
+            <if test="consistentOriginal != null" >
+                consistent_original = #{consistentOriginal,jdbcType=CHAR},
+            </if>
+            <if test="rsrvStr1 != null" >
+                RSRV_STR1 = #{rsrvStr1,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr2 != null" >
+                RSRV_STR2 = #{rsrvStr2,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr3 != null" >
+                RSRV_STR3 = #{rsrvStr3,jdbcType=VARCHAR},
+            </if>
+            <if test="sts != null" >
+                STS = #{sts,jdbcType=CHAR},
+            </if>
+            <if test="stsDate != null" >
+                STS_DATE = #{stsDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null" >
+                REMARKS = #{remarks,jdbcType=VARCHAR},
+            </if>
+        </set>
+
+        where appr_type ='02' and  soid = #{soid,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

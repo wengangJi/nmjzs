@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.common.dao.SequenceMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.common.entity.Sequence" >
+    <id column="name" property="name" jdbcType="VARCHAR" />
+    <result column="current_value" property="currentValue" jdbcType="INTEGER" />
+    <result column="increment" property="increment" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sequence_value
+  </sql>
+  <select id="getNextValue" resultType="INTEGER"  parameterType="java.lang.String">
+    select NEXTVAL(#{name,jdbcType=VARCHAR}) as seqValue
+  </select>
+
+  <select id="getCurrValue" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select CURRVAL(#{name,jdbcType=VARCHAR}) as seqValue
+  </select>
+
+  <insert id="initSequence" parameterType="com.zhongxin.cims.modules.common.entity.Sequence" >
+    insert into sequence (name, current_value, increment
+      )
+    values (#{name,jdbcType=VARCHAR}, #{currentValue,jdbcType=INTEGER}, #{increment,jdbcType=INTEGER}
+      )
+  </insert>
+</mapper>

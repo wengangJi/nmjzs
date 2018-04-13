@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.cp.dao.SoCpPerformanceMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.cp.entity.SoCpPerformance" >
+    <result column="SOID" property="soid" jdbcType="VARCHAR" />
+    <result column="ACT_TYPE" property="actType" jdbcType="CHAR" />
+    <result column="HONOR_CASE" property="honorCase" jdbcType="VARCHAR" />
+    <result column="PENALTY_CASE" property="penaltyCase" jdbcType="VARCHAR" />
+    <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+    <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+    <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+  </resultMap>
+
+    <sql id="Base_Column_List" >
+        SOID,ACT_TYPE,  HONOR_CASE, PENALTY_CASE,RSRV_STR1, RSRV_STR2,RSRV_STR3
+    </sql>
+  <insert id="insert" parameterType="com.zhongxin.cims.modules.cp.entity.SoCpPerformance" >
+    insert into so_cp_performance (SOID, ACT_TYPE,
+      HONOR_CASE, PENALTY_CASE, RSRV_STR1, 
+      RSRV_STR2, RSRV_STR3)
+    values (#{soid,jdbcType=VARCHAR}, #{actType,jdbcType=CHAR},
+      #{honorCase,jdbcType=VARCHAR}, #{penaltyCase,jdbcType=VARCHAR}, #{rsrvStr1,jdbcType=VARCHAR}, 
+      #{rsrvStr2,jdbcType=VARCHAR}, #{rsrvStr3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.cp.entity.SoCpPerformance" >
+    insert into so_cp_performance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="soid != null" >
+        SOID,
+      </if>
+      <if test="actType != null" >
+        ACT_TYPE,
+      </if>
+
+      <if test="honorCase != null" >
+        HONOR_CASE,
+      </if>
+      <if test="penaltyCase != null" >
+        PENALTY_CASE,
+      </if>
+      <if test="rsrvStr1 != null" >
+        RSRV_STR1,
+      </if>
+      <if test="rsrvStr2 != null" >
+        RSRV_STR2,
+      </if>
+      <if test="rsrvStr3 != null" >
+        RSRV_STR3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="soid != null" >
+        #{soid,jdbcType=VARCHAR},
+      </if>
+      <if test="actType != null" >
+        #{actType,jdbcType=CHAR},
+      </if>
+
+      <if test="honorCase != null" >
+        #{honorCase,jdbcType=VARCHAR},
+      </if>
+      <if test="penaltyCase != null" >
+        #{penaltyCase,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr1 != null" >
+        #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+    <!-- 调用见 SoCpController 方法 -->
+    <select id="findSoCpPerformanceBySoid" resultType="SoCpPerformance" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from so_cp_performance a
+        where a.soid = #{soid}
+    </select>
+
+    <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.cp.entity.SoCpPerformance">
+        update so_cp_performance
+        <set>
+            ACT_TYPE = #{actType,jdbcType=CHAR},
+            HONOR_CASE = #{honorCase,jdbcType=VARCHAR},
+            PENALTY_CASE = #{penaltyCase,jdbcType=VARCHAR},
+            RSRV_STR1 = #{rsrvStr1,jdbcType=VARCHAR},
+            RSRV_STR2 = #{rsrvStr2,jdbcType=VARCHAR},
+            RSRV_STR3 = #{rsrvStr3,jdbcType=VARCHAR}
+        </set>
+        where soid = #{soid,jdbcType=VARCHAR}
+    </update>
+</mapper>

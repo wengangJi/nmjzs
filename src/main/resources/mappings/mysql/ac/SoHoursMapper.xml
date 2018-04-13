@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.ac.dao.SoHoursMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.ac.entity.SoHours" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="soid" property="soid" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="plan_id" property="planId" jdbcType="BIGINT" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="lesson_id" property="lessonId" jdbcType="BIGINT" />
+    <result column="hours" property="hours" jdbcType="DOUBLE" />
+    <result column="video_time" property="videoTime" jdbcType="INTEGER" />
+    <result column="played_time" property="playedTime" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+      <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+      <result column="finish_time" property="finishTime" jdbcType="TIMESTAMP" />
+   <result column="audit_tag" property="auditTag" jdbcType="CHAR" />
+    <result column="audit_level" property="auditLevel" jdbcType="CHAR" />
+    <result column="audit_by" property="auditBy" jdbcType="VARCHAR" />
+    <result column="audit_date" property="auditDate" jdbcType="TIMESTAMP" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="reduce_reason" property="reduceReason" jdbcType="VARCHAR" />
+    <result column="cert_no" property="certNo" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="rsrv_str1" property="rsrvStr1" jdbcType="VARCHAR" />
+    <result column="rsrv_str2" property="rsrvStr2" jdbcType="VARCHAR" />
+    <result column="rsrv_str3" property="rsrvStr3" jdbcType="VARCHAR" />
+    <result column="sts" property="sts" jdbcType="CHAR" />
+    <result column="sts_date" property="stsDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, soid, user_id, type, plan_id, course_id, lesson_id, hours, video_time, played_time, 
+    create_date,start_time,finish_time, audit_tag, audit_level, audit_by, audit_date, company_name, reduce_reason, cert_no,
+    remark, rsrv_str1, rsrv_str2, rsrv_str3, sts, sts_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from so_hours
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+    <select id="selectBySoid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from so_hours
+        where soid = #{soid,jdbcType=VARCHAR} and sts ='0'
+    </select>
+    <select id="selectReduceBySoid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from so_hours
+        where soid = #{soid,jdbcType=VARCHAR} and sts ='0' and type ='0'
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from so_hours
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zhongxin.cims.modules.ac.entity.SoHours" >
+    insert into so_hours (id, soid, user_id, 
+      type, plan_id, course_id, 
+      lesson_id, hours, video_time, 
+      played_time, create_date,start_time,finish_time, audit_tag, audit_level,
+      audit_by, audit_date, company_name, 
+      reduce_reason, cert_no, remark, 
+      rsrv_str1, rsrv_str2, rsrv_str3, 
+      sts, sts_date)
+    values (#{id,jdbcType=BIGINT}, #{soid,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{type,jdbcType=CHAR}, #{planId,jdbcType=BIGINT}, #{courseId,jdbcType=BIGINT},
+      #{lessonId,jdbcType=BIGINT}, #{hours,jdbcType=DOUBLE}, #{videoTime,jdbcType=INTEGER},
+      #{playedTime,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{startTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP}, #{auditTag,jdbcType=CHAR}, #{auditLevel,jdbcType=CHAR},
+      #{auditBy,jdbcType=VARCHAR}, #{auditDate,jdbcType=TIMESTAMP}, #{companyName,jdbcType=VARCHAR},
+      #{reduceReason,jdbcType=VARCHAR}, #{certNo,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{rsrvStr1,jdbcType=VARCHAR}, #{rsrvStr2,jdbcType=VARCHAR}, #{rsrvStr3,jdbcType=VARCHAR}, 
+      #{sts,jdbcType=CHAR}, #{stsDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.ac.entity.SoHours" >
+    insert into so_hours
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="soid != null" >
+        soid,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="planId != null" >
+        plan_id,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="lessonId != null" >
+        lesson_id,
+      </if>
+      <if test="hours != null" >
+        hours,
+      </if>
+      <if test="videoTime != null" >
+        video_time,
+      </if>
+      <if test="playedTime != null" >
+        played_time,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="auditTag != null" >
+        audit_tag,
+      </if>
+      <if test="auditlevel != null" >
+        audit_level,
+      </if>
+      <if test="auditBy != null" >
+        audit_by,
+      </if>
+      <if test="auditDate != null" >
+        audit_date,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="reduceReason != null" >
+        reduce_reason,
+      </if>
+      <if test="certNo != null" >
+        cert_no,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="rsrvStr1 != null" >
+        rsrv_str1,
+      </if>
+      <if test="rsrvStr2 != null" >
+        rsrv_str2,
+      </if>
+      <if test="rsrvStr3 != null" >
+        rsrv_str3,
+      </if>
+      <if test="sts != null" >
+        sts,
+      </if>
+      <if test="stsDate != null" >
+        sts_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="soid != null" >
+        #{soid,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="planId != null" >
+        #{planId,jdbcType=BIGINT},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="lessonId != null" >
+        #{lessonId,jdbcType=BIGINT},
+      </if>
+      <if test="hours != null" >
+        #{hours,jdbcType=DOUBLE},
+      </if>
+      <if test="videoTime != null" >
+        #{videoTime,jdbcType=INTEGER},
+      </if>
+      <if test="playedTime != null" >
+        #{playedTime,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditTag != null" >
+        #{auditTag,jdbcType=CHAR},
+      </if>
+      <if test="auditTag != null" >
+        #{auditLevel,jdbcType=CHAR},
+      </if>
+      <if test="auditBy != null" >
+        #{auditBy,jdbcType=VARCHAR},
+      </if>
+      <if test="auditDate != null" >
+        #{auditDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="reduceReason != null" >
+        #{reduceReason,jdbcType=VARCHAR},
+      </if>
+      <if test="certNo != null" >
+        #{certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr1 != null" >
+        #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.ac.entity.SoHours" >
+    update so_hours
+    <set >
+      <if test="soid != null" >
+        soid = #{soid,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="planId != null" >
+        plan_id = #{planId,jdbcType=BIGINT},
+      </if>
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="lessonId != null" >
+        lesson_id = #{lessonId,jdbcType=BIGINT},
+      </if>
+      <if test="hours != null" >
+        hours = #{hours,jdbcType=DOUBLE},
+      </if>
+      <if test="videoTime != null" >
+        video_time = #{videoTime,jdbcType=INTEGER},
+      </if>
+      <if test="playedTime != null" >
+        played_time = #{playedTime,jdbcType=INTEGER},
+      </if>
+    <!--  <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>-->
+      <if test="auditTag != null" >
+        audit_tag = #{auditTag,jdbcType=CHAR},
+      </if>
+      <if test="auditLevel != null" >
+        audit_level = #{auditLevel,jdbcType=CHAR},
+      </if>
+      <if test="auditBy != null" >
+        audit_by = #{auditBy,jdbcType=VARCHAR},
+      </if>
+      <if test="auditDate != null" >
+        audit_date = #{auditDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="reduceReason != null" >
+        reduce_reason = #{reduceReason,jdbcType=VARCHAR},
+      </if>
+      <if test="certNo != null" >
+        cert_no = #{certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr1 != null" >
+        rsrv_str1 = #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        rsrv_str2 = #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        rsrv_str3 = #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        sts = #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        sts_date = #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.ac.entity.SoHours" >
+    update so_hours
+    set soid = #{soid,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      plan_id = #{planId,jdbcType=BIGINT},
+      course_id = #{courseId,jdbcType=BIGINT},
+      lesson_id = #{lessonId,jdbcType=BIGINT},
+      hours = #{hours,jdbcType=DOUBLE},
+      video_time = #{videoTime,jdbcType=INTEGER},
+      played_time = #{playedTime,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      audit_tag = #{auditTag,jdbcType=CHAR},
+      audit_level = #{auditLevel,jdbcType=CHAR},
+      audit_by = #{auditBy,jdbcType=VARCHAR},
+      audit_date = #{auditDate,jdbcType=TIMESTAMP},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      reduce_reason = #{reduceReason,jdbcType=VARCHAR},
+      cert_no = #{certNo,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      rsrv_str1 = #{rsrvStr1,jdbcType=VARCHAR},
+      rsrv_str2 = #{rsrvStr2,jdbcType=VARCHAR},
+      rsrv_str3 = #{rsrvStr3,jdbcType=VARCHAR},
+      sts = #{sts,jdbcType=CHAR},
+      sts_date = #{stsDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="findReduceByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select id, soid, user_id, type,
+        plan_id, course_id, lesson_id,
+        hours, video_time, played_time,
+        create_date, audit_tag, audit_level, audit_by,
+        audit_date, company_name, reduce_reason,
+        cert_no, remark, rsrv_str1,
+        rsrv_str2, rsrv_str3, sts,
+        sts_date
+        from so_hours
+        where sts = '0' and user_id = #{userId} and type ='0'
+    </select>
+
+    <select id="findByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select id, soid, user_id, type,
+        plan_id, course_id, lesson_id,
+        hours, video_time, played_time,
+        create_date, audit_tag, audit_level, audit_by,
+        audit_date, company_name, reduce_reason,
+        cert_no, remark, rsrv_str1,
+        rsrv_str2, rsrv_str3, sts,
+        sts_date
+        from so_hours
+        where sts = '0' and user_id = #{userId}
+    </select>
+    <select id="findAuditList" resultMap="BaseResultMap">
+                select a.id, a.soid, a.user_id, a.type,
+        a.plan_id, a.course_id, a.lesson_id,
+        a.hours, a.video_time, a.played_time,
+        a.create_date, a.start_time,a.finish_time,a.audit_tag, a.audit_level, a.audit_by,
+        a.audit_date, a.company_name, a.reduce_reason,
+        a.cert_no, a.remark, a.rsrv_str1,
+        a.rsrv_str2, a.rsrv_str3, a.sts,
+        a.sts_date
+        from so_hours a left join t_serv b  on a.user_id = b.user_id
+        <where>
+             b.sts ='0' and a.sts ='0'
+            <if test="type != null and type != ''">
+                and a.type = #{type,jdbcType=CHAR}
+            </if>
+            <if test="qryStr5 !=null and qryStr5!=''">
+                and a.soid = #{qryStr5}
+            </if>
+            <if test="qryStr1 !=null and qryStr1!=''">
+                and b.name   like  '%${qryStr1}%'
+            </if>
+            <if test="qryStr2 !=null and qryStr2!=''">
+                and b.id_no   like  '%${qryStr2}%'
+            </if>
+
+            <if test="auditTag != null and auditTag != ''" >
+                and a.audit_tag = #{auditTag,jdbcType=CHAR}
+            </if>
+            <if test="auditLevel != null and auditLevel != ''" >
+                and a.audit_level = #{auditLevel,jdbcType=CHAR}
+            </if>
+        </where>
+        order by a.create_date asc
+    </select>
+
+
+    <select id="findAuditedList" resultMap="BaseResultMap">
+        select distinct a.id, a.soid, a.user_id, a.type,
+        a.plan_id, a.course_id, a.lesson_id,
+        a.hours, a.video_time, a.played_time,
+        a.create_date, a.start_time,a.finish_time,a.audit_tag, a.audit_level, a.audit_by,
+        a.audit_date, a.company_name, a.reduce_reason,
+        a.cert_no, a.remark, a.rsrv_str1,
+        a.rsrv_str2, a.rsrv_str3, a.sts,
+        a.sts_date
+        from so_hours a inner join t_serv b  on a.user_id = b.user_id and b.sts ='0' and a.sts ='0'  inner join so_audit c on a.id =c.so_hours_id  and c.sts ='0'
+        <where>
+            <if test="type != null and type != ''">
+                and a.type = #{type,jdbcType=CHAR}
+            </if>
+
+          <!--  <if test="qryStr3 != null and qryStr3 != ''" >
+                and a.audit_tag = #{qryStr3,jdbcType=CHAR}
+            </if>-->
+            <if test="qryStr4 != null and qryStr4 != '' and qryStr4 eq 0  " >
+                and c.audit_level ='2'
+
+                <if test="qryStr3 != null and qryStr3 != '' and  qryStr3 eq 1" >
+                    and c.audit_tag =  '1'
+                </if>
+
+                <if test="qryStr3 != null and qryStr3 != '' and  qryStr3 eq 2" >
+                    and c.audit_tag =  '0'
+                </if>
+
+            </if>
+
+            <if test="qryStr4 != null and qryStr4 != '' and qryStr4 eq 2  " >
+                and c.audit_level ='3'
+
+                <if test="qryStr3 != null and qryStr3 != '' and  qryStr3 eq 1" >
+                    and c.audit_tag =  '1'
+                </if>
+
+                <if test="qryStr3 != null and qryStr3 != '' and  qryStr3 eq 2" >
+                    and c.audit_tag =  '0'
+                </if>
+
+            </if>
+
+            <if test="qryStr4 != null and qryStr4 != '' and qryStr4 eq 3  " >
+                and a.audit_level ='3'
+
+                <if test="qryStr3 != null and qryStr3 != '' and  qryStr3 eq 1" >
+                    and a.audit_tag =  '1'
+                </if>
+
+                <if test="qryStr3 != null and qryStr3 != '' and  qryStr3 eq 2" >
+                    and a.audit_tag =  '2'
+                </if>
+
+            </if>
+
+
+
+            <if test="qryStr5 !=null and qryStr5!=''">
+                and a.soid = #{qryStr5}
+            </if>
+            <if test="qryStr1 !=null and qryStr1!=''">
+                and b.name   like  '%${qryStr1}%'
+            </if>
+            <if test="qryStr2 !=null and qryStr2!=''">
+                and b.id_no   like  '%${qryStr2}%'
+            </if>
+
+
+        </where>
+        order by create_date desc
+    </select>
+
+
+    <select id="findAuditedNoPassList" resultMap="BaseResultMap">
+        select distinct a.id, a.soid, a.user_id, a.type,
+        a.plan_id, a.course_id, a.lesson_id,
+        a.hours, a.video_time, a.played_time,
+        a.create_date, a.start_time,a.finish_time,a.audit_tag, a.audit_level, a.audit_by,
+        a.audit_date, a.company_name, a.reduce_reason,
+        a.cert_no, a.remark, a.rsrv_str1,
+        a.rsrv_str2, a.rsrv_str3, a.sts,
+        a.sts_date
+        from so_hours a inner join t_serv b  on a.user_id = b.user_id and b.sts ='0' and a.sts ='0'  and a.audit_tag ='2'
+        <where>
+            <if test="type != null and type != ''">
+                and a.type = #{type,jdbcType=CHAR}
+            </if>
+
+            <if test="qryStr5 !=null and qryStr5!=''">
+                and a.soid = #{qryStr5}
+            </if>
+            <if test="qryStr1 !=null and qryStr1!=''">
+                and b.name   like  '%${qryStr1}%'
+            </if>
+            <if test="qryStr2 !=null and qryStr2!=''">
+                and b.id_no   like  '%${qryStr2}%'
+            </if>
+
+
+        </where>
+        order by create_date desc
+    </select>
+
+
+    <select id="findOwnAuditList" resultMap="BaseResultMap">
+        select distinct a.id, a.soid, a.user_id, a.type,
+        a.plan_id, a.course_id, a.lesson_id,
+        a.hours, a.video_time, a.played_time,
+        a.create_date, a.start_time,a.finish_time,a.audit_tag, a.audit_level, a.audit_by,
+        a.audit_date, a.company_name, a.reduce_reason,
+        a.cert_no, a.remark, a.rsrv_str1,
+        a.rsrv_str2, a.rsrv_str3, a.sts,
+        a.sts_date
+        from so_hours a , t_serv b  where  a.user_id = b.user_id and b.sts ='0' and a.sts ='0' and a.user_id = #{userId,jdbcType=VARCHAR}
+
+            <if test="qryStr5 !=null and qryStr5!=''">
+                and a.soid = #{qryStr5}
+            </if>
+            <if test="qryStr1 !=null and qryStr1!=''">
+                and b.name   like  '%${qryStr1}%'
+            </if>
+            <if test="qryStr2 !=null and qryStr2!=''">
+                and b.id_no   like  '%${qryStr2}%'
+            </if>
+            <if test="qryStr3 != null and qryStr3 != ''" >
+                and a.audit_tag = #{qryStr3,jdbcType=CHAR}
+            </if>
+            <if test="qryStr4 != null and qryStr4 != ''" >
+                and a.audit_level = #{qryStr4,jdbcType=CHAR}
+            </if>
+            <if test="type != null and type != ''" >
+                and a.type = #{type,jdbcType=CHAR}
+            </if>
+
+        order by create_date desc
+    </select>
+
+
+    <select id="selectByVideo" resultType="int" parameterType="java.lang.String" >
+        select
+        count(soid)
+        from so_hours
+        where soid = #{soid,jdbcType=VARCHAR}    and   course_id=#{courseId,jdbcType=BIGINT} and lesson_id=#{lessonId,jdbcType=BIGINT} and sts ='1'
+    </select>
+
+    <select id="selectByCheckExistsHours" resultType="int" parameterType="java.lang.String" >
+        select
+        count(soid)
+        from so_hours
+        where soid = #{soid,jdbcType=VARCHAR}    and   course_id=#{courseId,jdbcType=BIGINT} and lesson_id=#{lessonId,jdbcType=BIGINT} and sts ='0' and audit_tag !='2'
+    </select>
+
+    <select id="selectByCheckVideoConfirm" resultType="int" parameterType="java.lang.String" >
+        select
+        count(soid)
+        from so_hours
+        where soid = #{soid,jdbcType=VARCHAR}    and   course_id=#{courseId,jdbcType=BIGINT} and lesson_id=#{lessonId,jdbcType=BIGINT} and sts ='0' and audit_tag ='0'
+    </select>
+
+    <select id="selectByCheckVideoAudit" resultType="int" parameterType="java.lang.String" >
+        select
+        count(soid)
+        from so_hours
+        where soid = #{soid,jdbcType=VARCHAR}    and   course_id=#{courseId,jdbcType=BIGINT} and lesson_id=#{lessonId,jdbcType=BIGINT} and sts ='0' and audit_tag ='1'
+    </select>
+
+    <update id="removeHours" parameterType="com.zhongxin.cims.modules.ac.entity.SoHours" >
+       delete from so_hours where soid = #{soid,jdbcType=VARCHAR} and course_id = #{courseId,jdbcType=BIGINT} and  lesson_id=#{lessonId,jdbcType=BIGINT} and sts = '1'
+    </update>
+
+    <update id="confirmHours" parameterType="com.zhongxin.cims.modules.ac.entity.SoHours" >
+        update so_hours set sts =#{sts},sts_date =#{stsDate}
+        where soid = #{soid,jdbcType=VARCHAR} and course_id = #{courseId,jdbcType=BIGINT} and  lesson_id=#{lessonId,jdbcType=BIGINT} and sts = '1'
+    </update>
+
+    <select id="getTotalHours" parameterType="java.lang.String" resultType="double">
+        select sum(hours)
+        from so_hours where sts = '0' and audit_tag = '1' and soid = #{soid,jdbcType=VARCHAR}
+    </select>
+</mapper>

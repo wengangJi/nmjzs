@@ -1,0 +1,1006 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.ac.dao.SoPlanMapper">
+
+    <resultMap id="SoPlantMap" type="com.zhongxin.cims.modules.ac.entity.SoPlanEntity">
+        <result column="S_SOID" property="soid" jdbcType="VARCHAR"/>
+        <association property="soPlan" javaType="SoPlan" resultMap="SoPlanResultMap"/>
+        <association property="soInvoice" javaType="SoInvoice" resultMap="SoInvoiceResultMap"/>
+
+    </resultMap>
+
+    <resultMap id="SoPlanEntityMap" type="com.zhongxin.cims.modules.ac.entity.SoPlanEntity">
+        <result column="S_SOID" property="soid" jdbcType="VARCHAR"/>
+        <association property="soPlan" javaType="SoPlan" resultMap="SoPlanResultMap"/>
+        <association property="servAcInfo" javaType="ServAssociateConstructor" resultMap="ServAcResultMap"/>
+
+    </resultMap>
+
+    <resultMap id="FindCpResultMap"  type="com.zhongxin.cims.modules.cp.entity.ServCpEntity" >
+        <id column="S_servid" property="servid" />
+        <result column="C_SOID" property="soid" jdbcType="VARCHAR"/>
+        <association property="serv" javaType="Serv" resultMap="servCpRS"/>
+        <association property="cert" javaType="Cert" resultMap="certCpRS"/>
+        <association property="personnel" javaType="Personnel" resultMap="PersonnelRs"/>
+
+    </resultMap>
+
+    <resultMap id="ServAcResultMap" type="com.zhongxin.cims.modules.ac.entity.ServAssociateConstructor">
+        <id column="S_SERVID" property="servid" jdbcType="INTEGER"/>
+        <result column="S_USER_ID" property="userId" jdbcType="VARCHAR"/>
+        <result column="S_COMPANY_ID" property="companyId" jdbcType="INTEGER"/>
+        <result column="S_APP_ID" property="appId" jdbcType="VARCHAR"/>
+        <result column="S_PROVINCE_ID" property="provinceId" jdbcType="VARCHAR"/>
+        <result column="S_LOCAL_ID" property="localId" jdbcType="INTEGER"/>
+        <result column="S_AREA_ID" property="areaId" jdbcType="INTEGER"/>
+        <result column="S_NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="S_SEX" property="sex" jdbcType="VARCHAR"/>
+        <result column="S_BIRTH_DATE" property="birthDate" jdbcType="DATE"/>
+        <result column="S_ID_TYPE" property="idType" jdbcType="VARCHAR"/>
+        <result column="S_ID_NO" property="idNo" jdbcType="VARCHAR"/>
+        <result column="S_GARD_SCHOOL" property="gardSchool" jdbcType="VARCHAR"/>
+        <result column="S_GARD_DATE" property="gardDate" jdbcType="DATE"/>
+        <result column="S_GARD_MAJOR" property="gardMajor" jdbcType="VARCHAR"/>
+        <result column="S_DEGREE" property="degree" jdbcType="VARCHAR"/>
+        <result column="S_EDUCATION" property="education" jdbcType="VARCHAR"/>
+        <result column="S_CONTACT_PERSON" property="contactPerson" jdbcType="VARCHAR"/>
+        <result column="S_CONTACT_PHONE" property="contactPhone" jdbcType="VARCHAR"/>
+        <result column="S_CONTACT_ADDR" property="contactAddr" jdbcType="VARCHAR"/>
+        <result column="S_POST_CODE" property="postCode" jdbcType="VARCHAR"/>
+        <result column="S_MAIL" property="mail" jdbcType="VARCHAR"/>
+        <result column="S_CERT_TYPE" property="certType" jdbcType="VARCHAR"/>
+        <result column="S_CERT_NO" property="certNo" jdbcType="VARCHAR"/>
+        <result column="S_ISSUE_BY" property="issueBy" jdbcType="VARCHAR"/>
+        <result column="S_ISSUE_DATE" property="issueDate" jdbcType="DATE"/>
+        <result column="S_REGI_NO" property="regiNo" jdbcType="VARCHAR"/>
+        <result column="S_REGI_DATE" property="regiDate" jdbcType="DATE"/>
+        <result column="S_EDUC_NO" property="educNo" jdbcType="VARCHAR"/>
+        <result column="S_EDUC_DATE" property="educDate" jdbcType="DATE"/>
+        <result column="S_MAJOR_FIRST" property="majorFirst" jdbcType="VARCHAR"/>
+        <result column="S_MAJOR_SECOND" property="majorSecond" jdbcType="VARCHAR"/>
+        <result column="S_MAJOR_THIRD" property="majorThird" jdbcType="VARCHAR"/>
+        <result column="S_MAJOR_FOURTH" property="majorFourth" jdbcType="VARCHAR"/>
+        <result column="S_MAJOR_FIFTH" property="majorFifth" jdbcType="VARCHAR"/>
+        <result column="S_MAJOR_SIXTH" property="majorSixth" jdbcType="VARCHAR"/>
+        <result column="S_PATCH_ID" property="patchId" jdbcType="VARCHAR"/>
+        <result column="S_RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR"/>
+        <result column="S_RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR"/>
+        <result column="S_RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR"/>
+        <result column="S_EMP_FLAG" property="empFlag" jdbcType="VARCHAR"/>
+        <result column="S_STS" property="sts" jdbcType="CHAR"/>
+        <result column="S_STS_DATE" property="stsDate" jdbcType="TIMESTAMP"/>
+        <result column="S_REMARKS" property="remarks" jdbcType="VARCHAR"/>
+        <result column="S_WORKING_DATE" property="workingDate" jdbcType="DATE"/>
+
+    </resultMap>
+
+
+    <resultMap id="InvoiceResultMap" type="com.zhongxin.cims.modules.ac.entity.SoInvoice">
+        <id column="soid" property="soid" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="apply_date" property="applyDate" jdbcType="TIMESTAMP"/>
+        <result column="fee" property="fee" jdbcType="REAL"/>
+        <result column="contact_phone" property="contactPhone" jdbcType="VARCHAR"/>
+        <result column="contact_name" property="contactName" jdbcType="VARCHAR"/>
+        <result column="post_code" property="postCode" jdbcType="VARCHAR"/>
+        <result column="post_address" property="postAddress" jdbcType="VARCHAR"/>
+        <result column="company_name" property="companyName" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="rsrv_str1" property="rsrvStr1" jdbcType="VARCHAR"/>
+        <result column="rsrv_str2" property="rsrvStr2" jdbcType="VARCHAR"/>
+        <result column="rsrv_str3" property="rsrvStr3" jdbcType="VARCHAR"/>
+        <result column="sts" property="sts" jdbcType="CHAR"/>
+        <result column="sts_date" property="stsDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.ac.entity.SoPlan">
+        <id column="soid" property="soid" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="plan_id" property="planId" jdbcType="BIGINT"/>
+        <result column="company_id" property="companyId" jdbcType="INTEGER"/>
+        <result column="apply_date" property="applyDate" jdbcType="TIMESTAMP"/>
+        <result column="finish_date" property="finishDate" jdbcType="TIMESTAMP"/>
+        <result column="exp_date" property="expDate" jdbcType="DATE"/>
+        <result column="fee_id" property="feeId" jdbcType="VARCHAR"/>
+        <result column="fee" property="fee" jdbcType="REAL"/>
+        <result column="fee_state" property="feeState" jdbcType="CHAR"/>
+        <result column="local_id" property="localId" jdbcType="INTEGER"/>
+        <result column="rsrv_str1" property="rsrvStr1" jdbcType="VARCHAR"/>
+        <result column="rsrv_str2" property="rsrvStr2" jdbcType="VARCHAR"/>
+        <result column="rsrv_str3" property="rsrvStr3" jdbcType="VARCHAR"/>
+        <result column="sts" property="sts" jdbcType="CHAR"/>
+        <result column="sts_date" property="stsDate" jdbcType="TIMESTAMP"/>
+        <result column="hour_state" property="hourState" jdbcType="CHAR"/>
+        <result column="learn_state" property="learnState" jdbcType="CHAR"/>
+        <result column="exam_state" property="examState" jdbcType="CHAR"/>
+        <result column="cert_state" property="certState" jdbcType="CHAR"/>
+        <result column="reduce_flag" property="reduceFlag" jdbcType="CHAR"/>
+        <result column="cores" property="cores" jdbcType="VARCHAR"/>
+        <result column="StartTime" property="examTime"/>
+        <result column="checkLevel" property="checkLevel"/>
+        <result column="ofline_user" property="oflineUser" jdbcType="VARCHAR"/>
+        <result column="ofline_no" property="oflineNo" jdbcType="VARCHAR"/>
+        <result column="ofline_remarks" property="oflineRemarks" jdbcType="VARCHAR"/>
+        <result column="ofline_path" property="oflinePath" jdbcType="VARCHAR"/>
+        <result column="ofline_sts" property="oflineSts" jdbcType="VARCHAR"/>
+        <result column="ofline_sts_date" property="oflineStsDate" jdbcType="TIMESTAMP"/>
+        <result column="ofline_audit_by" property="oflineAuditBy" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <resultMap id="SoPlanResultMap" type="com.zhongxin.cims.modules.ac.entity.SoPlan">
+        <id column="p_soid" property="soid" jdbcType="VARCHAR"/>
+        <result column="p_user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="p_plan_id" property="planId" jdbcType="BIGINT"/>
+        <result column="p_company_id" property="companyId" jdbcType="INTEGER"/>
+        <result column="p_apply_date" property="applyDate" jdbcType="TIMESTAMP"/>
+        <result column="p_finish_date" property="finishDate" jdbcType="TIMESTAMP"/>
+        <result column="p_exp_date" property="expDate" jdbcType="DATE"/>
+        <result column="p_fee_id" property="feeId" jdbcType="VARCHAR"/>
+        <result column="p_fee" property="fee" jdbcType="REAL"/>
+        <result column="p_fee_state" property="feeState" jdbcType="CHAR"/>
+        <result column="p_local_id" property="localId" jdbcType="INTEGER"/>
+        <result column="p_rsrv_str1" property="rsrvStr1" jdbcType="VARCHAR"/>
+        <result column="p_rsrv_str2" property="rsrvStr2" jdbcType="VARCHAR"/>
+        <result column="p_rsrv_str3" property="rsrvStr3" jdbcType="VARCHAR"/>
+        <result column="p_sts" property="sts" jdbcType="CHAR"/>
+        <result column="p_sts_date" property="stsDate" jdbcType="TIMESTAMP"/>
+        <result column="p_hour_state" property="hourState" jdbcType="CHAR"/>
+        <result column="p_learn_state" property="learnState" jdbcType="CHAR"/>
+        <result column="p_exam_state" property="examState" jdbcType="CHAR"/>
+        <result column="p_cert_state" property="certState" jdbcType="CHAR"/>
+        <result column="p_reduce_flag" property="reduceFlag" jdbcType="CHAR"/>
+    </resultMap>
+
+    <resultMap id="courseMap" type="com.zhongxin.cims.modules.ac.entity.Course">
+        <id column="c_course_id" property="courseId" jdbcType="VARCHAR"/>
+        <result column="c_course_name" property="courseName" jdbcType="VARCHAR"/>
+        <result column="c_plan_id" property="planId" jdbcType="BIGINT"/>
+        <result column="c_major_id" property="majorId" jdbcType="VARCHAR"/>
+        <result column="c_course_type" property="courseType" jdbcType="VARCHAR"/>
+        <result column="c_course_hours" property="courseHours" jdbcType="VARCHAR"/>
+        <result column="c_course_info" property="courseInfo" jdbcType="VARCHAR"/>
+        <result column="c_teacher_id" property="teacherId" jdbcType="VARCHAR"/>
+        <result column="c_teacher_name" property="teacherName" jdbcType="VARCHAR"/>
+        <result column="c_teacher_info" property="teacherInfo" jdbcType="VARCHAR"/>
+        <result column="c_size" property="size" jdbcType="VARCHAR"/>
+        <result column="c_type" property="type" jdbcType="VARCHAR"/>
+        <result column="c_path" property="path" jdbcType="VARCHAR"/>
+        <result column="c_image" property="image" jdbcType="VARCHAR"/>
+        <result column="c_image_path" property="imagePath" jdbcType="VARCHAR"/>
+        <result column="c_RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR"/>
+        <result column="c_RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR"/>
+        <result column="c_RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <resultMap id="SoInvoiceResultMap" type="com.zhongxin.cims.modules.ac.entity.SoInvoice">
+        <id column="i_soid" property="soid" jdbcType="VARCHAR"/>
+        <result column="i_user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="i_title" property="title" jdbcType="VARCHAR"/>
+        <result column="i_apply_date" property="applyDate" jdbcType="TIMESTAMP"/>
+        <result column="i_fee" property="fee" jdbcType="REAL"/>
+        <result column="i_contact_phone" property="contactPhone" jdbcType="VARCHAR"/>
+        <result column="i_contact_name" property="contactName" jdbcType="VARCHAR"/>
+        <result column="i_post_code" property="postCode" jdbcType="VARCHAR"/>
+        <result column="i_post_address" property="postAddress" jdbcType="VARCHAR"/>
+        <result column="i_company_name" property="companyName" jdbcType="VARCHAR"/>
+        <result column="i_remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="i_rsrv_str1" property="rsrvStr1" jdbcType="VARCHAR"/>
+        <result column="i_rsrv_str2" property="rsrvStr2" jdbcType="VARCHAR"/>
+        <result column="i_rsrv_str3" property="rsrvStr3" jdbcType="VARCHAR"/>
+        <result column="i_sts" property="sts" jdbcType="CHAR"/>
+        <result column="i_sts_date" property="stsDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    soid, user_id, plan_id,company_id, apply_date, finish_date, exp_date, fee_id, fee, fee_state, local_id,
+    rsrv_str1, rsrv_str2, rsrv_str3, sts, sts_date ,hour_state,learn_state,exam_state,cert_state,reduce_flag,ofline_user,ofline_no,ofline_remarks,ofline_path,ofline_sts,ofline_sts_date,ofline_audit_by
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from so_plan
+        where soid = #{soid,jdbcType=VARCHAR} and sts ='0'
+    </select>
+
+    <select id="findByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from so_plan
+        where user_id = #{userId,jdbcType=VARCHAR} and sts ='0'
+        order by apply_date desc
+    </select>
+
+    <select id="findByPlanId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from so_plan
+        where plan_id = #{planId,jdbcType=VARCHAR} and sts ='0'
+    </select>
+    <select id="findByCompanyId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from so_plan
+        where company_id = #{companyId,jdbcType=INTEGER} and sts ='0'
+        order by apply_date desc
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from so_plan
+    where soid = #{soid,jdbcType=VARCHAR}    and sts ='0'
+  </delete>
+    <insert id="insert" parameterType="com.zhongxin.cims.modules.ac.entity.SoPlan">
+    insert into so_plan (soid, user_id, plan_id,company_id, local_id,
+      apply_date, finish_date, exp_date, 
+      fee_id, fee, fee_state, rsrv_str1, 
+      rsrv_str2, rsrv_str3, sts,sts_date,hour_state,learn_state,exam_state,cert_state,reduce_flag)
+    values (#{soid,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{planId,jdbcType=BIGINT},#{companyId,jdbcType=INTEGER}, #{localId,jdbcType=INTEGER},
+      #{applyDate,jdbcType=TIMESTAMP}, #{finishDate,jdbcType=TIMESTAMP}, #{expDate,jdbcType=DATE}, 
+      #{feeId,jdbcType=VARCHAR}, #{fee,jdbcType=REAL}, #{feeState,jdbcType=CHAR}, #{rsrvStr1,jdbcType=VARCHAR}, 
+      #{rsrvStr2,jdbcType=VARCHAR}, #{rsrvStr3,jdbcType=VARCHAR}, #{sts,jdbcType=CHAR}, 
+      #{stsDate,jdbcType=TIMESTAMP}, #{hourState,jdbcType=CHAR}, #{learnState,jdbcType=CHAR}, #{examState,jdbcType=CHAR}, #{certState,jdbcType=CHAR}, #{reduceFlag,jdbcType=CHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.ac.entity.SoPlan">
+        insert into so_plan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="soid != null">
+                soid,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="planId != null">
+                plan_id,
+            </if>
+            <if test="applyDate != null">
+                apply_date,
+            </if>
+            <if test="finishDate != null">
+                finish_date,
+            </if>
+            <if test="expDate != null">
+                exp_date,
+            </if>
+            <if test="feeId != null">
+                fee_id,
+            </if>
+            <if test="fee != null">
+                fee,
+            </if>
+            <if test="feeState != null">
+                fee_state,
+            </if>
+            <if test="localId != null">
+                local_id,
+            </if>
+            <if test="rsrvStr1 != null">
+                rsrv_str1,
+            </if>
+            <if test="rsrvStr2 != null">
+                rsrv_str2,
+            </if>
+            <if test="rsrvStr3 != null">
+                rsrv_str3,
+            </if>
+            <if test="sts != null">
+                sts,
+            </if>
+            <if test="stsDate != null">
+                sts_date,
+            </if>
+            <if test="hourState != null">
+                hour_state,
+            </if>
+            <if test="learnState != null">
+                learn_state,
+            </if>
+            <if test="examState != null">
+                exam_state,
+            </if>
+            <if test="certState != null">
+                cert_state,
+            </if>
+            <if test="reduceFlag != null">
+                reduce_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="soid != null">
+                #{soid,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="planId != null">
+                #{planId,jdbcType=BIGINT},
+            </if>
+            <if test="applyDate != null">
+                #{applyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="finishDate != null">
+                #{finishDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expDate != null">
+                #{expDate,jdbcType=DATE},
+            </if>
+            <if test="feeId != null">
+                #{feeId,jdbcType=VARCHAR},
+            </if>
+            <if test="fee != null">
+                #{fee,jdbcType=REAL},
+            </if>
+            <if test="feeState != null">
+                #{feeState,jdbcType=CHAR},
+            </if>
+            <if test="feeState != null">
+                #{localId,jdbcType=INTEGER},
+            </if>
+            <if test="rsrvStr1 != null">
+                #{rsrvStr1,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr2 != null">
+                #{rsrvStr2,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr3 != null">
+                #{rsrvStr3,jdbcType=VARCHAR},
+            </if>
+            <if test="sts != null">
+                #{sts,jdbcType=CHAR},
+            </if>
+            <if test="stsDate != null">
+                #{stsDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="hourState != null">
+                #{hourState,jdbcType=CHAR},
+            </if>
+            <if test="learnState != null">
+                #{learnState,jdbcType=CHAR},
+            </if>
+            <if test="examState != null">
+                #{examState,jdbcType=CHAR},
+            </if>
+            <if test="certState != null">
+                #{certState,jdbcType=CHAR},
+            </if>
+            <if test="reduceFlag != null">
+                #{reduceFlag,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.ac.entity.SoPlan">
+        update so_plan
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="planId != null">
+                plan_id = #{planId,jdbcType=BIGINT},
+            </if>
+            <if test="finishDate != null">
+                finish_date = #{finishDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expDate != null">
+                exp_date = #{expDate,jdbcType=DATE},
+            </if>
+            <if test="feeId != null">
+                fee_id = #{feeId,jdbcType=VARCHAR},
+            </if>
+            <if test="fee != null">
+                fee = #{fee,jdbcType=REAL},
+            </if>
+            <if test="feeState != null">
+                fee_state = #{feeState,jdbcType=CHAR},
+            </if>
+            <if test="localId != null">
+                local_id = #{localId,jdbcType=INTEGER},
+            </if>
+            <if test="rsrvStr1 != null">
+                rsrv_str1 = #{rsrvStr1,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr2 != null">
+                rsrv_str2 = #{rsrvStr2,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr3 != null">
+                rsrv_str3 = #{rsrvStr3,jdbcType=VARCHAR},
+            </if>
+            <if test="sts != null">
+                sts = #{sts,jdbcType=CHAR},
+            </if>
+            <if test="stsDate != null">
+                sts_date = #{stsDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="hourState != null">
+                hour_state = #{hourState,jdbcType=CHAR},
+            </if>
+            <if test="learnState != null">
+                learn_state = #{learnState,jdbcType=CHAR},
+            </if>
+            <if test="examState != null">
+                exam_state = #{examState,jdbcType=CHAR},
+            </if>
+            <if test="certState != null">
+                cert_state = #{certState,jdbcType=CHAR},
+            </if>
+            <if test="reduceFlag != null">
+                reduce_flag = #{reduceFlag,jdbcType=CHAR},
+            </if>
+            <if test="oflineUser != null">
+                ofline_user = #{oflineUser,jdbcType=VARCHAR},
+            </if>
+            <if test="oflineNo != null">
+                ofline_No = #{oflineNo,jdbcType=VARCHAR},
+            </if>
+            <if test="oflineRemarks != null">
+                ofline_Remarks = #{oflineRemarks,jdbcType=VARCHAR},
+            </if>
+            <if test="oflinePath != null">
+                ofline_Path = #{oflinePath,jdbcType=VARCHAR},
+            </if>
+            <if test="oflineSts != null">
+                ofline_Sts = #{oflineSts,jdbcType=VARCHAR},
+            </if>
+            <if test="oflineStsDate != null">
+                ofline_Sts_date = #{oflineStsDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="oflineAuditBy != null">
+                ofline_Audit_By = #{oflineAuditBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where soid = #{soid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.ac.entity.SoPlan">
+    update so_plan
+    set user_id = #{userId,jdbcType=VARCHAR},
+      plan_id = #{planId,jdbcType=BIGINT},
+      finish_date = #{finishDate,jdbcType=TIMESTAMP},
+      exp_date = #{expDate,jdbcType=DATE},
+      fee_id = #{feeId,jdbcType=VARCHAR},
+      fee = #{fee,jdbcType=REAL},
+      fee_state = #{feeState,jdbcType=CHAR},
+      local_id = #{localId,jdbcType=INTEGER},
+      rsrv_str1 = #{rsrvStr1,jdbcType=VARCHAR},
+      rsrv_str2 = #{rsrvStr2,jdbcType=VARCHAR},
+      rsrv_str3 = #{rsrvStr3,jdbcType=VARCHAR},
+      sts = #{sts,jdbcType=CHAR},
+      sts_date = #{stsDate,jdbcType=TIMESTAMP},
+      hour_state = #{hourState,jdbcType=CHAR},
+      learn_state = #{learnState,jdbcType=CHAR},
+      exam_state = #{examState,jdbcType=CHAR},
+      cert_state = #{certState,jdbcType=CHAR},
+      reduce_flag = #{reduceFlag,jdbcType=CHAR}
+    where soid = #{soid,jdbcType=VARCHAR}
+  </update>
+
+    <select id="findAllBySoid" resultMap="SoPlantMap">
+     select
+      a.soid as p_soid,
+      a.user_id as p_user_id,
+      a.plan_id as p_plan_id,
+      a.apply_date as p_apply_date,
+      a.finish_date as p_finish_date ,
+      a.exp_date as p_exp_date,
+      a.fee_id as p_fee_id,
+      a.fee as p_fee,
+      a.fee_state as p_fee_state ,
+      a.local_id as p_local_id ,
+      a.rsrv_str1 as p_rsrv_str1,
+      a.rsrv_str2 as p_rsrv_str2,
+      a.rsrv_str3 as p_rsrv_str3,
+      a.sts as p_sts,
+      a.sts_date as p_sts_date,
+      a.hour_state as p_hour_state,
+      a.learn_state as p_learn_state,
+      a.exam_state as p_exam_state,
+      a.cert_state as p_cert_state,
+      a.reduce_flag as p_reduce_flag,
+      b.soid as i_soid,
+      b.user_id as  i_user_id,
+      b.title as  i_title,
+      b.apply_date as  i_apply_date,
+      b.fee as  i_fee,
+      b.contact_phone as  i_contact_phone,
+      b.contact_name as  i_contact_name,
+      b.post_code as i_post_code,
+      b.post_address as i_post_address,
+      b.company_name as  i_company_name,
+      b.remark as  i_remark,
+      b.rsrv_str1 as i_rsrv_str1,
+      b.rsrv_str2 as i_rsrv_str2,
+      b.rsrv_str3 as i_rsrv_str3,
+      b.sts as i_sts,
+      b.sts_date as i_sts_date
+      from so_plan a left join so_invoice b on a.soid=b.soid  and b.sts='0'
+      where a.soid = #{soid,jdbcType=VARCHAR}  and a.sts ='0'
+      order by a.apply_date desc
+    </select>
+
+    <select id="findPayListByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from so_plan a
+        where a.user_id = #{userId,jdbcType=VARCHAR} and a.fee_state =#{feeState,jdbcType=VARCHAR} and a.sts ='0'
+        order by a.apply_date desc
+    </select>
+
+    <select id="findAllPrePayList" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from so_plan a
+        where   a.sts ='0'
+        <if test="oflineSts!=null and oflineSts!=''">
+            and  a.ofline_sts=#{oflineSts}
+        </if>
+        <if test="oflineSts==null or oflineSts==''">
+            and  a.ofline_sts='0'
+        </if>
+
+        <if test="oflineUser!=null and oflineUser!=''">
+            and a.ofline_User  like  '%${oflineUser}%'
+        </if>
+        <if test="oflineNo!=null and oflineNo!=''">
+            and a.ofline_No  like  '%${oflineNo}%'
+        </if>
+
+        order by a.ofline_sts_date desc
+    </select>
+
+    <select id="findLearnListByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from so_plan a
+        where a.user_id = #{userId,jdbcType=VARCHAR} and a.learn_state =#{learnState,jdbcType=VARCHAR} and a.sts ='0'
+        and a.fee_state ='1'
+        order by a.apply_date desc
+    </select>
+
+    <select id="findHourListByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from so_plan a
+        where a.user_id = #{userId,jdbcType=VARCHAR} and a.hour_state =#{hourState,jdbcType=VARCHAR} and a.sts ='0' and  a.fee_state ='1'
+        order by a.apply_date desc
+    </select>
+
+    <select id="findExamListByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from so_plan a
+        where a.user_id = #{userId,jdbcType=VARCHAR} and a.exam_state =#{examState,jdbcType=VARCHAR} and a.sts ='0' and
+        a.fee_state ='1' and a.hour_state='1'
+        order by a.apply_date desc
+    </select>
+
+    <select id="findAllExamListByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from so_plan a
+        where a.user_id = #{userId,jdbcType=VARCHAR} and a.sts ='0' and a.fee_state ='1'  and
+        a.hour_state='1'
+        order by a.apply_date desc
+    </select>
+
+    <select id="findAllReduceListByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from so_plan a
+        where a.user_id = #{userId,jdbcType=VARCHAR} and a.sts ='0' and a.fee_state ='1'  and
+        reduce_Flag in ('0','1')
+        order by a.apply_date desc
+    </select>
+
+    <select id="findAllReduceListByCompanyId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from so_plan a
+        where a.company_id = #{companyId,jdbcType=INTEGER} and a.sts ='0' and a.fee_state ='1'  and
+        reduce_Flag in ('0','1')
+        order by a.apply_date desc
+    </select>
+
+    <select id="findReduceListByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+         a.soid, a.user_id, a.plan_id, a.apply_date, a.finish_date, a.exp_date, a.fee_id, a.fee, a.fee_state, a.local_id,
+    a.rsrv_str1,a.rsrv_str2, a.rsrv_str3, a.sts, a.sts_date ,a.hour_state,a.learn_state,a.exam_state,a.cert_state,a.reduce_flag
+        from so_plan a,so_hours b
+        where a.soid = b.soid and  a.user_id = #{userId,jdbcType=VARCHAR} and a.sts ='0' and a.fee_state ='1'  and reduce_Flag in ('1','0') and b.type='0' and b.sts ='0'
+        order by a.apply_date desc
+    </select>
+
+    <select id="findAllReduceList1" resultMap="BaseResultMap">
+        select
+        a.soid, a.user_id, a.plan_id, a.apply_date, a.finish_date, a.exp_date, a.fee_id, a.fee, a.fee_state, a.local_id,
+        a.rsrv_str1,a.rsrv_str2, a.rsrv_str3, a.sts, a.sts_date ,a.hour_state,a.learn_state,a.exam_state,a.cert_state,a.reduce_flag
+        from so_plan a,so_hours b
+        where a.soid = b.soid  and a.sts ='0' and a.fee_state ='1'  and reduce_Flag in ('1','0') and b.type='0' and b.sts ='0'
+        <if test="localId!=null and localId!=''">
+                and  a.local_Id=#{localId}
+            </if>
+            <if test="planId!=null and planId!=''">
+                and   a.plan_Id=#{planId}
+            </if>
+            <if test="feeState!=null and feeState!=''">
+                and   a.fee_State=#{feeState}
+            </if>
+            <if test="auditTag!=null and auditTag!=''">
+                and   b.audit_Tag=#{auditTag}
+            </if>
+            <if test="startTime != null and startTime != ''">
+                <![CDATA[
+                and a.createTime >= #{startTime}
+                ]]>
+            </if>
+            <if test="endTime != null and endTime != ''">
+                <![CDATA[
+                and a.createTime <= #{endTime}
+                ]]>
+            </if>
+
+        order by a.apply_date desc
+    </select>
+
+
+    <select id="findAllReduceList" resultMap="BaseResultMap">
+        select distinct
+        a.soid, a.user_id, a.plan_id, a.apply_date, a.finish_date, a.exp_date, a.fee_id, a.fee, a.fee_state, a.local_id,
+        a.rsrv_str1,a.rsrv_str2, a.rsrv_str3, a.sts, a.sts_date ,a.hour_state,a.learn_state,a.exam_state,a.cert_state,a.reduce_flag
+        from so_plan a,so_hours b ,t_serv c
+        where a.soid = b.soid  and a.sts ='0' and a.fee_state ='1'  and reduce_Flag in ('1','0') and b.type='0' and b.sts ='0' and a.user_id =c.user_id and c.sts ='0'
+        <if test="servAcInfo != null">
+            <if test="servAcInfo.name != null and servAcInfo.name != ''">
+                and c.name  like  '%${servAcInfo.name}%'
+            </if>
+        </if>
+        <if test="servAcInfo != null">
+            <if test="servAcInfo.idNo != null and servAcInfo.idNo != ''">
+                and c.id_no like  '%${servAcInfo.idNo}%'
+            </if>
+        </if>
+        <if test="soPlan != null">
+            <if test="soPlan.localId != null and soPlan.localId != ''">
+                and a.local_id = #{soPlan.localId}
+            </if>
+        </if>
+        <if test="soPlan != null">
+            <if test="soPlan.planId != null and soPlan.planId != ''">
+                and a.plan_Id = #{soPlan.planId}
+            </if>
+        </if>
+        <if test="soPlan != null">
+            <if test="soPlan.feeState != null and soPlan.feeState != ''">
+                and a.fee_state = #{soPlan.feeState}
+            </if>
+        </if>
+        <if test="soPlan != null">
+            <if test="soPlan.learnState != null and soPlan.learnState != ''">
+                and a.learn_state = #{soPlan.learnState}
+            </if>
+        </if>
+        <if test="soPlan != null">
+            <if test="soPlan.hourState != null and soPlan.hourState != ''">
+                and a.hour_state = #{soPlan.hourState}
+            </if>
+        </if>
+        <if test="soPlan != null">
+            <if test="soPlan.auditTag!=null and soPlan.auditTag!=''">
+                and   b.audit_Tag=#{soPlan.auditTag}
+            </if>
+        </if>
+
+
+        <if test="soPlan != null">
+            <if test="soPlan.reduceFlag != null and soPlan.reduceFlag != ''">
+                and a.reduce_flag = #{soPlan.reduceFlag}
+            </if>
+        </if>
+
+
+
+
+
+        order by a.apply_date desc
+    </select>
+
+    <select id="findAllCertListByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from so_plan a
+        where a.user_id = #{userId,jdbcType=VARCHAR} and a.sts ='0' and a.fee_state ='1'  and  a.hour_state='1' and exam_state = '1' and cert_state ='0'
+        order by a.apply_date desc
+    </select>
+
+    <select id="findListBySoPlan" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from so_plan a
+        <where>
+            1=1 and sts ='0'
+
+            <if test="localId != null and localId != ''">
+                and a.local_id = #{localId}
+            </if>
+            <if test="planId != null and planId != ''">
+                and a.plan_Id = #{planId}
+            </if>
+            <if test="feeState != null and feeState != ''">
+                and a.fee_state = #{feeState}
+            </if>
+            <if test="learnState != null and learnState != ''">
+                and a.learn_state = #{learnState}
+            </if>
+            <if test="hourState != null and hourState != ''">
+                and a.hour_state = #{hourState}
+            </if>
+            <if test="examState != null and examState != ''">
+                and a.exam_state = #{examState}
+            </if>
+            <if test="reduceFlag != null and reduceFlag != ''">
+                and a.reduce_flag = #{reduceFlag}
+            </if>
+            <if test="startTime != null and startTime != ''">
+                <![CDATA[
+                and a.apply_date >= #{startTime}
+                ]]>
+            </if>
+            <if test="endTime != null and endTime != ''">
+                <![CDATA[
+                and a.apply_date <= #{endTime}
+                ]]>
+            </if>
+        </where>
+        order by a.apply_date desc
+    </select>
+
+
+    <select id="findBySoid" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from so_plan a
+        where a.sts ='0' and a.soid = #{soid,jdbcType=VARCHAR}
+    </select>
+    <select id="findCanReduceHoursPlan" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+            a.soid,
+            a.user_id,
+            a.plan_id,
+            a.apply_date,
+            a.finish_date,
+            a.exp_date,
+            a.fee_id,
+            a.fee,
+            a.fee_state,
+            a.local_id,
+            a.rsrv_str2,
+            a.rsrv_str3,
+            a.hour_state,
+            a.learn_state,
+            a.exam_state,
+            a.cert_state,
+            a.reduce_flag,
+            b.plan_name rsrv_str1
+         from so_plan a,t_plan b
+        where a.plan_id = b.plan_id
+          and a.sts = '0'
+          and a.hour_state != '1'
+          and user_id = #{userId}
+    </select>
+
+       <select id="findListBySoPlanEntity" resultMap="SoPlanEntityMap" >
+            select
+              a.soid as p_soid,
+              a.user_id as p_user_id,
+              a.plan_id as p_plan_id,
+              a.apply_date as p_apply_date,
+              a.finish_date as p_finish_date ,
+              a.exp_date as p_exp_date,
+              a.fee_id as p_fee_id,
+              a.fee as p_fee,
+              a.fee_state as p_fee_state ,
+              a.local_id as p_local_id ,
+              a.rsrv_str1 as p_rsrv_str1,
+              a.rsrv_str2 as p_rsrv_str2,
+              a.rsrv_str3 as p_rsrv_str3,
+              a.sts as p_sts,
+              a.sts_date as p_sts_date,
+              b.servid as S_SERVID,
+              b.user_id as S_USER_ID,
+              b.company_id as S_COMPANY_ID,
+              b.app_id as S_APP_ID,
+              b.province_id as S_PROVINCE_ID,
+              b.local_id as S_LOCAL_ID,
+              b.area_id as S_AREA_ID,
+              b.name as S_NAME,
+              b.sex as S_SEX,
+              b.birth_date as S_BIRTH_DATE,
+              b.id_type as S_ID_TYPE,
+              b.id_no as S_ID_NO,
+              b.gard_school as S_GARD_SCHOOL,
+              b.gard_date as S_GARD_DATE,
+              b.gard_major as S_GARD_MAJOR,
+              b.degree as S_DEGREE,
+              b.education as S_EDUCATION,
+              b.contact_person as S_CONTACT_PERSON,
+              b.contact_phone as S_CONTACT_PHONE,
+              b.contact_addr as S_CONTACT_ADDR,
+              b.post_code as S_POST_CODE,
+              b.mail as S_MAIL,
+              b.cert_type as S_CERT_TYPE,
+              b.cert_no as S_CERT_NO,
+              b.issue_by as S_ISSUE_BY,
+              b.issue_date as S_ISSUE_DATE,
+              b.regi_no as S_REGI_NO,
+              b.regi_date as S_REGI_DATE,
+              b.educ_no as S_EDUC_NO,
+              b.educ_date as S_EDUC_DATE,
+              b.major_first as S_MAJOR_FIRST,
+              b.major_second as S_MAJOR_SECOND,
+              b.major_third as S_MAJOR_THIRD,
+              b.major_fourth as S_MAJOR_FOURTH,
+              b.major_fifth as S_MAJOR_FIFTH,
+              b.major_sixth as S_MAJOR_SIXTH,
+              b.patch_id as S_PATCH_ID,
+              b.rsrv_str1 as S_RSRV_STR1,
+              b.rsrv_str2 as S_RSRV_STR2,
+              b.rsrv_str3 as S_RSRV_STR3,
+              b.emp_flag as S_EMP_FLAG,
+              b.sts as S_STS,
+              b.sts_date as S_STS_DATE,
+              b.remarks as S_REMARKS,
+              b.working_date as S_WORKING_DATE
+              from so_plan a left join t_serv b on a.user_id =b.user_id and b.sts ='0'
+           <where>
+               <if test="servAcInfo != null">
+                   <if test="servAcInfo.name != null and servAcInfo.name != ''">
+                       and b.name  like  '%${servAcInfo.name}%'
+                   </if>
+               </if>
+               <if test="servAcInfo != null">
+                   <if test="servAcInfo.idNo != null and servAcInfo.idNo != ''">
+                       and b.id_no like  '%${servAcInfo.idNo}%'
+                   </if>
+               </if>
+               <if test="soPlan != null">
+                   <if test="soPlan.localId != null and soPlan.localId != ''">
+                       and a.local_id = #{soPlan.localId}
+                   </if>
+               </if>
+               <if test="soPlan != null">
+                   <if test="soPlan.planId != null and soPlan.planId != ''">
+                       and a.plan_Id = #{soPlan.planId}
+                   </if>
+               </if>
+               <if test="soPlan != null">
+                   <if test="soPlan.feeState != null and soPlan.feeState != ''">
+                       and a.fee_state = #{soPlan.feeState}
+                   </if>
+               </if>
+               <if test="soPlan != null">
+                   <if test="soPlan.learnState != null and soPlan.learnState != ''">
+                       and a.learn_state = #{soPlan.learnState}
+                   </if>
+               </if>
+               <if test="soPlan != null">
+                   <if test="soPlan.hourState != null and soPlan.hourState != ''">
+                       and a.hour_state = #{soPlan.hourState}
+                   </if>
+               </if>
+               <if test="soPlan != null">
+                   <if test="soPlan.examState != null and soPlan.examState != ''">
+                       and a.exam_state = #{soPlan.examState}
+                   </if>
+               </if>
+               <if test="soPlan != null">
+                   <if test="soPlan.reduceFlag != null and soPlan.reduceFlag != ''">
+                       and a.reduce_flag = #{soPlan.reduceFlag}
+                   </if>
+               </if>
+
+
+
+
+
+
+               <if test="startTime != null and startTime != ''">
+                   <![CDATA[
+                    and a.apply_date >= #{startTime}
+                    ]]>
+               </if>
+               <if test="endTime != null and endTime != ''">
+                   <![CDATA[
+                    and a.apply_date <= #{endTime}
+                    ]]>
+               </if>
+       </where>
+           order by a.apply_date desc
+        </select>
+
+
+
+    <select id="findListBySoPlanEntitys" resultMap="SoPlanResultMap">
+        select
+        a.soid as p_soid,
+        a.user_id as p_user_id,
+        a.plan_id as p_plan_id,
+        a.apply_date as p_apply_date,
+        a.finish_date as p_finish_date ,
+        a.exp_date as p_exp_date,
+        a.fee_id as p_fee_id,
+        a.fee as p_fee,
+        a.fee_state as p_fee_state ,
+        a.hour_state as p_hour_state,
+        a.learn_State as p_learn_State,
+        a.exam_State as p_exam_State,
+        a.cert_state as p_cert_state,
+        a.reduce_Flag as p_reduce_Flag,
+        a.local_id as p_local_id ,
+        a.rsrv_str1 as p_rsrv_str1,
+        a.rsrv_str2 as p_rsrv_str2,
+        a.rsrv_str3 as p_rsrv_str3,
+        a.sts as p_sts,
+        a.sts_date as p_sts_date
+        from so_plan a left join t_serv b on a.user_id =b.user_id and b.sts ='0'
+        <where>
+            <if test="servAcInfo != null">
+                <if test="servAcInfo.name != null and servAcInfo.name != ''">
+                    and b.name  like  '%${servAcInfo.name}%'
+                </if>
+            </if>
+            <if test="servAcInfo != null">
+                <if test="servAcInfo.idNo != null and servAcInfo.idNo != ''">
+                    and b.id_no like  '%${servAcInfo.idNo}%'
+                </if>
+            </if>
+            <if test="soPlan != null">
+                <if test="soPlan.localId != null and soPlan.localId != ''">
+                    and a.local_id = #{soPlan.localId}
+                </if>
+            </if>
+            <if test="soPlan != null">
+                <if test="soPlan.planId != null and soPlan.planId != ''">
+                    and a.plan_Id = #{soPlan.planId}
+                </if>
+            </if>
+            <if test="soPlan != null">
+                <if test="soPlan.feeState != null and soPlan.feeState != ''">
+                    and a.fee_state = #{soPlan.feeState}
+                </if>
+            </if>
+            <if test="soPlan != null">
+                <if test="soPlan.learnState != null and soPlan.learnState != ''">
+                    and a.learn_state = #{soPlan.learnState}
+                </if>
+            </if>
+            <if test="soPlan != null">
+                <if test="soPlan.hourState != null and soPlan.hourState != ''">
+                    and a.hour_state = #{soPlan.hourState}
+                </if>
+            </if>
+            <if test="soPlan != null">
+                <if test="soPlan.examState != null and soPlan.examState != ''">
+                    and a.exam_state = #{soPlan.examState}
+                </if>
+            </if>
+            <if test="soPlan != null">
+                <if test="soPlan.reduceFlag != null and soPlan.reduceFlag != ''">
+                    and a.reduce_flag = #{soPlan.reduceFlag}
+                </if>
+            </if>
+
+
+
+
+
+
+            <if test="startTime != null and startTime != ''">
+                <![CDATA[
+                    and a.apply_date >= #{startTime}
+                    ]]>
+            </if>
+            <if test="endTime != null and endTime != ''">
+                <![CDATA[
+                    and a.apply_date <= #{endTime}
+                    ]]>
+            </if>
+        </where>
+        order by a.apply_date desc
+    </select>
+</mapper>

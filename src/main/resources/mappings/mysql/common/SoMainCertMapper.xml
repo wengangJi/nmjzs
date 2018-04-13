@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.common.dao.SoMainCertMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.common.entity.SoMainCert" >
+    <result column="soid" property="soid" jdbcType="VARCHAR" />
+    <result column="servid" property="servid" jdbcType="INTEGER" />
+    <result column="company_id" property="companyId" jdbcType="INTEGER" />
+    <result column="cert_type" property="certType" jdbcType="VARCHAR" />
+    <result column="cert_no" property="certNo" jdbcType="VARCHAR" />
+    <result column="eff_date" property="effDate" jdbcType="DATE" />
+    <result column="exp_date" property="expDate" jdbcType="DATE" />
+    <result column="issue_by" property="issueBy" jdbcType="VARCHAR" />
+    <result column="issue_date" property="issueDate" jdbcType="TIMESTAMP" />
+    <result column="rsrv_str1" property="rsrvStr1" jdbcType="VARCHAR" />
+    <result column="rsrv_str2" property="rsrvStr2" jdbcType="VARCHAR" />
+    <result column="rsrv_str3" property="rsrvStr3" jdbcType="VARCHAR" />
+    <result column="cert_sts" property="certSts" jdbcType="VARCHAR" />
+    <result column="cert_date" property="certDate" jdbcType="TIMESTAMP" />
+    <result column="sts" property="sts" jdbcType="CHAR" />
+      <result column="sts_date" property="stsDate" jdbcType="TIMESTAMP" />
+
+  </resultMap>
+  <insert id="insert" parameterType="com.zhongxin.cims.modules.common.entity.SoMainCert" >
+    insert into so_main_cert (soid, servid, company_id, 
+      cert_type, cert_no, eff_date, 
+      exp_date, issue_by, issue_date, 
+      rsrv_str1, rsrv_str2, rsrv_str3, 
+      cert_sts, cert_date, sts,sts_date)
+    values (#{soid,jdbcType=VARCHAR}, #{servid,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, 
+      #{certType,jdbcType=VARCHAR}, #{certNo,jdbcType=VARCHAR}, #{effDate,jdbcType=DATE}, 
+      #{expDate,jdbcType=DATE}, #{issueBy,jdbcType=VARCHAR}, #{issueDate,jdbcType=TIMESTAMP},
+      #{rsrvStr1,jdbcType=VARCHAR}, #{rsrvStr2,jdbcType=VARCHAR}, #{rsrvStr3,jdbcType=VARCHAR}, 
+      #{certSts,jdbcType=VARCHAR}, #{certDate,jdbcType=TIMESTAMP}, #{sts,jdbcType=CHAR}, #{stsDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.common.entity.SoMainCert" >
+    insert into so_main_cert
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="soid != null" >
+        soid,
+      </if>
+      <if test="servid != null" >
+        servid,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="certType != null" >
+        cert_type,
+      </if>
+      <if test="certNo != null" >
+        cert_no,
+      </if>
+      <if test="effDate != null" >
+        eff_date,
+      </if>
+      <if test="expDate != null" >
+        exp_date,
+      </if>
+      <if test="issueBy != null" >
+        issue_by,
+      </if>
+      <if test="issueDate != null" >
+        issue_date,
+      </if>
+      <if test="rsrvStr1 != null" >
+        rsrv_str1,
+      </if>
+      <if test="rsrvStr2 != null" >
+        rsrv_str2,
+      </if>
+      <if test="rsrvStr3 != null" >
+        rsrv_str3,
+      </if>
+      <if test="certSts != null" >
+        cert_sts,
+      </if>
+      <if test="certDate != null" >
+        cert_date,
+      </if>
+      <if test="sts != null" >
+        sts,
+      </if>
+        <if test="stsDate != null" >
+            sts,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="soid != null" >
+        #{soid,jdbcType=VARCHAR},
+      </if>
+      <if test="servid != null" >
+        #{servid,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="certType != null" >
+        #{certType,jdbcType=VARCHAR},
+      </if>
+      <if test="certNo != null" >
+        #{certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="effDate != null" >
+        #{effDate,jdbcType=DATE},
+      </if>
+      <if test="expDate != null" >
+        #{expDate,jdbcType=DATE},
+      </if>
+      <if test="issueBy != null" >
+        #{issueBy,jdbcType=VARCHAR},
+      </if>
+      <if test="issueDate != null" >
+        #{issueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rsrvStr1 != null" >
+        #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="certSts != null" >
+        #{certSts,jdbcType=VARCHAR},
+      </if>
+      <if test="certDate != null" >
+        #{certDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=CHAR},
+      </if>
+        <if test="stsDate != null" >
+            #{stsDate,jdbcType=TIMESTAMP},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateBySoid" parameterType="com.zhongxin.cims.modules.common.entity.SoMainCert" >
+     update so_main_cert
+     <set>
+         <if test="certNo != null">
+             CERT_NO = #{certNo},
+         </if>
+         <if test="certSts != null">
+             CERT_STS = #{certSts},
+         </if>
+         <if test="certDate != null">
+             CERT_DATE = #{certDate},
+         </if>
+         <if test="effDate != null">
+             EFF_DATE = #{effDate},
+         </if>
+         <if test="expDate != null">
+             exp_date = #{expDate},
+         </if>
+         <if test="issueBy != null">
+             issue_by = #{issueBy},
+         </if>
+         <if test="issueDate != null">
+             issue_date = #{issueDate},
+         </if>
+         <if test="sts != null">
+             sts = #{sts},
+         </if>
+         <if test="stsDate != null">
+             sts_date = #{stsDate},
+         </if>
+     </set>
+      where soid = #{soid}
+  </update>
+
+    <select id="findBySoid" resultType="com.zhongxin.cims.modules.common.entity.SoMainCert" resultMap="BaseResultMap">
+        select *
+        from so_main_cert
+        where soid = #{soid}
+    </select>
+</mapper>

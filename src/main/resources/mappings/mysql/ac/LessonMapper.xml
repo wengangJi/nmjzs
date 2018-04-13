@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.ac.dao.LessonMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.ac.entity.Lesson" >
+    <id column="lesson_id" property="lessonId" jdbcType="BIGINT" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="lesson_name" property="lessonName" jdbcType="VARCHAR" />
+    <result column="lesson_info" property="lessonInfo" jdbcType="VARCHAR" />
+    <result column="pay_tag" property="payTag" jdbcType="CHAR" />
+    <result column="watch_times" property="watchTimes" jdbcType="INTEGER" />
+    <result column="file_type" property="fileType" jdbcType="VARCHAR" />
+    <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
+    <result column="play_time" property="playTime" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="show_index" property="showIndex" jdbcType="INTEGER" />
+    <result column="rsrv_str1" property="rsrvStr1" jdbcType="VARCHAR" />
+    <result column="rsrv_str2" property="rsrvStr2" jdbcType="VARCHAR" />
+    <result column="rsrv_str3" property="rsrvStr3" jdbcType="VARCHAR" />
+    <result column="sts" property="sts" jdbcType="CHAR" />
+    <result column="sts_date" property="stsDate" jdbcType="TIMESTAMP" />
+    <result column="soid" property="soid" jdbcType="VARCHAR" />
+    <result column="hours" property="hours" jdbcType="DOUBLE" />
+    <result column="video_Time" property="videoTime" jdbcType="INTEGER" />
+    <result column="played_Time" property="playedTime" jdbcType="INTEGER" />
+    <result column="audit_Tag" property="auditTag" jdbcType="VARCHAR" />
+
+
+  </resultMap>
+
+  <resultMap id="LessonMap" type="com.zhongxin.cims.modules.ac.entity.Lesson" >
+    <id column="lesson_id" property="lessonId" jdbcType="BIGINT" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="lesson_name" property="lessonName" jdbcType="VARCHAR" />
+    <result column="lesson_info" property="lessonInfo" jdbcType="VARCHAR" />
+    <result column="pay_tag" property="payTag" jdbcType="CHAR" />
+    <result column="watch_times" property="watchTimes" jdbcType="INTEGER" />
+    <result column="file_type" property="fileType" jdbcType="VARCHAR" />
+    <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
+    <result column="play_time" property="playTime" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="show_index" property="showIndex" jdbcType="INTEGER" />
+    <result column="rsrv_str1" property="rsrvStr1" jdbcType="VARCHAR" />
+    <result column="rsrv_str2" property="rsrvStr2" jdbcType="VARCHAR" />
+    <result column="rsrv_str3" property="rsrvStr3" jdbcType="VARCHAR" />
+    <result column="sts" property="sts" jdbcType="CHAR" />
+    <result column="sts_date" property="stsDate" jdbcType="TIMESTAMP" />
+    <result column="soid" property="soid" jdbcType="VARCHAR" />
+    <result column="hours" property="hours" jdbcType="DOUBLE" />
+    <result column="video_Time" property="videoTime" jdbcType="INTEGER" />
+    <result column="played_Time" property="playedTime" jdbcType="INTEGER" />
+    <result column="audit_Tag" property="auditTag" jdbcType="VARCHAR" />
+    <association property="course" javaType="Course">
+      <id column="course_id" property="courseId" jdbcType="BIGINT" />
+      <result column="course_name" property="courseName" jdbcType="VARCHAR" />
+      <result column="plan_id" property="planId" jdbcType="BIGINT" />
+      <result column="major_id" property="majorId" jdbcType="VARCHAR" />
+      <result column="course_type" property="courseType" jdbcType="VARCHAR" />
+      <result column="course_hours" property="courseHours" jdbcType="VARCHAR" />
+      <result column="course_info" property="courseInfo" jdbcType="VARCHAR" />
+      <result column="teacher_id" property="teacherId" jdbcType="VARCHAR" />
+      <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
+      <result column="teacher_info" property="teacherInfo" jdbcType="VARCHAR" />
+      <result column="size" property="size" jdbcType="VARCHAR" />
+      <result column="type" property="type" jdbcType="VARCHAR" />
+      <result column="path" property="path" jdbcType="VARCHAR" />
+      <result column="image" property="image" jdbcType="VARCHAR" />
+      <result column="image_path" property="imagePath" jdbcType="VARCHAR" />
+      <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+      <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+      <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+      <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+      <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+      <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+      <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+      <result column="STS" property="sts" jdbcType="CHAR" />
+      <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+      <association property="plan" javaType="Plan">
+        <id column="plan_id" property="planId" jdbcType="BIGINT" />
+        <result column="plan_name" property="planName" jdbcType="VARCHAR" />
+        <result column="plan_type" property="planType" jdbcType="VARCHAR" />
+        <result column="major_id" property="majorId" jdbcType="VARCHAR" />
+        <result column="plan_hours" property="planHours" jdbcType="VARCHAR" />
+        <result column="charge_type" property="chargeType" jdbcType="VARCHAR" />
+        <result column="charge" property="charge" jdbcType="INTEGER" />
+        <result column="start_date" property="startDate" jdbcType="DATE" />
+        <result column="end_date" property="endDate" jdbcType="DATE" />
+        <result column="audit_sts" property="auditSts" jdbcType="CHAR" />
+        <result column="audit_date" property="auditDate" jdbcType="TIMESTAMP" />
+        <result column="year" property="year" jdbcType="VARCHAR" />
+        <result column="month" property="month" jdbcType="VARCHAR" />
+        <result column="day" property="day" jdbcType="VARCHAR" />
+        <result column="local_id" property="localId" jdbcType="INTEGER" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+        <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+        <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+        <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+        <result column="STS" property="sts" jdbcType="CHAR" />
+        <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+      </association>
+    </association>
+
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    lesson_id, course_id, lesson_name, lesson_info, pay_tag, watch_times, file_type, 
+    file_url, play_time, create_by, create_date, update_by, update_date, show_index, 
+    rsrv_str1, rsrv_str2, rsrv_str3, sts, sts_date
+  </sql>
+
+    <select id="selectByLessonId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        *
+        from t_course_lesson a
+        where a.lesson_id = #{lessonId,jdbcType=BIGINT} and a.sts = '0'
+    </select>
+
+  <select id="selectByPrimaryKey" resultMap="LessonMap" parameterType="java.lang.String" >
+    select 
+    *
+    from t_course_lesson a INNER JOIN t_course b on a.course_id = b.course_id INNER JOIN t_plan c on b.plan_id = c.plan_id
+    where lesson_id = #{lessonId,jdbcType=BIGINT} and a.sts = '0'
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_course_lesson
+    where lesson_id = #{lessonId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zhongxin.cims.modules.ac.entity.Lesson" >
+    insert into t_course_lesson (course_id, lesson_name,
+      lesson_info, pay_tag, watch_times, 
+      file_type, file_url, play_time, 
+      create_by, create_date, update_by, 
+      update_date, show_index, rsrv_str1,
+      rsrv_str2, rsrv_str3, sts, 
+      sts_date)
+    values (#{courseId,jdbcType=BIGINT}, #{lessonName,jdbcType=VARCHAR},
+      #{lessonInfo,jdbcType=VARCHAR}, #{payTag,jdbcType=CHAR}, #{watchTimes,jdbcType=INTEGER}, 
+      #{fileType,jdbcType=VARCHAR}, #{fileUrl,jdbcType=VARCHAR}, #{playTime,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{showIndex,jdbcType=INTEGER}, #{rsrvStr1,jdbcType=VARCHAR}, 
+      #{rsrvStr2,jdbcType=VARCHAR}, #{rsrvStr3,jdbcType=VARCHAR}, #{sts,jdbcType=CHAR}, 
+      #{stsDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.ac.entity.Lesson" >
+    insert into t_course_lesson
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="lessonName != null" >
+        lesson_name,
+      </if>
+      <if test="lessonInfo != null" >
+        lesson_info,
+      </if>
+      <if test="payTag != null" >
+        pay_tag,
+      </if>
+      <if test="watchTimes != null" >
+        watch_times,
+      </if>
+      <if test="fileType != null" >
+        file_type,
+      </if>
+      <if test="fileUrl != null" >
+        file_url,
+      </if>
+      <if test="playTime != null" >
+        play_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="showIndex != null" >
+        show_index,
+      </if>
+      <if test="rsrvStr1 != null" >
+        rsrv_str1,
+      </if>
+      <if test="rsrvStr2 != null" >
+        rsrv_str2,
+      </if>
+      <if test="rsrvStr3 != null" >
+        rsrv_str3,
+      </if>
+      <if test="sts != null" >
+        sts,
+      </if>
+      <if test="stsDate != null" >
+        sts_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="courseId != null" >
+        #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="lessonName != null" >
+        #{lessonName,jdbcType=VARCHAR},
+      </if>
+      <if test="lessonInfo != null" >
+        #{lessonInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="payTag != null" >
+        #{payTag,jdbcType=CHAR},
+      </if>
+      <if test="watchTimes != null" >
+        #{watchTimes,jdbcType=INTEGER},
+      </if>
+      <if test="fileType != null" >
+        #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null" >
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="playTime != null" >
+        #{playTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="showIndex != null" >
+        #{showIndex,jdbcType=INTEGER},
+      </if>
+      <if test="rsrvStr1 != null" >
+        #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.ac.entity.Lesson" >
+    update t_course_lesson
+    <set >
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="lessonName != null" >
+        lesson_name = #{lessonName,jdbcType=VARCHAR},
+      </if>
+      <if test="lessonInfo != null" >
+        lesson_info = #{lessonInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="payTag != null" >
+        pay_tag = #{payTag,jdbcType=CHAR},
+      </if>
+      <if test="watchTimes != null" >
+        watch_times = #{watchTimes,jdbcType=INTEGER},
+      </if>
+      <if test="fileType != null" >
+        file_type = #{fileType,jdbcType=VARCHAR},
+      </if>
+     <!-- <if test="fileUrl != null" >
+        file_url = #{fileUrl,jdbcType=VARCHAR},
+      </if>-->
+      <if test="playTime != null" >
+        play_time = #{playTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="showIndex != null" >
+        show_index = #{showIndex,jdbcType=INTEGER},
+      </if>
+      <if test="rsrvStr1 != null" >
+        rsrv_str1 = #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        rsrv_str2 = #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        rsrv_str3 = #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        sts = #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        sts_date = #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where lesson_id = #{lessonId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.ac.entity.Lesson" >
+    update t_course_lesson
+    set course_id = #{courseId,jdbcType=BIGINT},
+      lesson_name = #{lessonName,jdbcType=VARCHAR},
+      lesson_info = #{lessonInfo,jdbcType=VARCHAR},
+      pay_tag = #{payTag,jdbcType=CHAR},
+      watch_times = #{watchTimes,jdbcType=INTEGER},
+      file_type = #{fileType,jdbcType=VARCHAR},
+      file_url = #{fileUrl,jdbcType=VARCHAR},
+      play_time = #{playTime,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      show_index = #{showIndex,jdbcType=INTEGER},
+      rsrv_str1 = #{rsrvStr1,jdbcType=VARCHAR},
+      rsrv_str2 = #{rsrvStr2,jdbcType=VARCHAR},
+      rsrv_str3 = #{rsrvStr3,jdbcType=VARCHAR},
+      sts = #{sts,jdbcType=CHAR},
+      sts_date = #{stsDate,jdbcType=TIMESTAMP}
+    where lesson_id = #{lessonId,jdbcType=BIGINT}
+  </update>
+
+    <select id="findByCourseId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from t_course_lesson a
+        where a.course_id = #{courseId} and sts = '0'
+    </select>
+
+    <select id="findCourseHoursBySoid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+    a.lesson_id, a.course_id, a.lesson_name, a.lesson_info, a.pay_tag, a.watch_times, a.file_type,
+    a.file_url, a.play_time, a.create_by, a.create_date, a.update_by, a.update_date, a.show_index,
+    a.rsrv_str1, a.rsrv_str2, a.rsrv_str3, a.sts, a.sts_date,b.soid,b.hours,b.video_time,b.played_time,b.audit_tag
+            from t_course_lesson a LEFT JOIN so_hours b ON a.course_id=b.course_id AND a.lesson_id=b.lesson_id AND   b.soid =#{soid} AND b.type='1' AND b.sts='0' AND b.audit_tag IN ('0','1')
+        where a.course_id = #{courseId}
+
+        order by  a.show_index
+    </select>
+
+    <select id="findAll" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from t_course_lesson a
+        where sts = '0'
+    </select>
+
+
+  <select id="list" resultMap="LessonMap">
+      select
+      *
+      from t_course_lesson a INNER JOIN t_course b on a.course_id = b.course_id INNER JOIN t_plan c on b.plan_id = c.plan_id
+      <where>
+          a.sts = '0'
+          <if test="lessonName != null and lessonName != ''" >
+              and a.lesson_name like '%${lessonName}%'
+          </if>
+          <if test="courseId != null" >
+              and a.course_id = #{courseId,jdbcType=BIGINT}
+          </if>
+          <if test="plan.planId != null" >
+              and c.plan_id = #{plan.planId,jdbcType=BIGINT}
+          </if>
+      </where>
+  </select>
+</mapper>

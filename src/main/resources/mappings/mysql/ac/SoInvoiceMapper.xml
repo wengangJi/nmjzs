@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.ac.dao.SoInvoiceMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.ac.entity.SoInvoice" >
+    <id column="soid" property="soid" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="apply_date" property="applyDate" jdbcType="TIMESTAMP" />
+    <result column="fee" property="fee" jdbcType="REAL" />
+    <result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" />
+    <result column="contact_name" property="contactName" jdbcType="VARCHAR" />
+    <result column="post_code" property="postCode" jdbcType="VARCHAR" />
+    <result column="post_address" property="postAddress" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="audit_tag" property="auditTag" jdbcType="CHAR" />
+    <result column="audit_by" property="auditBy" jdbcType="VARCHAR" />
+    <result column="audit_date" property="auditDate" jdbcType="TIMESTAMP" />
+    <result column="audit_info" property="auditInfo" jdbcType="VARCHAR" />
+    <result column="rsrv_str1" property="rsrvStr1" jdbcType="VARCHAR" />
+    <result column="rsrv_str2" property="rsrvStr2" jdbcType="VARCHAR" />
+    <result column="rsrv_str3" property="rsrvStr3" jdbcType="VARCHAR" />
+    <result column="sts" property="sts" jdbcType="CHAR" />
+    <result column="sts_date" property="stsDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    soid, user_id, title, apply_date, fee, contact_phone, contact_name, post_code, post_address, 
+    company_name, remark, audit_tag, audit_by, audit_date, audit_info, rsrv_str1, rsrv_str2, 
+    rsrv_str3, sts, sts_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from so_invoice
+    where soid = #{soid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from so_invoice
+    where soid = #{soid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhongxin.cims.modules.ac.entity.SoInvoice" >
+    insert into so_invoice (soid, user_id, title, 
+      apply_date, fee, contact_phone, 
+      contact_name, post_code, post_address, 
+      company_name, remark, audit_tag, 
+      audit_by, audit_date, audit_info, 
+      rsrv_str1, rsrv_str2, rsrv_str3, 
+      sts, sts_date)
+    values (#{soid,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{applyDate,jdbcType=TIMESTAMP}, #{fee,jdbcType=REAL}, #{contactPhone,jdbcType=VARCHAR}, 
+      #{contactName,jdbcType=VARCHAR}, #{postCode,jdbcType=VARCHAR}, #{postAddress,jdbcType=VARCHAR}, 
+      #{companyName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{auditTag,jdbcType=CHAR}, 
+      #{auditBy,jdbcType=VARCHAR}, #{auditDate,jdbcType=TIMESTAMP}, #{auditInfo,jdbcType=VARCHAR}, 
+      #{rsrvStr1,jdbcType=VARCHAR}, #{rsrvStr2,jdbcType=VARCHAR}, #{rsrvStr3,jdbcType=VARCHAR}, 
+      #{sts,jdbcType=CHAR}, #{stsDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.ac.entity.SoInvoice" >
+    insert into so_invoice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="soid != null" >
+        soid,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="applyDate != null" >
+        apply_date,
+      </if>
+      <if test="fee != null" >
+        fee,
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone,
+      </if>
+      <if test="contactName != null" >
+        contact_name,
+      </if>
+      <if test="postCode != null" >
+        post_code,
+      </if>
+      <if test="postAddress != null" >
+        post_address,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="auditTag != null" >
+        audit_tag,
+      </if>
+      <if test="auditBy != null" >
+        audit_by,
+      </if>
+      <if test="auditDate != null" >
+        audit_date,
+      </if>
+      <if test="auditInfo != null" >
+        audit_info,
+      </if>
+      <if test="rsrvStr1 != null" >
+        rsrv_str1,
+      </if>
+      <if test="rsrvStr2 != null" >
+        rsrv_str2,
+      </if>
+      <if test="rsrvStr3 != null" >
+        rsrv_str3,
+      </if>
+      <if test="sts != null" >
+        sts,
+      </if>
+      <if test="stsDate != null" >
+        sts_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="soid != null" >
+        #{soid,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null" >
+        #{applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fee != null" >
+        #{fee,jdbcType=REAL},
+      </if>
+      <if test="contactPhone != null" >
+        #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null" >
+        #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="postAddress != null" >
+        #{postAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTag != null" >
+        #{auditTag,jdbcType=CHAR},
+      </if>
+      <if test="auditBy != null" >
+        #{auditBy,jdbcType=VARCHAR},
+      </if>
+      <if test="auditDate != null" >
+        #{auditDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditInfo != null" >
+        #{auditInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr1 != null" >
+        #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.ac.entity.SoInvoice" >
+    update so_invoice
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null" >
+        apply_date = #{applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fee != null" >
+        fee = #{fee,jdbcType=REAL},
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null" >
+        contact_name = #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        post_code = #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="postAddress != null" >
+        post_address = #{postAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTag != null" >
+        audit_tag = #{auditTag,jdbcType=CHAR},
+      </if>
+      <if test="auditBy != null" >
+        audit_by = #{auditBy,jdbcType=VARCHAR},
+      </if>
+      <if test="auditDate != null" >
+        audit_date = #{auditDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditInfo != null" >
+        audit_info = #{auditInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr1 != null" >
+        rsrv_str1 = #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        rsrv_str2 = #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        rsrv_str3 = #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        sts = #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        sts_date = #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where soid = #{soid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.ac.entity.SoInvoice" >
+    update so_invoice
+    set user_id = #{userId,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      apply_date = #{applyDate,jdbcType=TIMESTAMP},
+      fee = #{fee,jdbcType=REAL},
+      contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      contact_name = #{contactName,jdbcType=VARCHAR},
+      post_code = #{postCode,jdbcType=VARCHAR},
+      post_address = #{postAddress,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      audit_tag = #{auditTag,jdbcType=CHAR},
+      audit_by = #{auditBy,jdbcType=VARCHAR},
+      audit_date = #{auditDate,jdbcType=TIMESTAMP},
+      audit_info = #{auditInfo,jdbcType=VARCHAR},
+      rsrv_str1 = #{rsrvStr1,jdbcType=VARCHAR},
+      rsrv_str2 = #{rsrvStr2,jdbcType=VARCHAR},
+      rsrv_str3 = #{rsrvStr3,jdbcType=VARCHAR},
+      sts = #{sts,jdbcType=CHAR},
+      sts_date = #{stsDate,jdbcType=TIMESTAMP}
+    where soid = #{soid,jdbcType=VARCHAR}
+  </update>
+    <select id="findList" resultMap="BaseResultMap">
+        select
+        a.soid, a.user_id, a.title, a.apply_date, a.fee, a.contact_phone, a.contact_name, a.post_code, a.post_address,
+        b.ofline_no as  company_name, a.remark, a.audit_tag, a.audit_by, a.audit_date, a.audit_info,  a.rsrv_str1, a.rsrv_str2,
+        a.rsrv_str3, a.sts, a.sts_date
+        from so_invoice a,so_plan b
+        <where>
+            a.soid = b.soid
+            and b.fee_state = '1'
+            and a.sts = '0'
+            <if test="userId != null and userId != ''" >
+                and a.user_id = #{userId,jdbcType=VARCHAR}
+            </if>
+            <if test="auditTag != null and auditTag != ''" >
+                and a.audit_tag = #{auditTag,jdbcType=CHAR}
+            </if>
+            <if test="auditBy != null and auditBy != ''" >
+                and a.audit_by = #{auditBy,jdbcType=VARCHAR}
+            </if>
+            <if test="auditBy != null and auditBy != ''" >
+                and a.audit_by = #{auditBy,jdbcType=VARCHAR}
+            </if>
+            <if test="title != null and title != ''" >
+                and a.title like '%${title}%'
+            </if>
+            <if test="startTime != null and startTime != ''">
+                <![CDATA[
+                and a.apply_date >= #{startTime}
+                ]]>
+            </if>
+
+            <if test="rsrvStr3 != null and rsrvStr3 != ''" >
+                and a.user_id in ( select user_id from t_serv where  id_no like '%${rsrvStr3}%' )
+            </if>
+            <if test="endTime != null and endTime != ''">
+                <![CDATA[
+                and a.apply_date <= #{endTime}
+                ]]>
+            </if>
+        </where>
+    </select>
+</mapper>

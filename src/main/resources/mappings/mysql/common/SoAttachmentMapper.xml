@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.common.dao.SoAttachmentMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.common.entity.SoAttachment" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="soid" property="soid" jdbcType="VARCHAR" />
+    <result column="content_type" property="contentType" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="new_filename" property="newFilename" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="BIGINT" />
+    <result column="thumbnail_filename" property="thumbnailFilename" jdbcType="VARCHAR" />
+    <result column="thumbnail_size" property="thumbnailSize" jdbcType="BIGINT" />
+    <result column="pass" property="pass" jdbcType="CHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="sts" property="sts" jdbcType="CHAR" />
+    <result column="app_id" property="appId" jdbcType="VARCHAR" />
+    <result column="so_type" property="soType" jdbcType="VARCHAR" />
+    <result column="pass_user_id" property="passUserId" jdbcType="VARCHAR" />
+    <result column="pass_date" property="passDate" jdbcType="TIMESTAMP" />
+
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, soid, content_type, create_date, update_date, name, new_filename, size, thumbnail_filename, 
+    thumbnail_size, pass, path, sts  ,app_id,so_type,pass_user_id,pass_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from so_attachment
+    where id = #{id,jdbcType=BIGINT} and sts not in ('1','7')
+  </select>
+
+    <select id="selectComByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from so_attachment
+        where id = #{id,jdbcType=BIGINT} and sts='1'
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from so_attachment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zhongxin.cims.modules.common.entity.SoAttachment" >
+      <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+          SELECT LAST_INSERT_ID() AS ID
+      </selectKey>
+    insert into so_attachment (id, soid, content_type, 
+      create_date, update_date, name, 
+      new_filename, size, thumbnail_filename, 
+      thumbnail_size, pass, path, 
+      sts,app_id,so_type,pass_user_id,pass_date)
+    values (#{id,jdbcType=BIGINT}, #{soid,jdbcType=VARCHAR}, #{contentType,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR}, 
+      #{newFilename,jdbcType=VARCHAR}, #{size,jdbcType=BIGINT}, #{thumbnailFilename,jdbcType=VARCHAR}, 
+      #{thumbnailSize,jdbcType=BIGINT}, #{pass,jdbcType=CHAR}, #{path,jdbcType=VARCHAR}, 
+      #{sts,jdbcType=CHAR},#{appId,jdbcType=VARCHAR},#{soType,jdbcType=VARCHAR}, #{passUserId,jdbcType=VARCHAR},#{passDate,jdbcType=TIMESTAMP}   )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.common.entity.SoAttachment" >
+    insert into so_attachment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="soid != null" >
+        soid,
+      </if>
+      <if test="contentType != null" >
+        content_type,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="newFilename != null" >
+        new_filename,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="thumbnailFilename != null" >
+        thumbnail_filename,
+      </if>
+      <if test="thumbnailSize != null" >
+        thumbnail_size,
+      </if>
+      <if test="pass != null" >
+        pass,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="sts != null" >
+        sts,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="soid != null" >
+        #{soid,jdbcType=VARCHAR},
+      </if>
+      <if test="contentType != null" >
+        #{contentType,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="newFilename != null" >
+        #{newFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=BIGINT},
+      </if>
+      <if test="thumbnailFilename != null" >
+        #{thumbnailFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnailSize != null" >
+        #{thumbnailSize,jdbcType=BIGINT},
+      </if>
+      <if test="pass != null" >
+        #{pass,jdbcType=CHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+    <update id="removeImage" parameterType="com.zhongxin.cims.modules.common.entity.SoAttachment" >
+       delete from  so_attachment where soid = #{soid,jdbcType=VARCHAR} and app_id = #{appId,jdbcType=VARCHAR} and  so_type=#{soType,jdbcType=VARCHAR} and sts = '1'
+    </update>
+
+    <update id="confirmImage" parameterType="com.zhongxin.cims.modules.common.entity.SoAttachment" >
+        update so_attachment set sts =#{sts},update_date =#{updateDate}
+        where soid = #{soid,jdbcType=VARCHAR} and app_id = #{appId,jdbcType=VARCHAR} and  so_type=#{soType,jdbcType=VARCHAR} and sts = '1'
+    </update>
+
+    <update id="updateImage" parameterType="com.zhongxin.cims.modules.common.entity.SoAttachment" >
+        update so_attachment  set sts =#{sts},update_date = now()
+        where soid = #{soid} and app_id = #{appId} and  so_type=#{soType} and sts = '1'
+    </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.common.entity.SoAttachment" >
+    update so_attachment
+    <set >
+      <if test="contentType != null" >
+        content_type = #{contentType,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="newFilename != null" >
+        new_filename = #{newFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=BIGINT},
+      </if>
+      <if test="thumbnailFilename != null" >
+        thumbnail_filename = #{thumbnailFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnailSize != null" >
+        thumbnail_size = #{thumbnailSize,jdbcType=BIGINT},
+      </if>
+      <if test="pass != null" >
+        pass = #{pass,jdbcType=CHAR},
+      </if>
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        sts = #{sts,jdbcType=CHAR},
+      </if>
+      <if test="passUserId != null" >
+            pass_user_id = #{passUserId,jdbcType=CHAR},
+      </if>
+      <if test="passDate != null" >
+            pass_date = #{passDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.common.entity.SoAttachment" >
+    update so_attachment
+    set soid = #{soid,jdbcType=VARCHAR},
+      content_type = #{contentType,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      name = #{name,jdbcType=VARCHAR},
+      new_filename = #{newFilename,jdbcType=VARCHAR},
+      size = #{size,jdbcType=BIGINT},
+      thumbnail_filename = #{thumbnailFilename,jdbcType=VARCHAR},
+      thumbnail_size = #{thumbnailSize,jdbcType=BIGINT},
+      pass = #{pass,jdbcType=CHAR},
+      path = #{path,jdbcType=VARCHAR},
+      sts = #{sts,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectBySoid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+      select
+      <include refid="Base_Column_List" />
+      from so_attachment
+      where soid = #{soid,jdbcType=VARCHAR} and sts not in ('1','7')
+  </select>
+
+    <select id="selectAuditBySoid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from so_attachment
+        where soid = #{soid,jdbcType=VARCHAR}    and   app_id=#{appId,jdbcType=VARCHAR} and so_type=#{soType,jdbcType=VARCHAR} and sts='0' and pass='0'
+    </select>
+
+    <select id="selectMaxBySoid" resultType="int"  parameterType="java.lang.String" >
+        select
+        max(thumbnail_Size) as thumbnailSize
+        from so_attachment
+        where soid = #{soid,jdbcType=VARCHAR}    and   app_id=#{appId,jdbcType=VARCHAR} and so_type=#{soType,jdbcType=VARCHAR} and sts='0' and pass='0'
+    </select>
+
+    <select id="selectConfirmBySoid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from so_attachment
+        where soid = #{soid,jdbcType=VARCHAR}    and   app_id=#{appId,jdbcType=VARCHAR} and so_type=#{soType,jdbcType=VARCHAR} and sts='1'and pass='0'
+    </select>
+
+    <select id="selectMaxConfirmBySoid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from so_attachment
+        where soid = #{soid,jdbcType=VARCHAR}    and  sts !='7' AND create_date = (SELECT MAX(create_date) FROM so_attachment WHERE soid =#{soid,jdbcType=VARCHAR} AND sts !='7')
+    </select>
+
+    <select id="selectBySessionId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from so_attachment
+        where soid = #{sessionid,jdbcType=VARCHAR}    and   app_id=#{appId,jdbcType=VARCHAR} and so_type=#{soType,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByVideo" resultType="int" parameterType="java.lang.String" >
+        select
+         count(soid)
+        from so_attachment
+        where soid = #{soid,jdbcType=VARCHAR}    and   app_id=#{appId,jdbcType=VARCHAR} and so_type=#{soType,jdbcType=VARCHAR} and sts ='1'
+    </select>
+
+    <update id="updateBySoid" parameterType="java.lang.String" >
+        update so_attachment
+        set soid = #{soid},
+            path = #{path}
+        where soid = #{sessionid}  and app_id=#{appId} and so_type=#{soType}
+    </update>
+
+    <update id="removeByPrimaryKey" parameterType="com.zhongxin.cims.modules.common.entity.SoAttachment" >
+        update so_attachment
+        set
+        sts = #{sts,jdbcType=CHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="findBySelective" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from so_attachment
+        <where>
+            sts = '0'
+            <if test="soid != null and soid != ''">
+                and soid = #{soid,jdbcType=VARCHAR}
+            </if>
+            <if test="appId != null and appId != ''">
+                and app_id = #{appId,jdbcType=VARCHAR}
+            </if>
+            <if test="soType != null and soType != ''">
+                and so_type = #{soType,jdbcType=VARCHAR}
+            </if>
+            <if test="pass != null and pass != ''">
+                and pass = #{pass,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+        order by thumbnail_Size asc
+    </select>
+
+    <select id="findHisBySelective" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from so_attachment
+        <where>
+            sts = '0'
+            <if test="soid != null and soid != ''">
+                and soid = #{soid,jdbcType=VARCHAR}
+            </if>
+            <if test="appId != null and appId != ''">
+                and app_id = #{appId,jdbcType=VARCHAR}
+            </if>
+            <if test="soType != null and soType != ''">
+                and so_type = #{soType,jdbcType=VARCHAR}
+            </if>
+            <if test="pass != null and pass != ''">
+                and pass in ('0','1','2')
+            </if>
+        </where>
+    </select>
+</mapper>

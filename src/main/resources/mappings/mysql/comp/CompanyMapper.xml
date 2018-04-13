@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.comp.dao.CompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.comp.entity.Company" >
+    <id column="COMPANY_ID" property="companyId" jdbcType="INTEGER" />
+    <result column="COMPANY_NAME" property="companyName" jdbcType="VARCHAR" />
+    <result column="COMPANY_TYPE" property="companyType" jdbcType="VARCHAR" />
+    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+    <result column="TAX_NO" property="taxNo" jdbcType="VARCHAR" />
+    <result column="LICENCE_NO" property="licenceNo" jdbcType="VARCHAR" />
+    <result column="ECONOMIC_TYPE" property="economicType" jdbcType="VARCHAR" />
+    <result column="QUAL_LEVEL" property="qualLevel" jdbcType="VARCHAR" />
+    <result column="QUAL_TYPE" property="qualType" jdbcType="VARCHAR" />
+    <result column="QUAL_CERT_NO" property="qualCertNo" jdbcType="VARCHAR" />
+    <result column="LEG_PERSON" property="legPerson" jdbcType="VARCHAR" />
+    <result column="LEG_ID_TYPE" property="legIdType" jdbcType="VARCHAR" />
+    <result column="LEG_NO" property="legNo" jdbcType="VARCHAR" />
+    <result column="REGISTER_TYPE" property="registerType" jdbcType="VARCHAR" />
+    <result column="REGISTER_ADDR" property="registerAddr" jdbcType="VARCHAR" />
+    <result column="REGISTER_CAPITAL" property="registerCapital" jdbcType="VARCHAR" />
+    <result column="EFF_DATE" property="effDate" jdbcType="DATE" />
+    <result column="EXP_DATE" property="expDate" jdbcType="DATE" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="POST_CODE" property="postCode" jdbcType="VARCHAR" />
+    <result column="CONTACT_PERSON" property="contactPerson" jdbcType="VARCHAR" />
+    <result column="CONTACT_PHONE" property="contactPhone" jdbcType="VARCHAR" />
+    <result column="FAX" property="fax" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="PROFILE" property="profile" jdbcType="VARCHAR" />
+    <result column="PORTAL_CODE" property="portalCode" jdbcType="VARCHAR" />
+    <result column="PROVINCE_ID" property="provinceId" jdbcType="VARCHAR" />
+    <result column="LOCAL_ID" property="localId" jdbcType="INTEGER" />
+    <result column="AREA_ID" property="areaId" jdbcType="INTEGER" />
+    <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+    <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+    <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+    <result column="STS" property="sts" jdbcType="CHAR" />
+    <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    COMPANY_ID, COMPANY_NAME, COMPANY_TYPE, ORG_CODE, TAX_NO, LICENCE_NO, ECONOMIC_TYPE, 
+    QUAL_LEVEL, QUAL_TYPE, QUAL_CERT_NO, LEG_PERSON, LEG_ID_TYPE, LEG_NO, REGISTER_TYPE, 
+    REGISTER_ADDR, REGISTER_CAPITAL, EFF_DATE, EXP_DATE, ADDRESS, POST_CODE, CONTACT_PERSON, 
+    CONTACT_PHONE, FAX, EMAIL, PROFILE,PORTAL_CODE, PROVINCE_ID, LOCAL_ID, AREA_ID, RSRV_STR1, RSRV_STR2,
+    RSRV_STR3, REMARKS, STS, STS_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_company
+    where COMPANY_ID = #{companyId,jdbcType=INTEGER}   AND STS='0'
+  </select>
+
+  <select id="selectByNameOrOrgCode" resultMap="BaseResultMap" parameterType="com.zhongxin.cims.modules.comp.entity.Company" >
+      select
+      <include refid="Base_Column_List" />
+      from t_company
+      where    STS='0' AND ( COMPANY_NAME = #{companyName,jdbcType=VARCHAR}
+        OR ORG_CODE = #{orgCode,jdbcType=VARCHAR}  )
+  </select>
+
+    <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from t_company
+        where    STS='0'
+        <if test="_parameter!=null">
+            AND  COMPANY_NAME like '%${_parameter}%'
+        </if>
+    </select>
+
+ <!--   <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from t_company
+        where    STS='0'
+        <if test="companyName!=null">
+            AND  COMPANY_NAME like '%${companyName}%'
+        </if>
+    </select>-->
+
+    <select id="selectList" resultMap="BaseResultMap" parameterType="com.zhongxin.cims.modules.comp.entity.Company" >
+        select
+        <include refid="Base_Column_List" />
+        from t_company
+        where     1=1 AND  STS='0'
+        <if test="localId != null and localId !='' and localId !=47">
+         AND  LOCAL_ID =#{localId,jdbcType=INTEGER}
+        </if>
+      <if test="companyType!=null and companyType!=''" >
+         AND  COMPANY_TYPE=#{companyType,jdbcType=VARCHAR}
+        </if>
+        <if test="companyName!=null">
+            AND  COMPANY_NAME like '%${companyName}%'
+        </if>
+
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+      UPDATE t_company SET sts ='7',sts_date = NOW() WHERE company_id = #{companyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhongxin.cims.modules.comp.entity.Company" >
+    insert into t_company (COMPANY_ID, COMPANY_NAME, COMPANY_TYPE, 
+      ORG_CODE, TAX_NO, LICENCE_NO, 
+      ECONOMIC_TYPE, QUAL_LEVEL, QUAL_TYPE, 
+      QUAL_CERT_NO, LEG_PERSON, LEG_ID_TYPE, 
+      LEG_NO, REGISTER_TYPE, REGISTER_ADDR, 
+      REGISTER_CAPITAL, EFF_DATE, EXP_DATE, 
+      ADDRESS, POST_CODE, CONTACT_PERSON, 
+      CONTACT_PHONE, FAX, EMAIL, 
+      PROFILE, PROVINCE_ID, LOCAL_ID, 
+      AREA_ID, RSRV_STR1, RSRV_STR2, 
+      RSRV_STR3, REMARKS,PORTAL_CODE, STS,
+      STS_DATE)
+    values (#{companyId,jdbcType=INTEGER}, #{companyName,jdbcType=VARCHAR}, #{companyType,jdbcType=VARCHAR}, 
+      #{orgCode,jdbcType=VARCHAR}, #{taxNo,jdbcType=VARCHAR}, #{licenceNo,jdbcType=VARCHAR}, 
+      #{economicType,jdbcType=VARCHAR}, #{qualLevel,jdbcType=VARCHAR}, #{qualType,jdbcType=VARCHAR}, 
+      #{qualCertNo,jdbcType=VARCHAR}, #{legPerson,jdbcType=VARCHAR}, #{legIdType,jdbcType=VARCHAR}, 
+      #{legNo,jdbcType=VARCHAR}, #{registerType,jdbcType=VARCHAR}, #{registerAddr,jdbcType=VARCHAR}, 
+      #{registerCapital,jdbcType=VARCHAR}, #{effDate,jdbcType=DATE}, #{expDate,jdbcType=DATE}, 
+      #{address,jdbcType=VARCHAR}, #{postCode,jdbcType=VARCHAR}, #{contactPerson,jdbcType=VARCHAR}, 
+      #{contactPhone,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{profile,jdbcType=VARCHAR}, #{provinceId,jdbcType=VARCHAR}, #{localId,jdbcType=INTEGER}, 
+      #{areaId,jdbcType=INTEGER}, #{rsrvStr1,jdbcType=VARCHAR}, #{rsrvStr2,jdbcType=VARCHAR}, 
+      #{rsrvStr3,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR},#{portal,jdbcType=VARCHAR}, #{sts,jdbcType=CHAR},
+      #{stsDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.comp.entity.Company" >
+    insert into t_company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="companyId != null" >
+        COMPANY_ID,
+      </if>
+      <if test="companyName != null" >
+        COMPANY_NAME,
+      </if>
+      <if test="companyType != null" >
+        COMPANY_TYPE,
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE,
+      </if>
+      <if test="taxNo != null" >
+        TAX_NO,
+      </if>
+      <if test="licenceNo != null" >
+        LICENCE_NO,
+      </if>
+      <if test="economicType != null" >
+        ECONOMIC_TYPE,
+      </if>
+      <if test="qualLevel != null" >
+        QUAL_LEVEL,
+      </if>
+      <if test="qualType != null" >
+        QUAL_TYPE,
+      </if>
+      <if test="qualCertNo != null" >
+        QUAL_CERT_NO,
+      </if>
+      <if test="legPerson != null" >
+        LEG_PERSON,
+      </if>
+      <if test="legIdType != null" >
+        LEG_ID_TYPE,
+      </if>
+      <if test="legNo != null" >
+        LEG_NO,
+      </if>
+      <if test="registerType != null" >
+        REGISTER_TYPE,
+      </if>
+      <if test="registerAddr != null" >
+        REGISTER_ADDR,
+      </if>
+      <if test="registerCapital != null" >
+        REGISTER_CAPITAL,
+      </if>
+      <if test="effDate != null" >
+        EFF_DATE,
+      </if>
+      <if test="expDate != null" >
+        EXP_DATE,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="postCode != null" >
+        POST_CODE,
+      </if>
+      <if test="contactPerson != null" >
+        CONTACT_PERSON,
+      </if>
+      <if test="contactPhone != null" >
+        CONTACT_PHONE,
+      </if>
+      <if test="fax != null" >
+        FAX,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="profile != null" >
+        PROFILE,
+      </if>
+       <if test="portalCode != null" >
+            PORTAL_CODE,
+      </if>
+      <if test="provinceId != null" >
+        PROVINCE_ID,
+      </if>
+      <if test="localId != null" >
+        LOCAL_ID,
+      </if>
+      <if test="areaId != null" >
+        AREA_ID,
+      </if>
+      <if test="rsrvStr1 != null" >
+        RSRV_STR1,
+      </if>
+      <if test="rsrvStr2 != null" >
+        RSRV_STR2,
+      </if>
+      <if test="rsrvStr3 != null" >
+        RSRV_STR3,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+      <if test="sts != null" >
+        STS,
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyType != null" >
+        #{companyType,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="taxNo != null" >
+        #{taxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="licenceNo != null" >
+        #{licenceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="economicType != null" >
+        #{economicType,jdbcType=VARCHAR},
+      </if>
+      <if test="qualLevel != null" >
+        #{qualLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="qualType != null" >
+        #{qualType,jdbcType=VARCHAR},
+      </if>
+      <if test="qualCertNo != null" >
+        #{qualCertNo,jdbcType=VARCHAR},
+      </if>
+      <if test="legPerson != null" >
+        #{legPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="legIdType != null" >
+        #{legIdType,jdbcType=VARCHAR},
+      </if>
+      <if test="legNo != null" >
+        #{legNo,jdbcType=VARCHAR},
+      </if>
+      <if test="registerType != null" >
+        #{registerType,jdbcType=VARCHAR},
+      </if>
+      <if test="registerAddr != null" >
+        #{registerAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="registerCapital != null" >
+        #{registerCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="effDate != null" >
+        #{effDate,jdbcType=DATE},
+      </if>
+      <if test="expDate != null" >
+        #{expDate,jdbcType=DATE},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPerson != null" >
+        #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="profile != null" >
+        #{profile,jdbcType=VARCHAR},
+      </if>
+      <if test="portalCode != null" >
+            #{portalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="localId != null" >
+        #{localId,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="rsrvStr1 != null" >
+        #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.comp.entity.Company" >
+    update t_company
+    <set >
+      <if test="companyName != null" >
+        COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyType != null" >
+        COMPANY_TYPE = #{companyType,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="taxNo != null" >
+        TAX_NO = #{taxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="licenceNo != null" >
+        LICENCE_NO = #{licenceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="economicType != null" >
+        ECONOMIC_TYPE = #{economicType,jdbcType=VARCHAR},
+      </if>
+      <if test="qualLevel != null" >
+        QUAL_LEVEL = #{qualLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="qualType != null" >
+        QUAL_TYPE = #{qualType,jdbcType=VARCHAR},
+      </if>
+      <if test="qualCertNo != null" >
+        QUAL_CERT_NO = #{qualCertNo,jdbcType=VARCHAR},
+      </if>
+      <if test="legPerson != null" >
+        LEG_PERSON = #{legPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="legIdType != null" >
+        LEG_ID_TYPE = #{legIdType,jdbcType=VARCHAR},
+      </if>
+      <if test="legNo != null" >
+        LEG_NO = #{legNo,jdbcType=VARCHAR},
+      </if>
+      <if test="registerType != null" >
+        REGISTER_TYPE = #{registerType,jdbcType=VARCHAR},
+      </if>
+      <if test="registerAddr != null" >
+        REGISTER_ADDR = #{registerAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="registerCapital != null" >
+        REGISTER_CAPITAL = #{registerCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="effDate != null" >
+        EFF_DATE = #{effDate,jdbcType=DATE},
+      </if>
+      <if test="expDate != null" >
+        EXP_DATE = #{expDate,jdbcType=DATE},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        POST_CODE = #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPerson != null" >
+        CONTACT_PERSON = #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        CONTACT_PHONE = #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        FAX = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="profile != null" >
+        PROFILE = #{profile,jdbcType=VARCHAR},
+      </if>
+        <if test="portalCode !=null">
+            PORTAL_CODE=#{portalCode,jdbcType=VARCHAR},
+        </if>
+      <if test="provinceId != null" >
+        PROVINCE_ID = #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="localId != null" >
+        LOCAL_ID = #{localId,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null" >
+        AREA_ID = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="rsrvStr1 != null" >
+        RSRV_STR1 = #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        RSRV_STR2 = #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        RSRV_STR3 = #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        STS = #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE = #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where COMPANY_ID = #{companyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.comp.entity.Company" >
+    update t_company
+    set COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      COMPANY_TYPE = #{companyType,jdbcType=VARCHAR},
+      ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      TAX_NO = #{taxNo,jdbcType=VARCHAR},
+      LICENCE_NO = #{licenceNo,jdbcType=VARCHAR},
+      ECONOMIC_TYPE = #{economicType,jdbcType=VARCHAR},
+      QUAL_LEVEL = #{qualLevel,jdbcType=VARCHAR},
+      QUAL_TYPE = #{qualType,jdbcType=VARCHAR},
+      QUAL_CERT_NO = #{qualCertNo,jdbcType=VARCHAR},
+      LEG_PERSON = #{legPerson,jdbcType=VARCHAR},
+      LEG_ID_TYPE = #{legIdType,jdbcType=VARCHAR},
+      LEG_NO = #{legNo,jdbcType=VARCHAR},
+      REGISTER_TYPE = #{registerType,jdbcType=VARCHAR},
+      REGISTER_ADDR = #{registerAddr,jdbcType=VARCHAR},
+      REGISTER_CAPITAL = #{registerCapital,jdbcType=VARCHAR},
+      EFF_DATE = #{effDate,jdbcType=DATE},
+      EXP_DATE = #{expDate,jdbcType=DATE},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      POST_CODE = #{postCode,jdbcType=VARCHAR},
+      CONTACT_PERSON = #{contactPerson,jdbcType=VARCHAR},
+      CONTACT_PHONE = #{contactPhone,jdbcType=VARCHAR},
+      FAX = #{fax,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      PROFILE = #{profile,jdbcType=VARCHAR},
+      PORTAL_CODE = #{portalCode,jdbcType=VARCHAR},
+      PROVINCE_ID = #{provinceId,jdbcType=VARCHAR},
+      LOCAL_ID = #{localId,jdbcType=INTEGER},
+      AREA_ID = #{areaId,jdbcType=INTEGER},
+      RSRV_STR1 = #{rsrvStr1,jdbcType=VARCHAR},
+      RSRV_STR2 = #{rsrvStr2,jdbcType=VARCHAR},
+      RSRV_STR3 = #{rsrvStr3,jdbcType=VARCHAR},
+      REMARKS = #{remarks,jdbcType=VARCHAR},
+      STS = #{sts,jdbcType=CHAR},
+      STS_DATE = #{stsDate,jdbcType=TIMESTAMP}
+    where COMPANY_ID = #{companyId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.cp.dao.ServCpBaseMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.cp.entity.ServCpBase" >
+    <id column="SERVID" property="servid" jdbcType="INTEGER" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+    <result column="BIRTH_DATE" property="birthDate" jdbcType="DATE" />
+    <result column="ID_TYPE" property="idType" jdbcType="VARCHAR" />
+    <result column="ID_NO" property="idNo" jdbcType="VARCHAR" />
+    <result column="PERSON_TYPE" property="personType" jdbcType="VARCHAR" />
+    <result column="EXAM_DATE" property="examDate" jdbcType="DATE" />
+    <result column="EXAM_SCORE" property="examScore" jdbcType="VARCHAR" />
+    <result column="TELEPHONE" property="telephone" jdbcType="VARCHAR" />
+    <result column="COMPANY_ID" property="companyId" jdbcType="INTEGER" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="POST_CODE" property="postCode" jdbcType="VARCHAR" />
+    <result column="MAIL" property="mail" jdbcType="VARCHAR" />
+    <result column="GARD_SCHOOL" property="gardSchool" jdbcType="VARCHAR" />
+    <result column="GARD_DATE" property="gardDate" jdbcType="DATE" />
+    <result column="MAJOR" property="major" jdbcType="VARCHAR" />
+    <result column="TITLE_LEVEL" property="titleLevel" jdbcType="VARCHAR" />
+    <result column="TITLE_TYPE" property="titleType" jdbcType="VARCHAR" />
+    <result column="DEGREE" property="degree" jdbcType="VARCHAR" />
+    <result column="EDUCATION" property="education" jdbcType="VARCHAR" />
+    <result column="WORKING_DATE" property="workingDate" jdbcType="DATE" />
+    <result column="WORK_EXPE" property="workExpe" jdbcType="INTEGER" />
+    <result column="LEARN_EXPE" property="learnExpe" jdbcType="VARCHAR" />
+    <result column="CERT_EXPE" property="certExpe" jdbcType="VARCHAR" />
+    <result column="PATH_ID" property="pathId" jdbcType="VARCHAR" />
+    <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+    <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+    <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+    <result column="STS" property="sts" jdbcType="CHAR" />
+    <result column="STS_DATE" property="stsDate" jdbcType="DATE" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SERVID, NAME, SEX, BIRTH_DATE, ID_TYPE, ID_NO, PERSON_TYPE, EXAM_DATE, EXAM_SCORE, 
+    TELEPHONE, COMPANY_ID, ADDRESS, POST_CODE, MAIL, GARD_SCHOOL, GARD_DATE, MAJOR, TITLE_LEVEL, 
+    TITLE_TYPE, DEGREE, EDUCATION, WORKING_DATE, WORK_EXPE, LEARN_EXPE, CERT_EXPE, PATH_ID, 
+    RSRV_STR1, RSRV_STR2, RSRV_STR3, STS, STS_DATE, REMARKS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from serv_cp_base
+    where SERVID = #{servid,jdbcType=INTEGER}   and sts='0'
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from serv_cp_base
+    where SERVID = #{servid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhongxin.cims.modules.cp.entity.ServCpBase" >
+    insert into serv_cp_base (SERVID, NAME, SEX, 
+      BIRTH_DATE, ID_TYPE, ID_NO, 
+      PERSON_TYPE, EXAM_DATE, EXAM_SCORE, 
+      TELEPHONE, COMPANY_ID, ADDRESS, 
+      POST_CODE, MAIL, GARD_SCHOOL, 
+      GARD_DATE, MAJOR, TITLE_LEVEL, 
+      TITLE_TYPE, DEGREE, EDUCATION, 
+      WORKING_DATE, WORK_EXPE, LEARN_EXPE, 
+      CERT_EXPE, PATH_ID, RSRV_STR1, 
+      RSRV_STR2, RSRV_STR3, STS, 
+      STS_DATE, REMARKS)
+    values (#{servid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{birthDate,jdbcType=DATE}, #{idType,jdbcType=VARCHAR}, #{idNo,jdbcType=VARCHAR}, 
+      #{personType,jdbcType=VARCHAR}, #{examDate,jdbcType=DATE}, #{examScore,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{companyId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+      #{postCode,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, #{gardSchool,jdbcType=VARCHAR}, 
+      #{gardDate,jdbcType=DATE}, #{major,jdbcType=VARCHAR}, #{titleLevel,jdbcType=VARCHAR}, 
+      #{titleType,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, 
+      #{workingDate,jdbcType=DATE}, #{workExpe,jdbcType=INTEGER}, #{learnExpe,jdbcType=VARCHAR}, 
+      #{certExpe,jdbcType=VARCHAR}, #{pathId,jdbcType=VARCHAR}, #{rsrvStr1,jdbcType=VARCHAR}, 
+      #{rsrvStr2,jdbcType=VARCHAR}, #{rsrvStr3,jdbcType=VARCHAR}, #{sts,jdbcType=CHAR}, 
+      #{stsDate,jdbcType=DATE}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.cp.entity.ServCpBase" >
+    insert into serv_cp_base
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="servid != null" >
+        SERVID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="birthDate != null" >
+        BIRTH_DATE,
+      </if>
+      <if test="idType != null" >
+        ID_TYPE,
+      </if>
+      <if test="idNo != null" >
+        ID_NO,
+      </if>
+      <if test="personType != null" >
+        PERSON_TYPE,
+      </if>
+      <if test="examDate != null" >
+        EXAM_DATE,
+      </if>
+      <if test="examScore != null" >
+        EXAM_SCORE,
+      </if>
+      <if test="telephone != null" >
+        TELEPHONE,
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="postCode != null" >
+        POST_CODE,
+      </if>
+      <if test="mail != null" >
+        MAIL,
+      </if>
+      <if test="gardSchool != null" >
+        GARD_SCHOOL,
+      </if>
+      <if test="gardDate != null" >
+        GARD_DATE,
+      </if>
+      <if test="major != null" >
+        MAJOR,
+      </if>
+      <if test="titleLevel != null" >
+        TITLE_LEVEL,
+      </if>
+      <if test="titleType != null" >
+        TITLE_TYPE,
+      </if>
+      <if test="degree != null" >
+        DEGREE,
+      </if>
+      <if test="education != null" >
+        EDUCATION,
+      </if>
+      <if test="workingDate != null" >
+        WORKING_DATE,
+      </if>
+      <if test="workExpe != null" >
+        WORK_EXPE,
+      </if>
+      <if test="learnExpe != null" >
+        LEARN_EXPE,
+      </if>
+      <if test="certExpe != null" >
+        CERT_EXPE,
+      </if>
+      <if test="pathId != null" >
+        PATH_ID,
+      </if>
+      <if test="rsrvStr1 != null" >
+        RSRV_STR1,
+      </if>
+      <if test="rsrvStr2 != null" >
+        RSRV_STR2,
+      </if>
+      <if test="rsrvStr3 != null" >
+        RSRV_STR3,
+      </if>
+      <if test="sts != null" >
+        STS,
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="servid != null" >
+        #{servid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null" >
+        #{birthDate,jdbcType=DATE},
+      </if>
+      <if test="idType != null" >
+        #{idType,jdbcType=VARCHAR},
+      </if>
+      <if test="idNo != null" >
+        #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="personType != null" >
+        #{personType,jdbcType=VARCHAR},
+      </if>
+      <if test="examDate != null" >
+        #{examDate,jdbcType=DATE},
+      </if>
+      <if test="examScore != null" >
+        #{examScore,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="gardSchool != null" >
+        #{gardSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="gardDate != null" >
+        #{gardDate,jdbcType=DATE},
+      </if>
+      <if test="major != null" >
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="titleLevel != null" >
+        #{titleLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="titleType != null" >
+        #{titleType,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null" >
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="workingDate != null" >
+        #{workingDate,jdbcType=DATE},
+      </if>
+      <if test="workExpe != null" >
+        #{workExpe,jdbcType=INTEGER},
+      </if>
+      <if test="learnExpe != null" >
+        #{learnExpe,jdbcType=VARCHAR},
+      </if>
+      <if test="certExpe != null" >
+        #{certExpe,jdbcType=VARCHAR},
+      </if>
+      <if test="pathId != null" >
+        #{pathId,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr1 != null" >
+        #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        #{stsDate,jdbcType=DATE},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.cp.entity.ServCpBase" >
+    update serv_cp_base
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null" >
+        BIRTH_DATE = #{birthDate,jdbcType=DATE},
+      </if>
+      <if test="idType != null" >
+        ID_TYPE = #{idType,jdbcType=VARCHAR},
+      </if>
+      <if test="idNo != null" >
+        ID_NO = #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="personType != null" >
+        PERSON_TYPE = #{personType,jdbcType=VARCHAR},
+      </if>
+      <if test="examDate != null" >
+        EXAM_DATE = #{examDate,jdbcType=DATE},
+      </if>
+      <if test="examScore != null" >
+        EXAM_SCORE = #{examScore,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        POST_CODE = #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        MAIL = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="gardSchool != null" >
+        GARD_SCHOOL = #{gardSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="gardDate != null" >
+        GARD_DATE = #{gardDate,jdbcType=DATE},
+      </if>
+      <if test="major != null" >
+        MAJOR = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="titleLevel != null" >
+        TITLE_LEVEL = #{titleLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="titleType != null" >
+        TITLE_TYPE = #{titleType,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null" >
+        DEGREE = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        EDUCATION = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="workingDate != null" >
+        WORKING_DATE = #{workingDate,jdbcType=DATE},
+      </if>
+      <if test="workExpe != null" >
+        WORK_EXPE = #{workExpe,jdbcType=INTEGER},
+      </if>
+      <if test="learnExpe != null" >
+        LEARN_EXPE = #{learnExpe,jdbcType=VARCHAR},
+      </if>
+      <if test="certExpe != null" >
+        CERT_EXPE = #{certExpe,jdbcType=VARCHAR},
+      </if>
+      <if test="pathId != null" >
+        PATH_ID = #{pathId,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr1 != null" >
+        RSRV_STR1 = #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        RSRV_STR2 = #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        RSRV_STR3 = #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        STS = #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE = #{stsDate,jdbcType=DATE},
+      </if>
+      <if test="remarks != null" >
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SERVID = #{servid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.cp.entity.ServCpBase" >
+    update serv_cp_base
+    set NAME = #{name,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      BIRTH_DATE = #{birthDate,jdbcType=DATE},
+      ID_TYPE = #{idType,jdbcType=VARCHAR},
+      ID_NO = #{idNo,jdbcType=VARCHAR},
+      PERSON_TYPE = #{personType,jdbcType=VARCHAR},
+      EXAM_DATE = #{examDate,jdbcType=DATE},
+      EXAM_SCORE = #{examScore,jdbcType=VARCHAR},
+      TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      COMPANY_ID = #{companyId,jdbcType=INTEGER},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      POST_CODE = #{postCode,jdbcType=VARCHAR},
+      MAIL = #{mail,jdbcType=VARCHAR},
+      GARD_SCHOOL = #{gardSchool,jdbcType=VARCHAR},
+      GARD_DATE = #{gardDate,jdbcType=DATE},
+      MAJOR = #{major,jdbcType=VARCHAR},
+      TITLE_LEVEL = #{titleLevel,jdbcType=VARCHAR},
+      TITLE_TYPE = #{titleType,jdbcType=VARCHAR},
+      DEGREE = #{degree,jdbcType=VARCHAR},
+      EDUCATION = #{education,jdbcType=VARCHAR},
+      WORKING_DATE = #{workingDate,jdbcType=DATE},
+      WORK_EXPE = #{workExpe,jdbcType=INTEGER},
+      LEARN_EXPE = #{learnExpe,jdbcType=VARCHAR},
+      CERT_EXPE = #{certExpe,jdbcType=VARCHAR},
+      PATH_ID = #{pathId,jdbcType=VARCHAR},
+      RSRV_STR1 = #{rsrvStr1,jdbcType=VARCHAR},
+      RSRV_STR2 = #{rsrvStr2,jdbcType=VARCHAR},
+      RSRV_STR3 = #{rsrvStr3,jdbcType=VARCHAR},
+      STS = #{sts,jdbcType=CHAR},
+      STS_DATE = #{stsDate,jdbcType=DATE},
+      REMARKS = #{remarks,jdbcType=VARCHAR}
+    where SERVID = #{servid,jdbcType=INTEGER}
+  </update>
+</mapper>

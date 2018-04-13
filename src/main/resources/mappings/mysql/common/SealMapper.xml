@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.common.dao.SealMapper" >
+    <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.common.entity.Seal" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="local_id" property="localId" jdbcType="VARCHAR" />
+        <result column="seal_id" property="sealId" jdbcType="VARCHAR" />
+        <result column="seal_name" property="sealName" jdbcType="VARCHAR" />
+        <result column="content_type" property="contentType" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="thumbnail_name" property="thumbnailName" jdbcType="VARCHAR" />
+        <result column="path" property="path" jdbcType="VARCHAR" />
+        <result column="sts" property="sts" jdbcType="CHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, local_id, seal_id, seal_name, content_type, create_date, update_date, name, thumbnail_name,
+        path, sts
+    </sql>
+
+    <select id="selectCountByName" resultType="int"  parameterType="java.lang.String" >
+        select
+        count(id)
+        from t_seal
+        where name = #{name,jdbcType=VARCHAR} and sts ='0'
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from t_seal
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from t_seal
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.zhongxin.cims.modules.common.entity.Seal" >
+        insert into t_seal (id, local_id, seal_id,
+        seal_name, content_type, create_date,
+        update_date, name, thumbnail_name,
+        path, sts)
+        values (#{id,jdbcType=BIGINT}, #{localId,jdbcType=VARCHAR}, #{sealId,jdbcType=VARCHAR},
+        #{sealName,jdbcType=VARCHAR}, #{contentType,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+        #{updateDate,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR}, #{thumbnailName,jdbcType=VARCHAR},
+        #{path,jdbcType=VARCHAR}, #{sts,jdbcType=CHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.common.entity.Seal" >
+        insert into t_seal
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="localId != null" >
+                local_id,
+            </if>
+            <if test="sealId != null" >
+                seal_id,
+            </if>
+            <if test="sealName != null" >
+                seal_name,
+            </if>
+            <if test="contentType != null" >
+                content_type,
+            </if>
+            <if test="createDate != null" >
+                create_date,
+            </if>
+            <if test="updateDate != null" >
+                update_date,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="thumbnailName != null" >
+                thumbnail_name,
+            </if>
+            <if test="path != null" >
+                path,
+            </if>
+            <if test="sts != null" >
+                sts,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="localId != null" >
+                #{localId,jdbcType=VARCHAR},
+            </if>
+            <if test="sealId != null" >
+                #{sealId,jdbcType=VARCHAR},
+            </if>
+            <if test="sealName != null" >
+                #{sealName,jdbcType=VARCHAR},
+            </if>
+            <if test="contentType != null" >
+                #{contentType,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="thumbnailName != null" >
+                #{thumbnailName,jdbcType=VARCHAR},
+            </if>
+            <if test="path != null" >
+                #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="sts != null" >
+                #{sts,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.common.entity.Seal" >
+        update t_seal
+        <set >
+            <if test="localId != null" >
+                local_id = #{localId,jdbcType=VARCHAR},
+            </if>
+            <if test="sealId != null" >
+                seal_id = #{sealId,jdbcType=VARCHAR},
+            </if>
+            <if test="sealName != null" >
+                seal_name = #{sealName,jdbcType=VARCHAR},
+            </if>
+            <if test="contentType != null" >
+                content_type = #{contentType,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="thumbnailName != null" >
+                thumbnail_name = #{thumbnailName,jdbcType=VARCHAR},
+            </if>
+            <if test="path != null" >
+                path = #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="sts != null" >
+                sts = #{sts,jdbcType=CHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.common.entity.Seal" >
+        update t_seal
+        set local_id = #{localId,jdbcType=VARCHAR},
+        seal_id = #{sealId,jdbcType=VARCHAR},
+        seal_name = #{sealName,jdbcType=VARCHAR},
+        content_type = #{contentType,jdbcType=VARCHAR},
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+        name = #{name,jdbcType=VARCHAR},
+        thumbnail_name = #{thumbnailName,jdbcType=VARCHAR},
+        path = #{path,jdbcType=VARCHAR},
+        sts = #{sts,jdbcType=CHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="selectBySealId" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from t_seal
+      where seal_id = #{sealid} and local_id = #{localid} and sts = '0'
+  </select>
+
+    <select id="selectByUserId" resultType="int" parameterType="java.lang.String" >
+        select
+         count(seal_id)
+        from t_seal
+        where seal_id = #{sealid} and local_id = #{localid} and sts = '0'
+    </select>
+
+    <select id="selectBySelective" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_seal a
+        <where>
+             a.sts ='0'
+            <if test="sealId != null and sealId != ''">
+                and a.seal_id = #{sealId,jdbcType=CHAR}
+            </if>
+            <if test="localId !=null and localId!=''">
+                and a.local_id = #{localId}
+            </if>
+
+        </where>
+        order by a.id asc
+    </select>
+
+    <select id="removeByUserId"   parameterType="java.lang.Long">
+       delete  from t_seal
+        where seal_id = #{sealid} and local_id = #{localid} and sts = '0'
+    </select>
+</mapper>

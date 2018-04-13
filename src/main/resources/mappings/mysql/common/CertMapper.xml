@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.common.dao.CertMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.common.entity.Cert" >
+    <result column="SERVID" property="servid" jdbcType="INTEGER" />
+    <result column="COMPANY_ID" property="companyId" jdbcType="INTEGER" />
+    <result column="CERT_TYPE" property="certType" jdbcType="VARCHAR" />
+    <result column="CERT_NO" property="certNo" jdbcType="VARCHAR" />
+    <result column="EFF_DATE" property="effDate" jdbcType="DATE" />
+    <result column="EXP_DATE" property="expDate" jdbcType="DATE" />
+    <result column="ISSUE_BY" property="issueBy" jdbcType="VARCHAR" />
+    <result column="ISSUE_DATE" property="issueDate" jdbcType="TIMESTAMP" />
+    <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+    <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+    <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+    <result column="CERT_STS" property="certSts" jdbcType="VARCHAR" />
+    <result column="CERT_DATE" property="certDate" jdbcType="TIMESTAMP" />
+    <result column="STS" property="sts" jdbcType="CHAR" />
+    <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+    <sql id="CP_ASS_CERT_Column_List">
+        b.SERVID C_SERVID, b.SOID C_SOID, b.CERT_TYPE C_CERT_TYPE, b.CERT_NO C_CERT_NO,b.EFF_DATE C_EFF_DATE, b.EXP_DATE C_EXP_DATE,  b.ISSUE_BY C_ISSUE_BY, b.ISSUE_DATE C_ISSUE_DATE,
+        b.CERT_STS C_CERT_STS,  b.CERT_DATE C_CERT_DATE,  b.COMPANY_ID C_COMPANY_ID, b.STS C_STS,  b.RSRV_STR1 C_RSRV_STR1,  b.RSRV_STR2 C_RSRV_STR2,  b.RSRV_STR3 C_RSRV_STR3,
+        a.SERVID S_SERVID,   a.QR_ID S_QR_ID,  a.COMPANY_ID S_COMPANY_ID,  a.USER_ID S_USER_ID,  a.BATCH_ID S_BATCH_ID,  a.APP_ID S_APP_ID,   a.PROVINCE_ID S_PROVINCE_ID,  a.LOCAL_ID S_LOCAL_ID,
+        a.AREA_ID S_AREA_ID,   a.MONGO_FLAG S_MONGO_FLAG,  a.BACKLIST_FLAG S_BACKLIST_FLAG,  a.RELATION_FLAG S_RELATION_FLAG,   a.REMARKS S_REMARKS, a.RSRV_STR1 S_RSRV_STR1,  a.RSRV_STR2 S_RSRV_STR2,
+        a.RSRV_STR3 S_RSRV_STR3,  c.SERVID B_SERVID,  c.NAME B_NAME,   c.SEX B_SEX,  c.BIRTH_DATE B_BIRTH_DATE,  c.ID_TYPE B_ID_TYPE,  c.ID_NO B_ID_NO,  c.PERSON_TYPE B_PERSON_TYPE, c.EXAM_DATE B_EXAM_DATE,
+        c.EXAM_SCORE B_EXAM_SCORE,  c.TELEPHONE B_TELEPHONE,  c.ADDRESS B_ADDRESS,   c.POST_CODE B_POST_CODE,  c.MAIL B_MAIL, c.GARD_SCHOOL B_GARD_SCHOOL,  c.GARD_DATE B_GARD_DATE,  c.MAJOR B_MAJOR,
+        c.TITLE_LEVEL B_TITLE_LEVEL, c.TITLE_TYPE B_TITLE_TYPE,  c.DEGREE B_DEGREE, c.EDUCATION B_EDUCATION, c.WORKING_DATE B_WORKING_DATE,  c.WORK_EXPE B_WORK_EXPE,  c.LEARN_EXPE B_LEARN_EXPE,
+        c.CERT_EXPE B_CERT_EXPE,  c.PATH_ID B_PATH_ID,  c.RSRV_STR1 B_RSRV_STR1,  c.RSRV_STR2 B_RSRV_STR2, c.RSRV_STR3 B_RSRV_STR3, d.COMPANY_ID,  d.COMPANY_NAME,  d.COMPANY_TYPE,  d.ORG_CODE,
+        d.TAX_NO,   d.LICENCE_NO, d.ECONOMIC_TYPE,  d.QUAL_LEVEL, d.QUAL_TYPE, d.QUAL_CERT_NO,  d.LEG_PERSON, d.LEG_ID_TYPE, d.LEG_NO, d.REGISTER_TYPE,  d.REGISTER_ADDR, d.REGISTER_CAPITAL,
+        d.EFF_DATE,  d.EXP_DATE,  d.ADDRESS, d.POST_CODE, d.CONTACT_PERSON,  d.CONTACT_PHONE, d.FAX,  d.EMAIL,  d.PROFILE, d.PROVINCE_ID,  d.LOCAL_ID,  d.AREA_ID
+   </sql>
+    <sql id="CP_MAN_CERT_Column_List">
+       b.SERVID C_SERVID,b.CERT_TYPE C_CERT_TYPE,b.CERT_NO C_CERT_NO,b.EFF_DATE C_EFF_DATE,b.EXP_DATE C_EXP_DATE,b.ISSUE_BY C_ISSUE_BY,b.ISSUE_DATE C_ISSUE_DATE,
+       b.CERT_STS C_CERT_STS,b.CERT_DATE C_CERT_DATE,b.COMPANY_ID C_COMPANY_ID,b.STS C_STS,b.STS_DATE C_STS_DATE,b.RSRV_STR1 C_RSRV_STR1,b.RSRV_STR2 C_RSRV_STR2,b.RSRV_STR3 C_RSRV_STR3,
+       a.SERVID S_SERVID,a.QR_ID S_QR_ID,a.COMPANY_ID S_COMPANY_ID,a.USER_ID S_USER_ID,a.BATCH_ID S_BATCH_ID,a.APP_ID S_APP_ID,a.PROVINCE_ID S_PROVINCE_ID,a.LOCAL_ID S_LOCAL_ID,a.AREA_ID S_AREA_ID,a.MONGO_FLAG S_MONGO_FLAG,
+       a.BACKLIST_FLAG S_BACKLIST_FLAG,a.RELATION_FLAG S_RELATION_FLAG,a.REMARKS S_REMARKS,a.RSRV_STR1 S_RSRV_STR1,a.RSRV_STR2 S_RSRV_STR2,a.RSRV_STR3 S_RSRV_STR3,c.SERVID B_SERVID,c.NAME B_NAME,c.SEX B_SEX,c.BIRTH_DATE B_BIRTH_DATE,
+       c.ID_TYPE B_ID_TYPE,c.ID_NO B_ID_NO,c.PERSON_TYPE B_PERSON_TYPE,c.EXAM_DATE B_EXAM_DATE,c.EXAM_SCORE B_EXAM_SCORE,c.TELEPHONE B_TELEPHONE,c.ADDRESS B_ADDRESS,c.POST_CODE B_POST_CODE,c.MAIL B_MAIL,c.GARD_SCHOOL B_GARD_SCHOOL,
+       c.GARD_DATE B_GARD_DATE,c.MAJOR B_MAJOR,c.TITLE_LEVEL B_TITLE_LEVEL,c.TITLE_TYPE B_TITLE_TYPE,c.DEGREE B_DEGREE,c.EDUCATION B_EDUCATION,c.WORKING_DATE B_WORKING_DATE,c.WORK_EXPE B_WORK_EXPE,c.LEARN_EXPE B_LEARN_EXPE,
+       c.CERT_EXPE B_CERT_EXPE,c.PATH_ID B_PATH_ID,c.RSRV_STR1 B_RSRV_STR1,c.RSRV_STR2 B_RSRV_STR2,c.RSRV_STR3 B_RSRV_STR3,d.COMPANY_ID,d.COMPANY_NAME,d.COMPANY_TYPE,d.ORG_CODE,d.TAX_NO,d.LICENCE_NO,d.ECONOMIC_TYPE,
+       d.QUAL_LEVEL,d.QUAL_TYPE,d.QUAL_CERT_NO,d.LEG_PERSON,d.LEG_ID_TYPE,d.LEG_NO,d.REGISTER_TYPE,d.REGISTER_ADDR,d.REGISTER_CAPITAL,d.EFF_DATE,d.EXP_DATE,d.ADDRESS,d.POST_CODE,d.CONTACT_PERSON,d.CONTACT_PHONE,
+       d.FAX,d.EMAIL,d.PROFILE,d.PROVINCE_ID,d.LOCAL_ID,d.AREA_ID
+    </sql>
+
+    <select id="selectByServid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+          SERVID, COMPANY_ID, CERT_TYPE, CERT_NO, EFF_DATE, EXP_DATE, ISSUE_BY, ISSUE_DATE, RSRV_STR1, RSRV_STR2, RSRV_STR3, CERT_STS,CERT_DATE, STS, STS_DATE
+        from serv_main_cert
+        where SERVID = #{servid,jdbcType=INTEGER}   and sts ='0'
+    </select>
+
+    <insert id="insert" parameterType="com.zhongxin.cims.modules.common.entity.Cert" >
+    insert into serv_main_cert (SERVID, COMPANY_ID,
+      CERT_TYPE, CERT_NO, EFF_DATE, 
+      EXP_DATE, ISSUE_BY, ISSUE_DATE, 
+      RSRV_STR1, RSRV_STR2, RSRV_STR3, CERT_STS,CERT_DATE,
+      STS, STS_DATE)
+    values (#{servid,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER},
+      #{certType,jdbcType=VARCHAR}, #{certNo,jdbcType=VARCHAR}, #{effDate,jdbcType=DATE}, 
+      #{expDate,jdbcType=DATE}, #{issueBy,jdbcType=VARCHAR}, #{issueDate,jdbcType=TIMESTAMP},
+      #{rsrvStr1,jdbcType=VARCHAR}, #{rsrvStr2,jdbcType=VARCHAR}, #{rsrvStr3,jdbcType=VARCHAR},
+       #{certSts,jdbcType=VARCHAR}, #{certDate,jdbcType=TIMESTAMP},
+      #{sts,jdbcType=CHAR}, #{stsDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.common.entity.Cert" >
+    insert into serv_main_cert
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="servid != null" >
+        SERVID,
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID,
+      </if>
+
+      <if test="certType != null" >
+        CERT_TYPE,
+      </if>
+      <if test="certNo != null" >
+        CERT_NO,
+      </if>
+      <if test="effDate != null" >
+        EFF_DATE,
+      </if>
+      <if test="expDate != null" >
+        EXP_DATE,
+      </if>
+      <if test="issueBy != null" >
+        ISSUE_BY,
+      </if>
+      <if test="issueDate != null" >
+        ISSUE_DATE,
+      </if>
+      <if test="rsrvStr1 != null" >
+        RSRV_STR1,
+      </if>
+      <if test="rsrvStr2 != null" >
+        RSRV_STR2,
+      </if>
+      <if test="rsrvStr3 != null" >
+        RSRV_STR3,
+      </if>
+      <if test="sts != null" >
+        STS,
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="servid != null" >
+        #{servid,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+
+      <if test="certType != null" >
+        #{certType,jdbcType=VARCHAR},
+      </if>
+      <if test="certNo != null" >
+        #{certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="effDate != null" >
+        #{effDate,jdbcType=DATE},
+      </if>
+      <if test="expDate != null" >
+        #{expDate,jdbcType=DATE},
+      </if>
+      <if test="issueBy != null" >
+        #{issueBy,jdbcType=VARCHAR},
+      </if>
+      <if test="issueDate != null" >
+        #{issueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rsrvStr1 != null" >
+        #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+
+
+    <resultMap id="FindEqResultMap" type="QualifyCert" >
+        <id column="servid" property="servid" />
+        <association property="serv" javaType="Serv" resultMap="servRS"/>
+        <association property="cert" javaType="Cert" resultMap="certRS"/>
+        <collection property="qualItems" ofType="QualItem" resultMap="qualItemRS"/>
+    </resultMap>
+
+    <resultMap id="FindSeResultMap" type="SafetyEngineering" >
+        <id column="servid" property="servid" />
+        <association property="serv" javaType="Serv" resultMap="servRS"/>
+        <association property="cert" javaType="Cert" resultMap="certRS"/>
+    </resultMap>
+
+    <resultMap id="FindAcResultMap" type="AssociateConstructor" >
+        <id column="servid" property="servid" />
+        <association property="serv" javaType="Serv" resultMap="servRS"/>
+        <association property="cert" javaType="Cert" resultMap="certRS"/>
+        <association property="associateConstructorBase" javaType="AssociateConstructorBase" resultMap="acBaseRS"/>
+        <collection property="associateConstructorMajorList" ofType="AssociateConstructorMajor" resultMap="acMajorRS"/>
+    </resultMap>
+
+    <resultMap id="FindCpResultMap"  type="com.zhongxin.cims.modules.cp.entity.ServCpEntity" >
+        <id column="S_servid" property="servid" />
+        <result column="C_SOID" property="soid" jdbcType="VARCHAR"/>
+        <association property="serv" javaType="Serv" resultMap="servCpRS"/>
+        <association property="cert" javaType="Cert" resultMap="certCpRS"/>
+        <association property="personnel" javaType="Personnel" resultMap="PersonnelRs"/>
+
+    </resultMap>
+
+
+    <resultMap id="FindAcPersonResultMap" type="ACPerson" >
+        <result column="CERT_NO" property="certNo" jdbcType="VARCHAR"/>
+        <result column="AC_ID" property="acId" jdbcType="VARCHAR" />
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="SEX" property="sex" jdbcType="VARCHAR"/>
+        <result column="BIRTH_DATE" property="birthDate" jdbcType="DATE" />
+        <result column="ID_NO" property="idNo" jdbcType="VARCHAR"/>
+        <result column="DEGREE" property="degree" jdbcType="VARCHAR" />
+        <result column="EDUCATION" property="education" jdbcType="VARCHAR" />
+        <result column="GARD_SCHOOL" property="gardSchool" jdbcType="VARCHAR" />
+        <result column="GARD_DATE" property="gardDate" jdbcType="DATE" />
+        <result column="GARD_MAJOR" property="gardMajor" jdbcType="VARCHAR" />
+        <result column="ISSUE_DATE" property="issueDate" jdbcType="DATE"/>
+        <result column="EXP_DATE" property="expDate" jdbcType="DATE"/>
+        <result column="STS" property="sts" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="PersonnelRs" type="com.zhongxin.cims.modules.cp.entity.Personnel" >
+        <result column="B_SERVID" property="servid" jdbcType="INTEGER"/>
+        <result column="B_NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="B_SEX" property="sex" jdbcType="VARCHAR"/>
+        <result column="B_BIRTH_DATE" property="birthDate" jdbcType="DATE"/>
+        <result column="B_ID_TYPE" property="idType" jdbcType="VARCHAR"/>
+        <result column="B_ID_NO" property="idNo" jdbcType="VARCHAR"/>
+        <result column="B_PERSON_TYPE" property="personType" jdbcType="VARCHAR"/>
+        <result column="B_EXAM_DATE" property="examDate" jdbcType="DATE"/>
+        <result column="B_EXAM_SCORE" property="examScore" jdbcType="VARCHAR"/>
+        <result column="B_TELEPHONE" property="telephone" jdbcType="VARCHAR"/>
+        <result column="B_COMPANY_ID" property="companyId" jdbcType="INTEGER"/>
+        <result column="B_ADDRESS" property="address" jdbcType="VARCHAR"/>
+        <result column="B_POST_CODE" property="postCode" jdbcType="VARCHAR"/>
+        <result column="B_MAIL" property="mail" jdbcType="VARCHAR"/>
+        <result column="B_GARD_SCHOOL" property="gardSchool" jdbcType="VARCHAR"/>
+        <result column="B_GARD_DATE" property="gardDate" jdbcType="DATE"/>
+        <result column="B_MAJOR" property="major" jdbcType="VARCHAR"/>
+        <result column="B_TITLE_LEVEL" property="titleLevel" jdbcType="VARCHAR"/>
+        <result column="B_TITLE_TYPE" property="titleType" jdbcType="VARCHAR"/>
+        <result column="B_DEGREE" property="degree" jdbcType="VARCHAR"/>
+        <result column="B_EDUCATION" property="education" jdbcType="VARCHAR"/>
+        <result column="B_WORKING_DATE" property="workingDate" jdbcType="DATE"/>
+        <result column="B_WORK_EXPE" property="workExpe" jdbcType="INTEGER"/>
+        <result column="B_LEARN_EXPE" property="learnExpe" jdbcType="VARCHAR"/>
+        <result column="B_CERT_EXPE" property="certExpe" jdbcType="VARCHAR"/>
+        <result column="B_PATH_ID" property="pathId" jdbcType="VARCHAR"/>
+        <result column="B_RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR"/>
+        <result column="B_RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR"/>
+        <result column="B_RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR"/>
+        <result column="B_STS" property="sts" jdbcType="CHAR"/>
+        <result column="B_STS_DATE" property="stsDate" jdbcType="TIMESTAMP"/>
+        <result column="B_REMARKS" property="remarks" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="FindAcMajorResultMap" type="ACMajor" >
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="ID_NO" property="idNo" jdbcType="VARCHAR"/>
+        <result column="MAJOR" property="major" jdbcType="VARCHAR"/>
+        <result column="EFF_DATE" property="effDate" jdbcType="DATE"/>
+        <result column="EXP_DATE" property="expDate" jdbcType="DATE"/>
+        <result column="STS" property="sts" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="acMajorRS" type="AssociateConstructorMajor">
+        <id column="servid" property="servid" />
+        <result column="PARENT_MAJOR" property="parentMajor" jdbcType="VARCHAR" />
+        <result column="MAJOR" property="major" jdbcType="VARCHAR" />
+        <result column="EFF_DATE" property="effDate" jdbcType="DATE" />
+        <result column="EXP_DATE" property="expDate" jdbcType="DATE" />
+        <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+        <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+        <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+        <result column="PRES_TIME" property="presTime" jdbcType="INTEGER" />
+        <result column="ELEC_TIME" property="elecTime" jdbcType="INTEGER" />
+        <result column="STS" property="sts" jdbcType="CHAR" />
+        <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+        <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <resultMap id="acBaseRS" type="AssociateConstructorBase">
+        <id column="servid" property="servid" />
+        <result column="AC_ID" property="acId" jdbcType="VARCHAR" />
+        <result column="NAME" property="name" jdbcType="VARCHAR" />
+        <result column="SEX" property="sex" jdbcType="VARCHAR" />
+        <result column="NOTION" property="notion" jdbcType="VARCHAR" />
+        <result column="BIRTH_DATE" property="birthDate" jdbcType="DATE" />
+        <result column="ID_TYPE" property="idType" jdbcType="VARCHAR" />
+        <result column="ID_NO" property="idNo" jdbcType="VARCHAR" />
+        <result column="GARD_SCHOOL" property="gardSchool" jdbcType="VARCHAR" />
+        <result column="GARD_DATE" property="gardDate" jdbcType="DATE" />
+        <result column="GARD_MAJOR" property="gardMajor" jdbcType="VARCHAR" />
+        <result column="DEGREE" property="degree" jdbcType="VARCHAR" />
+        <result column="EDUCATION" property="education" jdbcType="VARCHAR" />
+        <result column="MOBILE_PHONE" property="mobilePhone" jdbcType="VARCHAR" />
+        <result column="MAIL" property="mail" jdbcType="VARCHAR" />
+        <result column="ECONOMIC_TYPE" property="economicType" jdbcType="VARCHAR" />
+        <result column="REGISTER_ADDR" property="registerAddr" jdbcType="VARCHAR" />
+        <result column="LEG_PERSON" property="legPerson" jdbcType="VARCHAR" />
+        <result column="CONTACT_PERSON" property="contactPerson" jdbcType="VARCHAR" />
+        <result column="COMPANY_TYPE" property="companyType" jdbcType="VARCHAR" />
+        <result column="COMPANY_OPIN" property="companyOpin" jdbcType="VARCHAR" />
+        <result column="EMPLOYEE" property="employee" jdbcType="VARCHAR" />
+        <result column="CONTRACT_START_DATE" property="contractStartDate" jdbcType="DATE" />
+        <result column="CONTRACT_END_DATE" property="contractEndDate" jdbcType="DATE" />
+        <result column="COMPANY" property="company" jdbcType="VARCHAR" />
+        <result column="SIGN_DATE" property="signDate" jdbcType="DATE" />
+        <result column="CHECK_CODE" property="checkCode" jdbcType="VARCHAR" />
+        <result column="PATH_ID" property="pathId" jdbcType="VARCHAR" />
+        <result column="STS" property="sts" jdbcType="CHAR" />
+        <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+        <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <resultMap id="servRS" type="Serv">
+        <id column="servid" property="servid" />
+        <result column="QR_ID" property="qrId" jdbcType="VARCHAR" />
+        <result column="APP_ID" property="appId" jdbcType="VARCHAR" />
+        <result column="PROVINCE_ID" property="provinceId" jdbcType="VARCHAR" />
+        <result column="LOCAL_ID" property="localId" jdbcType="INTEGER" />
+        <result column="AREA_ID" property="areaId" jdbcType="INTEGER" />
+        <result column="NOTICE_STS" property="noticeSts" jdbcType="VARCHAR" />
+        <result column="AUDIT_STS" property="auditSts" jdbcType="VARCHAR" />
+        <result column="APPE_STS" property="appeSts" jdbcType="VARCHAR" />
+        <result column="BATCH_ID" property="batchId" jdbcType="INTEGER" />
+        <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+        <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+        <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+        <result column="USER_ID" property="userId" jdbcType="INTEGER" />
+        <result column="STS" property="sts" jdbcType="CHAR" />
+        <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+        <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+        <association property="company" javaType="Company" resultMap="companyRS"/>
+    </resultMap>
+
+    <resultMap id="servCpRS" type="Serv">
+        <id column="S_servid" property="servid" />
+        <result column="S_QR_ID" property="qrId" jdbcType="VARCHAR" />
+        <result column="S_APP_ID" property="appId" jdbcType="VARCHAR" />
+        <result column="S_PROVINCE_ID" property="provinceId" jdbcType="VARCHAR" />
+        <result column="S_LOCAL_ID" property="localId" jdbcType="INTEGER" />
+        <result column="S_AREA_ID" property="areaId" jdbcType="INTEGER" />
+        <result column="S_MONGO_FLAG" property="mongoFlag" jdbcType="VARCHAR" />
+        <result column="S_BACKLIST_FLAG" property="backlistFlag" jdbcType="VARCHAR" />
+        <result column="S_RELATION_FLAG" property="relationFlag" jdbcType="VARCHAR" />
+        <result column="S_BATCH_ID" property="batchId" jdbcType="INTEGER" />
+        <result column="S_RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+        <result column="S_RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+        <result column="S_RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+        <result column="S_USER_ID" property="userId" jdbcType="INTEGER" />
+        <result column="S_APPL_DATE" property="applDate" jdbcType="DATE" />
+        <result column="S_COMPL_DATE" property="complDate" jdbcType="DATE" />
+        <result column="S_STS" property="sts" jdbcType="CHAR" />
+        <result column="S_STS_DATE" property="stsDate" jdbcType="DATE" />
+        <result column="S_REMARKS" property="remarks" jdbcType="VARCHAR" />
+        <association property="company" javaType="Company" resultMap="companyRS"/>
+    </resultMap>
+    <resultMap id="companyRS" type="Company">
+        <id column="COMPANY_ID" property="companyId" jdbcType="INTEGER" />
+        <result column="COMPANY_NAME" property="companyName" jdbcType="VARCHAR" />
+        <result column="COMPANY_TYPE" property="companyType" jdbcType="VARCHAR" />
+        <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+        <result column="TAX_NO" property="taxNo" jdbcType="VARCHAR" />
+        <result column="LICENCE_NO" property="licenceNo" jdbcType="VARCHAR" />
+        <result column="ECONOMIC_TYPE" property="economicType" jdbcType="VARCHAR" />
+        <result column="QUAL_LEVEL" property="qualLevel" jdbcType="VARCHAR" />
+        <result column="QUAL_TYPE" property="qualType" jdbcType="VARCHAR" />
+        <result column="QUAL_CERT_NO" property="qualCertNo" jdbcType="VARCHAR" />
+        <result column="LEG_PERSON" property="legPerson" jdbcType="VARCHAR" />
+        <result column="LEG_ID_TYPE" property="legIdType" jdbcType="VARCHAR" />
+        <result column="LEG_NO" property="legNo" jdbcType="VARCHAR" />
+        <result column="REGISTER_TYPE" property="registerType" jdbcType="VARCHAR" />
+        <result column="REGISTER_ADDR" property="registerAddr" jdbcType="VARCHAR" />
+        <result column="REGISTER_CAPITAL" property="registerCapital" jdbcType="VARCHAR" />
+        <result column="EFF_DATE" property="effDate" jdbcType="DATE" />
+        <result column="EXP_DATE" property="expDate" jdbcType="DATE" />
+        <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+        <result column="POST_CODE" property="postCode" jdbcType="VARCHAR" />
+        <result column="CONTACT_PERSON" property="contactPerson" jdbcType="VARCHAR" />
+        <result column="CONTACT_PHONE" property="contactPhone" jdbcType="VARCHAR" />
+        <result column="FAX" property="fax" jdbcType="VARCHAR" />
+        <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+        <result column="PROFILE" property="profile" jdbcType="VARCHAR" />
+        <result column="PROVINCE_ID" property="provinceId" jdbcType="VARCHAR" />
+        <result column="LOCAL_ID" property="localId" jdbcType="INTEGER" />
+        <result column="AREA_ID" property="areaId" jdbcType="INTEGER" />
+    </resultMap>
+
+    <resultMap id="certRS" type="Cert">
+        <id column="servid" property="servid" />
+        <result column="CERT_TYPE" property="certType" jdbcType="VARCHAR" />
+        <result column="CERT_NO" property="certNo" jdbcType="VARCHAR" />
+        <result column="EFF_DATE" property="effDate" jdbcType="DATE" />
+        <result column="EXP_DATE" property="expDate" jdbcType="DATE" />
+        <result column="ISSUE_BY" property="issueBy" jdbcType="VARCHAR" />
+        <result column="ISSUE_DATE" property="issueDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <resultMap id="certCpRS" type="Cert">
+        <id column="C_servid" property="servid" />
+        <result column="C_CERT_TYPE" property="certType" jdbcType="VARCHAR" />
+        <result column="C_CERT_NO" property="certNo" jdbcType="VARCHAR" />
+        <result column="C_EFF_DATE" property="effDate" jdbcType="DATE" />
+        <result column="C_EXP_DATE" property="expDate" jdbcType="DATE" />
+        <result column="C_ISSUE_BY" property="issueBy" jdbcType="VARCHAR" />
+        <result column="C_ISSUE_DATE" property="issueDate" jdbcType="TIMESTAMP" />
+        <result column="C_CERT_STS" property="certSts" jdbcType="VARCHAR" />
+        <result column="C_CERT_DATE" property="certDate" jdbcType="TIMESTAMP" />
+        <result column="C_STS" property="sts" jdbcType="VARCHAR" />
+        <result column="C_STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+        <result column="C_RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+        <result column="C_RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+        <result column="C_RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <resultMap id="qualItemRS" type="QualItem">
+        <id column="servid" property="servid" />
+        <result column="PARENT_QUAL_TYPE" property="parentQualType" jdbcType="VARCHAR" />
+        <result column="QUAL_TYPE" property="qualType" jdbcType="VARCHAR" />
+        <result column="QUAL_LEVEL" property="qualLevel" jdbcType="VARCHAR" />
+        <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+        <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+        <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!-- 调用见 CertService.findeq 方法 -->
+    <select id="findeq" resultType="QualifyCert" resultMap="FindEqResultMap">
+        select b.CERT_NO,
+               b.ISSUE_BY,
+               b.ISSUE_DATE,
+               b.EFF_DATE,
+               b.EXP_DATE,
+               b.CERT_TYPE,
+               c.PARENT_QUAL_TYPE,
+               c.QUAL_TYPE,
+               c.QUAL_LEVEL,
+               c.RSRV_STR1,
+               c.RSRV_STR2,
+               c.RSRV_STR3,
+               d.LEG_PERSON,
+               d.ADDRESS,
+               d.POST_CODE,
+               d.CONTACT_PHONE
+          from t_serv a left outer join serv_main_cert b ON a.SERVID = b.SERVID
+                left outer join serv_eq_qual_item c on a.servid = c.servid and c.main_flag = '0'
+                left outer join t_company d ON a.COMPANY_ID = d.COMPANY_ID
+        <where>
+               a.app_id = 'EQ' AND a.STS = '0' and  a.company_id = #{serv.company.companyId}
+        </where>
+    </select>
+
+    <!-- 调用见 CertService.findacPerson 方法 -->
+    <select id="findacPerson" resultType="AssociateConstructor" resultMap="FindAcPersonResultMap">
+        SELECT b.CERT_NO,
+               c.AC_ID,
+               c.NAME ,
+               c.SEX,
+               c.BIRTH_DATE ,
+               c.ID_NO ,
+               c.DEGREE ,
+               c.EDUCATION ,
+               c.GARD_SCHOOL ,
+               c.GARD_DATE ,
+               c.GARD_MAJOR ,
+               b.ISSUE_DATE ,
+               b.EXP_DATE,
+               c.remarks,
+               a.STS
+          FROM t_serv a LEFT JOIN serv_main_cert b ON a.SERVID = b.SERVID
+               LEFT JOIN serv_ac_base c ON a.SERVID = c.SERVID
+        <where>
+            a.app_id = 'AC' AND a.STS = '0' and  a.company_id = #{serv.company.companyId}
+        </where>
+    </select>
+
+
+    <!-- 调用见 CertService.findacMajor 方法 -->
+    <select id="findacMajor" resultType="AssociateConstructor" resultMap="FindAcMajorResultMap">
+        SELECT c.NAME,
+        c.ID_NO,
+        b.MAJOR,
+        b.EFF_DATE,
+        b.EXP_DATE,
+        a.STS
+        FROM t_serv a LEFT JOIN serv_ac_major b ON a.SERVID = b.SERVID
+        LEFT JOIN serv_ac_base c ON a.SERVID = c.SERVID
+        <where>
+            a.app_id = 'AC' AND a.STS = '0' and  a.company_id = #{serv.company.companyId}
+        </where>
+    </select>
+
+    <!-- 调用见 CertService.findse 方法 -->
+    <select id="findse" resultType="SafetyEngineering" resultMap="FindSeResultMap">
+        select b.cert_no,
+        b.issue_by ,
+        b.issue_date ,
+        b.exp_date ,
+        a.sts
+        from t_serv a left join serv_main_cert b on a.servid = b.servid
+        left join t_company d on a.company_id = d.company_id
+        <where>
+            a.app_id = 'SE' AND a.STS = '0' and  a.company_id = #{serv.company.companyId}
+        </where>
+    </select>
+
+
+    <!-- 调用见 CertService.findAssignPerson 方法 -->
+    <select id="findCPAssignCert"  resultMap="FindCpResultMap">
+        SELECT
+        <include refid="CP_ASS_CERT_Column_List"/>
+        FROM so_main_cert b INNER JOIN t_serv a ON a.SERVID = b.SERVID and a.app_id = 'CP' AND a.STS = '0'   and b.sts !='1' and b.cert_sts !='2'
+        <if test="serv != null">
+            <if test="serv.localId != null and serv.localId != ''">
+                and (a.local_id = #{serv.localId} or #{serv.localId} = '47')
+            </if>
+            <if test="serv.companyId != null and serv.companyId != ''">
+                and a.company_id = #{serv.companyId}
+            </if>
+            <if test="serv.batchId != null and serv.batchId != ''">
+                and a.batch_id = #{serv.batchId}
+            </if>
+        </if>
+        INNER JOIN serv_cp_base c ON a.SERVID = c.SERVID
+        <if test="personnel != null">
+            <if test="personnel.personType != null and personnel.personType != ''">
+                and c.person_type = #{personnel.personType}
+            </if>
+            <if test="personnel.name != null and personnel.name != ''">
+                and c.name = #{personnel.name}
+            </if>
+            <if test="personnel.idNo != null and personnel.idNo != ''">
+                and c.id_NO = #{personnel.idNo}
+            </if>
+        </if>
+        LEFT JOIN t_company d  on a.company_id = d.company_id
+        <where>
+            <if test="cert != null">
+                <if test="cert.certSts != null and cert.certSts != ''">
+                    and b.cert_sts = #{cert.certSts}
+                </if>
+            </if>
+            <if test="cert != null">
+                <if test="cert.sts != null and cert.sts != ''">
+                    and b.sts = #{cert.sts}
+                </if>
+            </if>
+
+            <if test="startTime != null and startTime != ''">
+                <![CDATA[
+                and b.cert_date >= #{startTime}
+                ]]>
+            </if>
+            <if test="endTime != null and endTime != ''">
+                <![CDATA[
+                and b.cert_date <= #{endTime}
+                ]]>
+            </if>
+        </where>
+        order by b.sts_date desc
+
+    </select>
+
+
+    <!-- 调用见 CertService.findAssignPerson 方法 -->
+    <select id="findCpManagerCert"  resultMap="FindCpResultMap">
+        SELECT
+        <include refid="CP_MAN_CERT_Column_List"/>
+        FROM serv_main_cert b LEFT JOIN t_serv a ON a.SERVID = b.SERVID
+        LEFT JOIN serv_cp_base c ON a.SERVID = c.SERVID
+        LEFT JOIN t_company d  on a.company_id = d.company_id
+        <where>
+            a.app_id = 'CP' AND a.sts = '0'   and b.sts='0' and b.cert_sts='2'
+            <if test="serv != null">
+                <if test="serv.localId != null and serv.localId != ''">
+                    and a.local_id = #{serv.localId}
+                </if>
+                <if test="serv.companyId != null and serv.companyId != ''">
+                    and a.company_id = #{serv.companyId}
+                </if>
+                <if test="serv.batchId != null and serv.batchId != ''">
+                    and a.batch_id = #{serv.batchId}
+                </if>
+            </if>
+            <if test="personnel != null">
+                <if test="personnel.personType != null and personnel.personType != ''">
+                    and c.person_type = #{personnel.personType}
+                </if>
+                <if test="personnel.name != null and personnel.name != ''">
+                    and c.name = #{personnel.name}
+                </if>
+                <if test="personnel.idNo != null and personnel.idNo != ''">
+                    and c.id_NO = #{personnel.idNo}
+                </if>
+            </if>
+            <if test="cert != null">
+                <if test="cert.sts != null and cert.sts != ''">
+                    and b.sts = #{cert.sts}
+                </if>
+            </if>
+
+            <if test="startTime != null and startTime != ''">
+                <![CDATA[
+                and b.cert_date >= #{startTime}
+                ]]>
+            </if>
+            <if test="endTime != null and endTime != ''">
+                <![CDATA[
+                and b.cert_date <= #{endTime}
+                ]]>
+            </if>
+        </where>
+
+    </select>
+
+    <!-- 调用见 CertService.findCPAssCertByCompanyId 方法 -->
+    <select id="findCPAssCertByCompanyId"  resultMap="FindCpResultMap">
+        SELECT
+        <include refid="CP_ASS_CERT_Column_List"/>
+        FROM so_main_cert b LEFT JOIN t_serv a ON a.SERVID = b.SERVID
+        LEFT JOIN serv_cp_base c ON a.SERVID = c.SERVID
+        LEFT JOIN t_company d  on a.company_id = d.company_id
+        <where>
+            a.app_id = 'CP' AND a.STS = '0'    and (b.sts='0'and  b.cert_sts in ('0','1','3'))
+            and    b.company_id = #{companyId}
+        </where>
+        order by b.sts_date desc
+
+    </select>
+
+
+    <!-- 调用见 CertService.findAssignPerson 方法 -->
+    <select id="findCPManCertByCompanyId"  resultMap="FindCpResultMap">
+        SELECT
+        <include refid="CP_MAN_CERT_Column_List"/>
+        FROM serv_main_cert b LEFT JOIN t_serv a ON a.SERVID = b.SERVID
+        LEFT JOIN serv_cp_base c ON a.SERVID = c.SERVID
+        LEFT JOIN t_company d  on a.company_id = d.company_id
+        <where>
+            a.app_id = 'CP' AND a.sts = '0'   and b.sts='0' and b.cert_sts='2'
+            and    b.company_id = #{companyId}
+        </where>
+
+        order by b.sts_date desc
+    </select>
+
+    <update id="updateByServid" parameterType="com.zhongxin.cims.modules.common.entity.Cert" >
+        update serv_main_cert
+        <set >
+            <if test="companyId != null" >
+                COMPANY_ID = ${companyId},
+            </if>
+
+            <if test="certType != null" >
+                CERT_TYPE = ${certType},
+            </if>
+            <if test="certNo != null" >
+                CERT_NO = ${certNo},
+            </if>
+            <if test="effDate != null" >
+                EFF_DATE = ${effDate},
+            </if>
+            <if test="expDate != null" >
+                EXP_DATE = ${expDate},
+            </if>
+            <if test="issueBy != null" >
+                ISSUE_BY = ${issueBy},
+            </if>
+            <if test="issueDate != null" >
+                ISSUE_DATE = ${issueDate},
+            </if>
+            <if test="rsrvStr1 != null" >
+                RSRV_STR1 = ${rsrvStr1},
+            </if>
+            <if test="rsrvStr2 != null" >
+                RSRV_STR2 = ${rsrvStr2},
+            </if>
+            <if test="rsrvStr3 != null" >
+                RSRV_STR3 = ${rsrvStr3},
+            </if>
+            <if test="sts != null" >
+                STS = ${sts},
+            </if>
+            <if test="stsDate != null" >
+                STS_DATE = ${stsDate},
+            </if>
+        </set>
+        where servid = #{servid}
+    </update>
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.common.entity.Cert" >
+        update serv_main_cert
+        <set >
+            <if test="companyId != null" >
+                COMPANY_ID = #{companyId},
+            </if>
+
+            <if test="certType != null" >
+                CERT_TYPE = #{certType},
+            </if>
+            <if test="certNo != null" >
+                CERT_NO = #{certNo},
+            </if>
+            <if test="effDate != null" >
+                EFF_DATE = #{effDate},
+            </if>
+            <if test="expDate != null" >
+                exp_date = #{expDate},
+            </if>
+            <if test="issueBy != null" >
+                ISSUE_BY = #{issueBy},
+            </if>
+            <if test="issueDate != null" >
+                ISSUE_DATE = #{issueDate},
+            </if>
+            <if test="rsrvStr1 != null" >
+                RSRV_STR1 = #{rsrvStr1},
+            </if>
+            <if test="rsrvStr2 != null" >
+                RSRV_STR2 = #{rsrvStr2},
+            </if>
+            <if test="rsrvStr3 != null" >
+                RSRV_STR3 = #{rsrvStr3},
+            </if>
+            <if test="certSts != null" >
+                CERT_STS = #{certSts},
+            </if>
+            <if test="certDate != null" >
+                CERT_DATE = #{certDate},
+            </if>
+            <if test="sts != null" >
+                STS = #{sts},
+            </if>
+            <if test="stsDate != null" >
+                STS_DATE = #{stsDate},
+            </if>
+        </set>
+        where servid = #{servid} and sts = '0'
+    </update>
+</mapper>

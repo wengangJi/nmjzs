@@ -1,0 +1,100 @@
+#============================#
+#===== Database sttings =====#
+#============================#
+
+#mysql database setting
+jdbc.type=mysql
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://10.15.17.151:3306/nmjzs?useUnicode=true&characterEncoding=utf-8
+jdbc.username=nmjzs
+jdbc.password=nmjzs
+
+#oracle database settings
+#jdbc.type=oracle
+#jdbc.driver=oracle.jdbc.driver.OracleDriver
+#jdbc.url=jdbc:oracle:thin:@127.0.0.1:1521:orcl
+#jdbc.username=nmjzs
+#jdbc.password=123456
+
+#mssql database settings
+#jdbc.type=mssql
+#jdbc.driver=net.sourceforge.jtds.jdbc.Driver
+#jdbc.url=jdbc:jtds:sqlserver://localhost:1433/nmjzs
+#jdbc.username=sa
+#jdbc.password=sa
+
+#pool settings
+jdbc.pool.minIdle=3
+jdbc.pool.maxActive=20
+
+#============================#
+#=== Framework settings =====#
+#============================#
+
+#hibernate settings
+hibernate.search.default.indexBase=indexes
+hibernate.show_sql=true
+#hibernate.show_sql=false
+
+#cache settings
+hibernate.ehcache.configFile=cache/ehcache-hibernate-local.xml
+#hibernate.ehcache.configFile=cache/ehcache-hibernate-rmi.xml
+ehcache.configFile=cache/ehcache-local.xml
+#ehcache.configFile=cache/ehcache-rmi.xml
+
+#home page path
+web.view.index=/a
+
+#internal resource view resolver
+web.view.prefix=/WEB-INF/views/
+web.view.suffix=.jsp
+
+#max upload size. 2G=2*1024*1024*1024(B)=2147483648 bytes
+web.maxUploadSize=2147483648
+
+#============================#
+#====== Global sttings ======#
+#============================#
+
+#product sttings
+productName=\u5185\u8499\u53e4\u81ea\u6cbb\u533a\u4e8c\u7ea7\u5efa\u9020\u5e08\u7f51\u7edc\u7ee7\u7eed\u6559\u80b2\u5e73\u53f0
+copyrightYear=2017
+version=V1.1.0
+
+#demo mode: Can't operate save, sys: area/office/user/role/menu/dict, cms: site/category
+demoMode=false
+
+#admin path
+adminPath=/a
+
+#front path
+frontPath=/f
+
+#url suffix
+urlSuffix=.html
+
+#page settings
+page.pageSize=12
+
+#userfiles basedir
+userfiles.basedir=/home/jboss/file/nmjzs
+
+#userfiles tmpdir
+userfiles.tmpdir=/home/jboss/file/nmjzs/tmp
+
+#vediofiles videdir
+userfiles.videodir=/home/jboss/file/nmjzs/video
+
+userfiles.soImage=/home/jboss/file/nmjzs/soImage
+
+userfiles.print=/home/jboss/file/nmjzs/print
+
+userfiles.config=/home/jboss/config
+
+
+#
+headphoto.basedir=/home/jboss/file/nmjzs/headPhoto
+
+headphoto.tmpdir=/home/jboss/file/nmjzs/headPhoto/tmp
+
+aliconfig=/home/jboss/config/aliconfig.properties

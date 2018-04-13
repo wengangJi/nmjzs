@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.ac.dao.AssociateConstructorMapper">
+    <resultMap id="BaseResultMap" type="AssociateConstructor">
+        <result column="SERVID" property="servid" jdbcType="INTEGER"/>
+        <association property="serv" javaType="Serv" resultMap="servRS"/>
+        <association property="cert" javaType="Cert" resultMap="cervRS"/>
+        <association property="associateConstructorBase" javaType="AssociateConstructorBase"
+                     resultMap="associateConstructorBaseRS"/>
+        <collection property="associateConstructorMajor" ofType="AssociateConstructorMajor"
+                    resultMap="associateConstructorMajorRS"/>
+    </resultMap>
+
+    <resultMap id="certRS" type="Cert">
+        <id column="servid" property="servid"/>
+        <result column="CERT_NO" property="certNo" jdbcType="VARCHAR"/>
+        <result column="ISSUE_BY" property="issueBy" jdbcType="VARCHAR"/>
+        <result column="ISSUE_DATE" property="issueDate" jdbcType="DATE"/>
+        <result column="EFF_DATE" property="effDate" jdbcType="DATE"/>
+        <result column="EXP_DATE" property="expDate" jdbcType="DATE"/>
+        <result column="STS" property="sts" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="servRs" type="Serv">
+        <id column="servid" property="servid"/>
+        <result column="QR_ID" property="qrId" jdbcType="VARCHAR"/>
+        <result column="APP_ID" property="appId" jdbcType="VARCHAR"/>
+        <result column="PROVINCE_ID" property="provinceId" jdbcType="VARCHAR"/>
+        <result column="LOCAL_ID" property="localId" jdbcType="INTEGER"/>
+        <result column="AREA_ID" property="areaId" jdbcType="INTEGER"/>
+        <result column="NOTICE_STS" property="noticeSts" jdbcType="VARCHAR"/>
+        <result column="AUDIT_STS" property="auditSts" jdbcType="VARCHAR"/>
+        <result column="APPE_STS" property="appeSts" jdbcType="VARCHAR"/>
+        <result column="BATCH_ID" property="batchId" jdbcType="INTEGER"/>
+        <result column="USER_ID" property="userId" jdbcType="INTEGER"/>
+        <result column="STS" property="sts" jdbcType="CHAR"/>
+        <result column="STS_DATE" property="stsDate" jdbcType="DATE"/>
+        <result column="REMARKS" property="remarks" jdbcType="VARCHAR"/>
+        <association property="company" javaType="Company" resultMap="companyRS"/>
+    </resultMap>
+
+    <resultMap id="companyRS" type="Company">
+        <id column="COMPANY_ID" property="companyId" jdbcType="INTEGER"/>
+        <result column="COMPANY_NAME" property="companyName" jdbcType="VARCHAR"/>
+        <result column="COMPANY_TYPE" property="companyType" jdbcType="VARCHAR"/>
+        <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR"/>
+        <result column="TAX_NO" property="taxNo" jdbcType="VARCHAR"/>
+        <result column="LICENCE_NO" property="licenceNo" jdbcType="VARCHAR"/>
+        <result column="ECONOMIC_TYPE" property="economicType" jdbcType="VARCHAR"/>
+        <result column="QUAL_LEVEL" property="qualLevel" jdbcType="VARCHAR"/>
+        <result column="QUAL_TYPE" property="qualType" jdbcType="VARCHAR"/>
+        <result column="QUAL_CERT_NO" property="qualCertNo" jdbcType="VARCHAR"/>
+        <result column="LEG_PERSON" property="legPerson" jdbcType="VARCHAR"/>
+        <result column="LEG_ID_TYPE" property="legIdType" jdbcType="VARCHAR"/>
+        <result column="LEG_NO" property="legNo" jdbcType="VARCHAR"/>
+        <result column="REGISTER_TYPE" property="registerType" jdbcType="VARCHAR"/>
+        <result column="REGISTER_ADDR" property="registerAddr" jdbcType="VARCHAR"/>
+        <result column="REGISTER_CAPITAL" property="registerCapital" jdbcType="VARCHAR"/>
+        <result column="EFF_DATE" property="effDate" jdbcType="DATE"/>
+        <result column="EXP_DATE" property="expDate" jdbcType="DATE"/>
+        <result column="ADDRESS" property="address" jdbcType="VARCHAR"/>
+        <result column="POST_CODE" property="postCode" jdbcType="VARCHAR"/>
+        <result column="CONTACT_PERSON" property="contactPerson" jdbcType="VARCHAR"/>
+        <result column="CONTACT_PHONE" property="contactPhone" jdbcType="VARCHAR"/>
+        <result column="FAX" property="fax" jdbcType="VARCHAR"/>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+        <result column="PROFILE" property="profile" jdbcType="VARCHAR"/>
+        <result column="PROVINCE_ID" property="provinceId" jdbcType="VARCHAR"/>
+        <result column="LOCAL_ID" property="localId" jdbcType="INTEGER"/>
+        <result column="AREA_ID" property="areaId" jdbcType="INTEGER"/>
+        <result column="REMARKS" property="remarks" jdbcType="VARCHAR"/>
+        <result column="STS" property="sts" jdbcType="CHAR"/>
+        <result column="STS_DATE" property="stsDate" jdbcType="DATE"/>
+    </resultMap>
+
+    <!--   <resultMap id="associateConstructorBaseRS" type="AssociateConstructorBase">
+           <id column="servid" property="servid" />
+           <result column="AC_ID" property="acId" jdbcType="VARCHAR" />
+           <result column="NAME" property="name" jdbcType="VARCHAR" />
+           <result column="SEX" property="sex" jdbcType="VARCHAR" />
+           <result column="NOTION" property="notion" jdbcType="VARCHAR" />
+           <result column="BIRTH_DATE" property="birthDate" jdbcType="DATE" />
+           <result column="ID_TYPE" property="idType" jdbcType="VARCHAR" />
+           <result column="ID_NO" property="idNo" jdbcType="VARCHAR" />
+           <result column="GARD_SCHOOL" property="gardSchool" jdbcType="VARCHAR" />
+           <result column="GARD_DATE" property="gardDate" jdbcType="DATE" />
+           <result column="GARD_MAJOR" property="gardMajor" jdbcType="VARCHAR" />
+           <result column="DEGREE" property="degree" jdbcType="VARCHAR" />
+           <result column="EDUCATION" property="education" jdbcType="VARCHAR" />
+           <result column="MOBILE_PHONE" property="mobilePhone" jdbcType="VARCHAR" />
+           <result column="MAIL" property="mail" jdbcType="VARCHAR" />
+           <result column="ECONOMIC_TYPE" property="economicType" jdbcType="VARCHAR" />
+           <result column="REGISTER_ADDR" property="registerAddr" jdbcType="VARCHAR" />
+           <result column="LEG_PERSON" property="legPerson" jdbcType="VARCHAR" />
+           <result column="CONTACT_PERSON" property="contactPerson" jdbcType="VARCHAR" />
+           <result column="COMPANY_TYPE" property="companyType" jdbcType="VARCHAR" />
+           <result column="COMPANY_OPIN" property="companyOpin" jdbcType="VARCHAR" />
+           <result column="EMPLOYEE" property="employee" jdbcType="VARCHAR" />
+           <result column="CONTRACT_START_DATE" property="contractStartDate" jdbcType="DATE" />
+           <result column="CONTRACT_END_DATE" property="contractEndDate" jdbcType="DATE" />
+           <result column="COMPANY" property="company" jdbcType="VARCHAR" />
+           <result column="SIGN_DATE" property="signDate" jdbcType="DATE" />
+           <result column="CHECK_CODE" property="checkCode" jdbcType="VARCHAR" />
+           <result column="PATH_ID" property="pathId" jdbcType="VARCHAR" />
+           <result column="STS" property="sts" jdbcType="CHAR" />
+           <result column="STS_DATE" property="stsDate" jdbcType="DATE" />
+           <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+       </resultMap>
+
+       <resultMap id="associateConstructorMajorRS" type="AssociateConstructorMajor">
+           <id column="servid" property="servid" />
+           <result column="SEQ" property="seq" jdbcType="INTEGER" />
+           <result column="PARENT_MAJOR" property="parentMajor" jdbcType="VARCHAR" />
+           <result column="MAJOR" property="major" jdbcType="VARCHAR" />
+           <result column="EFF_DATE" property="effDate" jdbcType="DATE" />
+           <result column="EXP_DATE" property="expDate" jdbcType="DATE" />
+           <result column="PRES_TIME" property="presTime" jdbcType="INTEGER" />
+           <result column="ELEC_TIME" property="elecTime" jdbcType="INTEGER" />
+           <result column="STS" property="sts" jdbcType="CHAR" />
+           <result column="STS_DATE" property="stsDate" jdbcType="DATE" />
+           <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+       </resultMap>
+   -->
+ <!--   &lt;!&ndash;    &lt;!&ndash; 调用见 PersonnelService.find 方法 &ndash;&gt;   &ndash;&gt;
+        <select id="find" resultType="Personnel" resultMap="FindResultMap">
+            select a.SERVID,
+            a.seq,
+            a.NAME,
+            a.MAJOR,
+            a.TITLE_LEVEL,
+            a.TITLE_TYPE,
+            a.PERSON_TYPE,
+            a.SEX,
+            a.BIRTH_DATE,
+            a.ID_NO,
+            b.CERT_NO,
+            b.ISSUE_DATE,
+            b.ISSUE_BY,
+            b.EFF_DATE,
+            b.EXP_DATE,
+            b.STS
+            from serv_cp_base a inner join serv_main_cert b on a.SERVID = b.SERVID
+            inner join t_serv c on a.SERVID = c.SERVID
+            <where>
+                c.sts = '0' and c.app_id = 'CP'
+                and b.COMPANY_ID = #{companyId}
+            </where>
+        </select>-->
+    <!--
+        <select id="findListByIdNo" resultType="AssociateConstructor" resultMap="FindResultMap">
+            select a.SERVID,
+            a.seq,
+            a.NAME,
+            a.MAJOR,
+            a.TITLE_LEVEL,
+            a.TITLE_TYPE,
+            a.PERSON_TYPE,
+            a.SEX,
+            a.BIRTH_DATE,
+            a.ID_NO,
+            b.CERT_NO,
+            b.ISSUE_DATE,
+            b.ISSUE_BY,
+            b.EFF_DATE,
+            b.EXP_DATE,
+            b.STS
+            from serv_cp_base a inner join serv_main_cert b on a.SERVID = b.SERVID
+            inner join t_serv c on a.SERVID = c.SERVID
+            <where>
+                c.sts = '0'
+                <if test="_parameter!=null">
+                    AND  a.ID_NO=${_parameter}
+                </if>
+            </where>
+        </select>-->
+</mapper>

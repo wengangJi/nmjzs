@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.ac.dao.ServAssociateConstructorMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.ac.entity.ServAssociateConstructor" >
+    <id column="SERVID" property="servid" jdbcType="INTEGER" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="COMPANY_ID" property="companyId" jdbcType="INTEGER" />
+    <result column="APP_ID" property="appId" jdbcType="VARCHAR" />
+    <result column="PROVINCE_ID" property="provinceId" jdbcType="VARCHAR" />
+    <result column="LOCAL_ID" property="localId" jdbcType="INTEGER" />
+    <result column="AREA_ID" property="areaId" jdbcType="INTEGER" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+    <result column="BIRTH_DATE" property="birthDate" jdbcType="DATE" />
+    <result column="ID_TYPE" property="idType" jdbcType="VARCHAR" />
+    <result column="ID_NO" property="idNo" jdbcType="VARCHAR" />
+    <result column="GARD_SCHOOL" property="gardSchool" jdbcType="VARCHAR" />
+    <result column="GARD_DATE" property="gardDate" jdbcType="DATE" />
+    <result column="GARD_MAJOR" property="gardMajor" jdbcType="VARCHAR" />
+    <result column="DEGREE" property="degree" jdbcType="VARCHAR" />
+    <result column="EDUCATION" property="education" jdbcType="VARCHAR" />
+    <result column="CONTACT_PERSON" property="contactPerson" jdbcType="VARCHAR" />
+    <result column="CONTACT_PHONE" property="contactPhone" jdbcType="VARCHAR" />
+    <result column="CONTACT_ADDR" property="contactAddr" jdbcType="VARCHAR" />
+    <result column="POST_CODE" property="postCode" jdbcType="VARCHAR" />
+    <result column="MAIL" property="mail" jdbcType="VARCHAR" />
+    <result column="CERT_TYPE" property="certType" jdbcType="VARCHAR" />
+    <result column="CERT_NO" property="certNo" jdbcType="VARCHAR" />
+    <result column="ISSUE_BY" property="issueBy" jdbcType="VARCHAR" />
+    <result column="ISSUE_DATE" property="issueDate" jdbcType="DATE" />
+    <result column="REGI_NO" property="regiNo" jdbcType="VARCHAR" />
+    <result column="REGI_DATE" property="regiDate" jdbcType="DATE" />
+    <result column="EDUC_NO" property="educNo" jdbcType="VARCHAR" />
+    <result column="EDUC_DATE" property="educDate" jdbcType="DATE" />
+    <result column="MAJOR_FIRST" property="majorFirst" jdbcType="VARCHAR" />
+    <result column="MAJOR_SECOND" property="majorSecond" jdbcType="VARCHAR" />
+    <result column="MAJOR_THIRD" property="majorThird" jdbcType="VARCHAR" />
+    <result column="MAJOR_FOURTH" property="majorFourth" jdbcType="VARCHAR" />
+    <result column="MAJOR_FIFTH" property="majorFifth" jdbcType="VARCHAR" />
+    <result column="MAJOR_SIXTH" property="majorSixth" jdbcType="VARCHAR" />
+    <result column="PATCH_ID" property="patchId" jdbcType="VARCHAR" />
+    <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+    <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+    <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+    <result column="EMP_FLAG" property="empFlag" jdbcType="VARCHAR" />
+    <result column="STS" property="sts" jdbcType="CHAR" />
+    <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+    <result column="WORKING_DATE" property="workingDate" jdbcType="DATE" />
+
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    SERVID, USER_ID, COMPANY_ID, APP_ID, PROVINCE_ID, LOCAL_ID, AREA_ID, NAME, SEX, BIRTH_DATE, 
+    ID_TYPE, ID_NO, GARD_SCHOOL, GARD_DATE, GARD_MAJOR, DEGREE, EDUCATION, CONTACT_PERSON, 
+    CONTACT_PHONE, CONTACT_ADDR, POST_CODE, MAIL, CERT_TYPE, CERT_NO, ISSUE_BY, ISSUE_DATE, 
+    REGI_NO, REGI_DATE, EDUC_NO, EDUC_DATE, MAJOR_FIRST, MAJOR_SECOND, MAJOR_THIRD, MAJOR_FOURTH, 
+    MAJOR_FIFTH, MAJOR_SIXTH, PATCH_ID, RSRV_STR1, RSRV_STR2, RSRV_STR3,EMP_FLAG, STS, STS_DATE,
+    REMARKS,WORKING_DATE
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_serv
+    where SERVID = #{servid,jdbcType=INTEGER}
+  </select>
+    <select id="findByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from t_serv
+        where sts ='0' and  user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="checkServExist" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from t_serv
+        where sts ='0' and  id_no = #{idNo,jdbcType=VARCHAR} and cert_no= #{certNo,jdbcType=VARCHAR}
+    </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_serv
+    where SERVID = #{servid,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.zhongxin.cims.modules.ac.entity.ServAssociateConstructor" >
+    insert into t_serv (SERVID, USER_ID, COMPANY_ID, 
+      APP_ID, PROVINCE_ID, LOCAL_ID, 
+      AREA_ID, NAME, SEX, 
+      BIRTH_DATE, ID_TYPE, ID_NO, 
+      GARD_SCHOOL, GARD_DATE, GARD_MAJOR, 
+      DEGREE, EDUCATION, CONTACT_PERSON, 
+      CONTACT_PHONE, CONTACT_ADDR, POST_CODE, 
+      MAIL, CERT_TYPE, CERT_NO, 
+      ISSUE_BY, ISSUE_DATE, REGI_NO, 
+      REGI_DATE, EDUC_NO, EDUC_DATE, 
+      MAJOR_FIRST, MAJOR_SECOND, MAJOR_THIRD, 
+      MAJOR_FOURTH, MAJOR_FIFTH, MAJOR_SIXTH, 
+      PATCH_ID, RSRV_STR1, RSRV_STR2, 
+      RSRV_STR3,EMP_FLAG, STS, STS_DATE,
+      REMARKS,WORKING_DATE)
+    values (#{servid,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{companyId,jdbcType=INTEGER}, 
+      #{appId,jdbcType=VARCHAR}, #{provinceId,jdbcType=VARCHAR}, #{localId,jdbcType=INTEGER}, 
+      #{areaId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{birthDate,jdbcType=DATE}, #{idType,jdbcType=VARCHAR}, #{idNo,jdbcType=VARCHAR}, 
+      #{gardSchool,jdbcType=VARCHAR}, #{gardDate,jdbcType=DATE}, #{gardMajor,jdbcType=VARCHAR}, 
+      #{degree,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, #{contactPerson,jdbcType=VARCHAR}, 
+      #{contactPhone,jdbcType=VARCHAR}, #{contactAddr,jdbcType=VARCHAR}, #{postCode,jdbcType=VARCHAR}, 
+      #{mail,jdbcType=VARCHAR}, #{certType,jdbcType=VARCHAR}, #{certNo,jdbcType=VARCHAR}, 
+      #{issueBy,jdbcType=VARCHAR}, #{issueDate,jdbcType=DATE}, #{regiNo,jdbcType=VARCHAR}, 
+      #{regiDate,jdbcType=DATE}, #{educNo,jdbcType=VARCHAR}, #{educDate,jdbcType=DATE}, 
+      #{majorFirst,jdbcType=VARCHAR}, #{majorSecond,jdbcType=VARCHAR}, #{majorThird,jdbcType=VARCHAR}, 
+      #{majorFourth,jdbcType=VARCHAR}, #{majorFifth,jdbcType=VARCHAR}, #{majorSixth,jdbcType=VARCHAR}, 
+      #{patchId,jdbcType=VARCHAR}, #{rsrvStr1,jdbcType=VARCHAR}, #{rsrvStr2,jdbcType=VARCHAR}, 
+      #{rsrvStr3,jdbcType=VARCHAR},#{empFlag,jdbcType=VARCHAR}, #{sts,jdbcType=CHAR}, #{stsDate,jdbcType=TIMESTAMP},
+      #{remarks,jdbcType=VARCHAR}, #{workingDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.ac.entity.ServAssociateConstructor" >
+    insert into t_serv
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="servid != null" >
+        SERVID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID,
+      </if>
+      <if test="appId != null" >
+        APP_ID,
+      </if>
+      <if test="provinceId != null" >
+        PROVINCE_ID,
+      </if>
+      <if test="localId != null" >
+        LOCAL_ID,
+      </if>
+      <if test="areaId != null" >
+        AREA_ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="birthDate != null" >
+        BIRTH_DATE,
+      </if>
+      <if test="idType != null" >
+        ID_TYPE,
+      </if>
+      <if test="idNo != null" >
+        ID_NO,
+      </if>
+      <if test="gardSchool != null" >
+        GARD_SCHOOL,
+      </if>
+      <if test="gardDate != null" >
+        GARD_DATE,
+      </if>
+      <if test="gardMajor != null" >
+        GARD_MAJOR,
+      </if>
+      <if test="degree != null" >
+        DEGREE,
+      </if>
+      <if test="education != null" >
+        EDUCATION,
+      </if>
+      <if test="contactPerson != null" >
+        CONTACT_PERSON,
+      </if>
+      <if test="contactPhone != null" >
+        CONTACT_PHONE,
+      </if>
+      <if test="contactAddr != null" >
+        CONTACT_ADDR,
+      </if>
+      <if test="postCode != null" >
+        POST_CODE,
+      </if>
+      <if test="mail != null" >
+        MAIL,
+      </if>
+      <if test="certType != null" >
+        CERT_TYPE,
+      </if>
+      <if test="certNo != null" >
+        CERT_NO,
+      </if>
+      <if test="issueBy != null" >
+        ISSUE_BY,
+      </if>
+      <if test="issueDate != null" >
+        ISSUE_DATE,
+      </if>
+      <if test="regiNo != null" >
+        REGI_NO,
+      </if>
+      <if test="regiDate != null" >
+        REGI_DATE,
+      </if>
+      <if test="educNo != null" >
+        EDUC_NO,
+      </if>
+      <if test="educDate != null" >
+        EDUC_DATE,
+      </if>
+      <if test="majorFirst != null" >
+        MAJOR_FIRST,
+      </if>
+      <if test="majorSecond != null" >
+        MAJOR_SECOND,
+      </if>
+      <if test="majorThird != null" >
+        MAJOR_THIRD,
+      </if>
+      <if test="majorFourth != null" >
+        MAJOR_FOURTH,
+      </if>
+      <if test="majorFifth != null" >
+        MAJOR_FIFTH,
+      </if>
+      <if test="majorSixth != null" >
+        MAJOR_SIXTH,
+      </if>
+      <if test="patchId != null" >
+        PATCH_ID,
+      </if>
+      <if test="rsrvStr1 != null" >
+        RSRV_STR1,
+      </if>
+      <if test="rsrvStr2 != null" >
+        RSRV_STR2,
+      </if>
+      <if test="rsrvStr3 != null" >
+        RSRV_STR3,
+      </if>
+        <if test="empFlag != null" >
+            EMP_FLAG,
+        </if>
+      <if test="sts != null" >
+        STS,
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+        <if test="workingDate != null" >
+            WORKING_DATE,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="servid != null" >
+        #{servid,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null" >
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="localId != null" >
+        #{localId,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null" >
+        #{birthDate,jdbcType=DATE},
+      </if>
+      <if test="idType != null" >
+        #{idType,jdbcType=VARCHAR},
+      </if>
+      <if test="idNo != null" >
+        #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="gardSchool != null" >
+        #{gardSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="gardDate != null" >
+        #{gardDate,jdbcType=DATE},
+      </if>
+      <if test="gardMajor != null" >
+        #{gardMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null" >
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPerson != null" >
+        #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactAddr != null" >
+        #{contactAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null" >
+        #{certType,jdbcType=VARCHAR},
+      </if>
+      <if test="certNo != null" >
+        #{certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="issueBy != null" >
+        #{issueBy,jdbcType=VARCHAR},
+      </if>
+      <if test="issueDate != null" >
+        #{issueDate,jdbcType=DATE},
+      </if>
+      <if test="regiNo != null" >
+        #{regiNo,jdbcType=VARCHAR},
+      </if>
+      <if test="regiDate != null" >
+        #{regiDate,jdbcType=DATE},
+      </if>
+      <if test="educNo != null" >
+        #{educNo,jdbcType=VARCHAR},
+      </if>
+      <if test="educDate != null" >
+        #{educDate,jdbcType=DATE},
+      </if>
+      <if test="majorFirst != null" >
+        #{majorFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="majorSecond != null" >
+        #{majorSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="majorThird != null" >
+        #{majorThird,jdbcType=VARCHAR},
+      </if>
+      <if test="majorFourth != null" >
+        #{majorFourth,jdbcType=VARCHAR},
+      </if>
+      <if test="majorFifth != null" >
+        #{majorFifth,jdbcType=VARCHAR},
+      </if>
+      <if test="majorSixth != null" >
+        #{majorSixth,jdbcType=VARCHAR},
+      </if>
+      <if test="patchId != null" >
+        #{patchId,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr1 != null" >
+        #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+        <if test="empFlag != null" >
+            #{empFlag,jdbcType=VARCHAR},
+        </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+        <if test="workingDate != null" >
+            #{workingDate,jdbcType=DATE},
+        </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.ac.entity.ServAssociateConstructor" >
+    update t_serv
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null" >
+        APP_ID = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        PROVINCE_ID = #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="localId != null" >
+        LOCAL_ID = #{localId,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null" >
+        AREA_ID = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null" >
+        BIRTH_DATE = #{birthDate,jdbcType=DATE},
+      </if>
+      <if test="idType != null" >
+        ID_TYPE = #{idType,jdbcType=VARCHAR},
+      </if>
+      <if test="idNo != null" >
+        ID_NO = #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="gardSchool != null" >
+        GARD_SCHOOL = #{gardSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="gardDate != null" >
+        GARD_DATE = #{gardDate,jdbcType=DATE},
+      </if>
+      <if test="gardMajor != null" >
+        GARD_MAJOR = #{gardMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null" >
+        DEGREE = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        EDUCATION = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPerson != null" >
+        CONTACT_PERSON = #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        CONTACT_PHONE = #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactAddr != null" >
+        CONTACT_ADDR = #{contactAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        POST_CODE = #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        MAIL = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null" >
+        CERT_TYPE = #{certType,jdbcType=VARCHAR},
+      </if>
+      <if test="certNo != null" >
+        CERT_NO = #{certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="issueBy != null" >
+        ISSUE_BY = #{issueBy,jdbcType=VARCHAR},
+      </if>
+      <if test="issueDate != null" >
+        ISSUE_DATE = #{issueDate,jdbcType=DATE},
+      </if>
+      <if test="regiNo != null" >
+        REGI_NO = #{regiNo,jdbcType=VARCHAR},
+      </if>
+      <if test="regiDate != null" >
+        REGI_DATE = #{regiDate,jdbcType=DATE},
+      </if>
+      <if test="educNo != null" >
+        EDUC_NO = #{educNo,jdbcType=VARCHAR},
+      </if>
+      <if test="educDate != null" >
+        EDUC_DATE = #{educDate,jdbcType=DATE},
+      </if>
+      <if test="majorFirst != null" >
+        MAJOR_FIRST = #{majorFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="majorSecond != null" >
+        MAJOR_SECOND = #{majorSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="majorThird != null" >
+        MAJOR_THIRD = #{majorThird,jdbcType=VARCHAR},
+      </if>
+      <if test="majorFourth != null" >
+        MAJOR_FOURTH = #{majorFourth,jdbcType=VARCHAR},
+      </if>
+      <if test="majorFifth != null" >
+        MAJOR_FIFTH = #{majorFifth,jdbcType=VARCHAR},
+      </if>
+      <if test="majorSixth != null" >
+        MAJOR_SIXTH = #{majorSixth,jdbcType=VARCHAR},
+      </if>
+      <if test="patchId != null" >
+        PATCH_ID = #{patchId,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr1 != null" >
+        RSRV_STR1 = #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        RSRV_STR2 = #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        RSRV_STR3 = #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+        <if test="empFlag != null" >
+            EMP_FLAG = #{empFlag,jdbcType=VARCHAR},
+        </if>
+      <if test="sts != null" >
+        STS = #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE = #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+        <if test="workingDate != null" >
+            WORKING_DATE = #{workingDate,jdbcType=DATE},
+        </if>
+    </set>
+    where SERVID = #{servid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.ac.entity.ServAssociateConstructor" >
+    update t_serv
+    set USER_ID = #{userId,jdbcType=VARCHAR},
+      COMPANY_ID = #{companyId,jdbcType=INTEGER},
+      APP_ID = #{appId,jdbcType=VARCHAR},
+      PROVINCE_ID = #{provinceId,jdbcType=VARCHAR},
+      LOCAL_ID = #{localId,jdbcType=INTEGER},
+      AREA_ID = #{areaId,jdbcType=INTEGER},
+      NAME = #{name,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      BIRTH_DATE = #{birthDate,jdbcType=DATE},
+      ID_TYPE = #{idType,jdbcType=VARCHAR},
+      ID_NO = #{idNo,jdbcType=VARCHAR},
+      GARD_SCHOOL = #{gardSchool,jdbcType=VARCHAR},
+      GARD_DATE = #{gardDate,jdbcType=DATE},
+      GARD_MAJOR = #{gardMajor,jdbcType=VARCHAR},
+      DEGREE = #{degree,jdbcType=VARCHAR},
+      EDUCATION = #{education,jdbcType=VARCHAR},
+      CONTACT_PERSON = #{contactPerson,jdbcType=VARCHAR},
+      CONTACT_PHONE = #{contactPhone,jdbcType=VARCHAR},
+      CONTACT_ADDR = #{contactAddr,jdbcType=VARCHAR},
+      POST_CODE = #{postCode,jdbcType=VARCHAR},
+      MAIL = #{mail,jdbcType=VARCHAR},
+      CERT_TYPE = #{certType,jdbcType=VARCHAR},
+      CERT_NO = #{certNo,jdbcType=VARCHAR},
+      ISSUE_BY = #{issueBy,jdbcType=VARCHAR},
+      ISSUE_DATE = #{issueDate,jdbcType=DATE},
+      REGI_NO = #{regiNo,jdbcType=VARCHAR},
+      REGI_DATE = #{regiDate,jdbcType=DATE},
+      EDUC_NO = #{educNo,jdbcType=VARCHAR},
+      EDUC_DATE = #{educDate,jdbcType=DATE},
+      MAJOR_FIRST = #{majorFirst,jdbcType=VARCHAR},
+      MAJOR_SECOND = #{majorSecond,jdbcType=VARCHAR},
+      MAJOR_THIRD = #{majorThird,jdbcType=VARCHAR},
+      MAJOR_FOURTH = #{majorFourth,jdbcType=VARCHAR},
+      MAJOR_FIFTH = #{majorFifth,jdbcType=VARCHAR},
+      MAJOR_SIXTH = #{majorSixth,jdbcType=VARCHAR},
+      PATCH_ID = #{patchId,jdbcType=VARCHAR},
+      RSRV_STR1 = #{rsrvStr1,jdbcType=VARCHAR},
+      RSRV_STR2 = #{rsrvStr2,jdbcType=VARCHAR},
+      RSRV_STR3 = #{rsrvStr3,jdbcType=VARCHAR},
+      EMP_FLAG = #{empFlag,jdbcType=VARCHAR},
+      STS = #{sts,jdbcType=CHAR},
+      STS_DATE = #{stsDate,jdbcType=TIMESTAMP},
+      REMARKS = #{remarks,jdbcType=VARCHAR},
+      WORKING_DATE = #{workingDate,jdbcType=DATE}
+
+    where SERVID = #{servid,jdbcType=INTEGER}
+  </update>
+
+    <select id="findByServAcInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_serv  a
+        <where>
+            1=1 and   a.sts ='0'
+
+            <if test="localId != null and localId != ''">
+                and a.local_id = #{localId}
+            </if>
+            <if test="idNo != null and idNo != ''">
+                and  a.id_no like  '%${idNo}%'
+            </if>
+            <if test="companyId != null and companyId != ''">
+                and a.company_Id = #{companyId}
+            </if>
+            <if test="majorFirst != null and majorFirst != ''">
+                and a.major_first = #{majorFirst}
+            </if>
+            <if test="certNo != null and certNo != ''">
+                and  a.cert_no like  '%${certNo}%'
+            </if>
+
+        </where>
+        order by  a.company_id asc
+    </select>
+</mapper>

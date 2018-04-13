@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="com.zhongxin.cims.modules.cp.assess">
+  <process id="cpAssess" name="三类人员考核流程" isExecutable="true">
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <userTask id="localAudit" name="盟市初审" activiti:candidateGroups="cp:assess:localAudit" activiti:dueDate="P7D"></userTask>
+    <sequenceFlow id="flow1" sourceRef="cpapply" targetRef="localAudit"></sequenceFlow>
+    <userTask id="localLeaderAudit" name="盟市分管局长审核" activiti:candidateGroups="cp:assess:localLeaderAudit" activiti:dueDate="P7D"></userTask>
+    <sequenceFlow id="flow2" sourceRef="localAudit" targetRef="localMainLeaderAudit"></sequenceFlow>
+    <userTask id="localMainLeaderAudit" name="盟市主管科长审核" activiti:candidateGroups="cp:assess:localMainLeaderAudit" activiti:dueDate="P7D"></userTask>
+    <sequenceFlow id="flow3" sourceRef="localMainLeaderAudit" targetRef="localLeaderAudit"></sequenceFlow>
+    <userTask id="constructionCpLeaderAudit" name="建设厅主管领导审核" activiti:candidateGroups="cp:assess:constructionCpLeaderAudit" activiti:dueDate="P7D"></userTask>
+    <sequenceFlow id="flow4" sourceRef="localLeaderAudit" targetRef="constructionCpLeaderAudit"></sequenceFlow>
+    <userTask id="constructionAllLeaderAudit" name="建设厅分管领导审核" activiti:candidateGroups="cp:assess:constructionAllLeaderAudit" activiti:dueDate="P7D"></userTask>
+    <sequenceFlow id="flow5" sourceRef="constructionCpLeaderAudit" targetRef="constructionAllLeaderAudit"></sequenceFlow>
+    <userTask id="directorAudit" name="厅长审核" activiti:candidateGroups="cp:assess:directorAudit" activiti:dueDate="P7D"></userTask>
+    <sequenceFlow id="flow6" sourceRef="constructionAllLeaderAudit" targetRef="directorAudit"></sequenceFlow>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow7" sourceRef="directorAudit" targetRef="endevent1"></sequenceFlow>
+    <userTask id="cpapply" name="填写申请单" activiti:assignee="${initiator}"></userTask>
+    <sequenceFlow id="flow8" sourceRef="startevent1" targetRef="cpapply"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_cpAssess">
+    <bpmndi:BPMNPlane bpmnElement="cpAssess" id="BPMNPlane_cpAssess">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="30.0" y="212.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="localAudit" id="BPMNShape_localAudit">
+        <omgdc:Bounds height="55.0" width="105.0" x="100.0" y="120.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="localLeaderAudit" id="BPMNShape_localLeaderAudit">
+        <omgdc:Bounds height="55.0" width="105.0" x="380.0" y="120.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="localMainLeaderAudit" id="BPMNShape_localMainLeaderAudit">
+        <omgdc:Bounds height="55.0" width="105.0" x="243.0" y="120.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="constructionCpLeaderAudit" id="BPMNShape_constructionCpLeaderAudit">
+        <omgdc:Bounds height="55.0" width="105.0" x="380.0" y="200.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="constructionAllLeaderAudit" id="BPMNShape_constructionAllLeaderAudit">
+        <omgdc:Bounds height="55.0" width="105.0" x="380.0" y="280.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="directorAudit" id="BPMNShape_directorAudit">
+        <omgdc:Bounds height="55.0" width="105.0" x="510.0" y="280.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="650.0" y="290.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="cpapply" id="BPMNShape_cpapply">
+        <omgdc:Bounds height="55.0" width="105.0" x="100.0" y="202.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="152.0" y="202.0"></omgdi:waypoint>
+        <omgdi:waypoint x="152.0" y="175.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="205.0" y="147.0"></omgdi:waypoint>
+        <omgdi:waypoint x="243.0" y="147.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="348.0" y="147.0"></omgdi:waypoint>
+        <omgdi:waypoint x="380.0" y="147.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="432.0" y="175.0"></omgdi:waypoint>
+        <omgdi:waypoint x="432.0" y="200.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="432.0" y="255.0"></omgdi:waypoint>
+        <omgdi:waypoint x="432.0" y="280.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="485.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="510.0" y="307.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="615.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="650.0" y="307.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="65.0" y="229.0"></omgdi:waypoint>
+        <omgdi:waypoint x="100.0" y="229.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

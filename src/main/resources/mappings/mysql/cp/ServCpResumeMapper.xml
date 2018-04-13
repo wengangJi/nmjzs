@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.cp.dao.ServCpResumeMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.cp.entity.ServCpResume" >
+    <result column="SERVID" property="servid" jdbcType="INTEGER" />
+    <result column="SEQ" property="seq" jdbcType="INTEGER" />
+    <result column="COMPANY" property="company" jdbcType="VARCHAR" />
+    <result column="POSITION" property="position" jdbcType="VARCHAR" />
+    <result column="EFF_DATE" property="effDate" jdbcType="DATE" />
+    <result column="EXP_DATE" property="expDate" jdbcType="DATE" />
+    <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+    <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+    <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+    <result column="STS" property="sts" jdbcType="CHAR" />
+    <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+          SERVID, SEQ,COMPANY, POSITION, EFF_DATE, EXP_DATE, RSRV_STR1,RSRV_STR2, RSRV_STR3, STS,  STS_DATE, REMARKS
+        from serv_cp_resume
+        where SERVID = #{servid,jdbcType=INTEGER}      and sts='0'
+    </select>
+  <insert id="insert" parameterType="com.zhongxin.cims.modules.cp.entity.ServCpResume" >
+    insert into serv_cp_resume (SERVID, SEQ,COMPANY, POSITION,
+      EFF_DATE, EXP_DATE, RSRV_STR1, 
+      RSRV_STR2, RSRV_STR3, STS, 
+      STS_DATE, REMARKS)
+    values (#{servid,jdbcType=INTEGER},#{seq,jdbcType=INTEGER}, #{company,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR},
+      #{effDate,jdbcType=DATE}, #{expDate,jdbcType=DATE}, #{rsrvStr1,jdbcType=VARCHAR}, 
+      #{rsrvStr2,jdbcType=VARCHAR}, #{rsrvStr3,jdbcType=VARCHAR}, #{sts,jdbcType=CHAR}, 
+      #{stsDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.cp.entity.ServCpResume" >
+    insert into serv_cp_resume
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="servid != null" >
+        SERVID,
+      </if>
+        <if test="seq != null" >
+            SEQ,
+        </if>
+      <if test="company != null" >
+        COMPANY,
+      </if>
+      <if test="position != null" >
+        POSITION,
+      </if>
+      <if test="effDate != null" >
+        EFF_DATE,
+      </if>
+      <if test="expDate != null" >
+        EXP_DATE,
+      </if>
+      <if test="rsrvStr1 != null" >
+        RSRV_STR1,
+      </if>
+      <if test="rsrvStr2 != null" >
+        RSRV_STR2,
+      </if>
+      <if test="rsrvStr3 != null" >
+        RSRV_STR3,
+      </if>
+      <if test="sts != null" >
+        STS,
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="servid != null" >
+        #{servid,jdbcType=INTEGER},
+      </if>
+        <if test="seq != null" >
+            #{seq,jdbcType=INTEGER},
+        </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="effDate != null" >
+        #{effDate,jdbcType=DATE},
+      </if>
+      <if test="expDate != null" >
+        #{expDate,jdbcType=DATE},
+      </if>
+      <if test="rsrvStr1 != null" >
+        #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.cp.entity.ServCpResume">
+        update serv_cp_resume
+        <set >
+            <if test="seq != null" >
+                SEQ = #{seq,jdbcType=INTEGER},
+            </if>
+            <if test="company != null" >
+                COMPANY = #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null" >
+                POSITION = #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="effDate != null" >
+                EFF_DATE = #{effDate,jdbcType=DATE},
+            </if>
+            <if test="expDate != null" >
+                EXP_DATE = #{expDate,jdbcType=DATE},
+            </if>
+            <if test="rsrvStr1 != null" >
+                RSRV_STR1 = #{rsrvStr1,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr2 != null" >
+                RSRV_STR2 = #{rsrvStr2,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr3 != null" >
+                RSRV_STR3 = #{rsrvStr3,jdbcType=VARCHAR},
+            </if>
+            <if test="sts != null" >
+                STS = #{sts,jdbcType=CHAR},
+            </if>
+            <if test="stsDate != null" >
+                STS_DATE = #{stsDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null" >
+                REMARKS = #{remarks,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where servid = #{servid,jdbcType=INTEGER}
+
+    </update>
+</mapper>

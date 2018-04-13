@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.common.dao.ServAttachmentMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.common.entity.ServAttachment" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="servid" property="servid" jdbcType="INTEGER" />
+    <result column="content_type" property="contentType" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="new_filename" property="newFilename" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="BIGINT" />
+    <result column="thumbnail_filename" property="thumbnailFilename" jdbcType="VARCHAR" />
+    <result column="thumbnail_size" property="thumbnailSize" jdbcType="BIGINT" />
+    <result column="pass" property="pass" jdbcType="CHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="sts" property="sts" jdbcType="CHAR" />
+    <result column="sts_date" property="stsDate" jdbcType="TIMESTAMP" />
+    <result column="app_id" property="appId" jdbcType="VARCHAR" />
+    <result column="so_type" property="soType" jdbcType="VARCHAR" />
+    <result column="pass_user_id" property="passUserId" jdbcType="VARCHAR" />
+    <result column="pass_date" property="passDate" jdbcType="TIMESTAMP" />
+
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, servid, content_type, create_date, update_date, name, new_filename, size, thumbnail_filename, 
+    thumbnail_size, pass, path, sts,sts_date  ,app_id,so_type,pass_user_id,pass_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from serv_attachment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from serv_attachment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zhongxin.cims.modules.common.entity.ServAttachment" >
+      <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+          SELECT LAST_INSERT_ID() AS ID
+      </selectKey>
+    insert into serv_attachment (id, servid, content_type, 
+      create_date, update_date, name, 
+      new_filename, size, thumbnail_filename, 
+      thumbnail_size, pass, path, 
+      sts,sts_date,app_id,so_type,pass_user_id,pass_date)
+    values (#{id,jdbcType=BIGINT}, #{servid,jdbcType=INTEGER}, #{contentType,jdbcType=VARCHAR},
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR}, 
+      #{newFilename,jdbcType=VARCHAR}, #{size,jdbcType=BIGINT}, #{thumbnailFilename,jdbcType=VARCHAR}, 
+      #{thumbnailSize,jdbcType=BIGINT}, #{pass,jdbcType=CHAR}, #{path,jdbcType=VARCHAR}, 
+      #{sts,jdbcType=CHAR},#{stsDate,jdbcType=TIMESTAMP},#{appId,jdbcType=VARCHAR},#{soType,jdbcType=VARCHAR}, #{passUserId,jdbcType=VARCHAR},#{passDate,jdbcType=TIMESTAMP}   )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.common.entity.ServAttachment" >
+    insert into serv_attachment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="servid != null" >
+        servid,
+      </if>
+      <if test="contentType != null" >
+        content_type,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="newFilename != null" >
+        new_filename,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="thumbnailFilename != null" >
+        thumbnail_filename,
+      </if>
+      <if test="thumbnailSize != null" >
+        thumbnail_size,
+      </if>
+      <if test="pass != null" >
+        pass,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="sts != null" >
+        sts,
+      </if>
+        <if test="stsDate != null" >
+            sts_date,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="servid != null" >
+        #{servid,jdbcType=INTEGER},
+      </if>
+      <if test="contentType != null" >
+        #{contentType,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="newFilename != null" >
+        #{newFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=BIGINT},
+      </if>
+      <if test="thumbnailFilename != null" >
+        #{thumbnailFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnailSize != null" >
+        #{thumbnailSize,jdbcType=BIGINT},
+      </if>
+      <if test="pass != null" >
+        #{pass,jdbcType=CHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=CHAR},
+      </if>
+        <if test="sts_date != null" >
+            #{stsDate,jdbcType=TIMESTAMP},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.common.entity.ServAttachment" >
+    update serv_attachment
+    <set >
+      <if test="servid != null" >
+        servid = #{servid,jdbcType=INTEGER},
+      </if>
+      <if test="contentType != null" >
+        content_type = #{contentType,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="newFilename != null" >
+        new_filename = #{newFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=BIGINT},
+      </if>
+      <if test="thumbnailFilename != null" >
+        thumbnail_filename = #{thumbnailFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnailSize != null" >
+        thumbnail_size = #{thumbnailSize,jdbcType=BIGINT},
+      </if>
+      <if test="pass != null" >
+        pass = #{pass,jdbcType=CHAR},
+      </if>
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        sts = #{sts,jdbcType=CHAR},
+      </if>
+      <if test="passUserId != null" >
+            pass_user_id = #{passUserId,jdbcType=CHAR},
+      </if>
+      <if test="passDate != null" >
+            pass_date = #{passDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.common.entity.ServAttachment" >
+    update serv_attachment
+    set servid = #{servid,jdbcType=INTEGER},
+      content_type = #{contentType,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      name = #{name,jdbcType=VARCHAR},
+      new_filename = #{newFilename,jdbcType=VARCHAR},
+      size = #{size,jdbcType=BIGINT},
+      thumbnail_filename = #{thumbnailFilename,jdbcType=VARCHAR},
+      thumbnail_size = #{thumbnailSize,jdbcType=BIGINT},
+      pass = #{pass,jdbcType=CHAR},
+      path = #{path,jdbcType=VARCHAR},
+      sts = #{sts,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByServid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+      select
+      <include refid="Base_Column_List" />
+      from serv_attachment
+      where servid = #{servid,jdbcType=INTEGER}     and sts ='0'
+  </select>
+
+    <update id="updateByServidSelective" parameterType="com.zhongxin.cims.modules.common.entity.ServAttachment" >
+        update serv_attachment
+        <set >
+            <if test="contentType != null" >
+                content_type = #{contentType,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="newFilename != null" >
+                new_filename = #{newFilename,jdbcType=VARCHAR},
+            </if>
+            <if test="size != null" >
+                size = #{size,jdbcType=BIGINT},
+            </if>
+            <if test="thumbnailFilename != null" >
+                thumbnail_filename = #{thumbnailFilename,jdbcType=VARCHAR},
+            </if>
+            <if test="thumbnailSize != null" >
+                thumbnail_size = #{thumbnailSize,jdbcType=BIGINT},
+            </if>
+            <if test="pass != null" >
+                pass = #{pass,jdbcType=CHAR},
+            </if>
+            <if test="path != null" >
+                path = #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="sts != null" >
+                sts = #{sts,jdbcType=CHAR},
+            </if>
+            <if test="stsDate != null" >
+                sts_date = #{stsDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="passUserId != null" >
+                pass_user_id = #{passUserId,jdbcType=CHAR},
+            </if>
+            <if test="passDate != null" >
+                pass_date = #{passDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where servid = #{servid,jdbcType=INTEGER}         and sts ='0'
+    </update>
+ 
+   
+</mapper>

@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongxin.cims.modules.cp.dao.SoCpBaseMapper">
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.cp.entity.SoCpBase">
+    <result column="SOID" jdbcType="VARCHAR" property="soid" />
+    <result column="ACT_TYPE" jdbcType="CHAR" property="actType" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="BIRTH_DATE" jdbcType="DATE" property="birthDate" />
+    <result column="ID_TYPE" jdbcType="VARCHAR" property="idType" />
+    <result column="ID_NO" jdbcType="VARCHAR" property="idNo" />
+    <result column="PERSON_TYPE" jdbcType="VARCHAR" property="personType" />
+    <result column="EXAM_DATE" jdbcType="DATE" property="examDate" />
+    <result column="EXAM_SCORE" jdbcType="VARCHAR" property="examScore" />
+    <result column="TELEPHONE" jdbcType="VARCHAR" property="telephone" />
+    <result column="COMPANY_ID" jdbcType="INTEGER" property="companyId" />
+    <result column="QUAL_LEVEL" jdbcType="VARCHAR" property="qualLevel" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="POST_CODE" jdbcType="VARCHAR" property="postCode" />
+    <result column="MAIL" jdbcType="VARCHAR" property="mail" />
+    <result column="GARD_SCHOOL" jdbcType="VARCHAR" property="gardSchool" />
+    <result column="GARD_DATE" jdbcType="DATE" property="gardDate" />
+    <result column="MAJOR" jdbcType="VARCHAR" property="major" />
+    <result column="TITLE_LEVEL" jdbcType="VARCHAR" property="titleLevel" />
+    <result column="TITLE_TYPE" jdbcType="VARCHAR" property="titleType" />
+    <result column="DEGREE" jdbcType="VARCHAR" property="degree" />
+    <result column="EDUCATION" jdbcType="VARCHAR" property="education" />
+    <result column="WORKING_DATE" jdbcType="DATE" property="workingDate" />
+    <result column="WORK_EXPE" jdbcType="INTEGER" property="workExpe" />
+    <result column="LEARN_EXPE" jdbcType="VARCHAR" property="learnExpe" />
+    <result column="CERT_EXPE" jdbcType="VARCHAR" property="certExpe" />
+    <result column="PATH_ID" jdbcType="VARCHAR" property="pathId" />
+    <result column="RSRV_STR1" jdbcType="VARCHAR" property="rsrvStr1" />
+    <result column="RSRV_STR2" jdbcType="VARCHAR" property="rsrvStr2" />
+    <result column="RSRV_STR3" jdbcType="VARCHAR" property="rsrvStr3" />
+  </resultMap>
+    <sql id="Base_Column_List" >
+        SOID, ACT_TYPE, NAME, SEX, BIRTH_DATE, ID_TYPE,
+        ID_NO, PERSON_TYPE, EXAM_DATE, EXAM_SCORE, TELEPHONE, COMPANY_ID, QUAL_LEVEL,
+        ADDRESS, POST_CODE, MAIL, GARD_SCHOOL, GARD_DATE, MAJOR, TITLE_LEVEL,
+        TITLE_TYPE, DEGREE, EDUCATION, WORKING_DATE,WORK_EXPE, LEARN_EXPE, CERT_EXPE, PATH_ID, RSRV_STR1, RSRV_STR2,
+        RSRV_STR3
+    </sql>
+
+  <insert id="insert" parameterType="com.zhongxin.cims.modules.cp.entity.SoCpBase">
+    insert into so_cp_base (SOID, ACT_TYPE,
+      NAME, SEX, BIRTH_DATE,
+      ID_TYPE, ID_NO, PERSON_TYPE,
+      EXAM_DATE, EXAM_SCORE, TELEPHONE,
+      COMPANY_ID, QUAL_LEVEL, ADDRESS,
+      POST_CODE, MAIL, GARD_SCHOOL,
+      GARD_DATE, MAJOR, TITLE_LEVEL,
+      TITLE_TYPE, DEGREE, EDUCATION,
+      WORKING_DATE, WORK_EXPE, LEARN_EXPE,
+      CERT_EXPE, PATH_ID, RSRV_STR1,
+      RSRV_STR2, RSRV_STR3)
+    values (#{soid,jdbcType=VARCHAR}, #{actType,jdbcType=CHAR},
+      #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birthDate,jdbcType=DATE},
+      #{idType,jdbcType=VARCHAR}, #{idNo,jdbcType=VARCHAR}, #{personType,jdbcType=VARCHAR},
+      #{examDate,jdbcType=DATE}, #{examScore,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR},
+      #{companyId,jdbcType=INTEGER}, #{qualLevel,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+      #{postCode,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, #{gardSchool,jdbcType=VARCHAR},
+      #{gardDate,jdbcType=DATE}, #{major,jdbcType=VARCHAR}, #{titleLevel,jdbcType=VARCHAR},
+      #{titleType,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR},
+      #{workingDate,jdbcType=DATE}, #{workExpe,jdbcType=INTEGER}, #{learnExpe,jdbcType=VARCHAR},
+      #{certExpe,jdbcType=VARCHAR}, #{pathId,jdbcType=VARCHAR}, #{rsrvStr1,jdbcType=VARCHAR},
+      #{rsrvStr2,jdbcType=VARCHAR}, #{rsrvStr3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.cp.entity.SoCpBase">
+    insert into so_cp_base
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="soid != null">
+        SOID,
+      </if>
+      <if test="actType != null">
+        ACT_TYPE,
+      </if>
+
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="birthDate != null">
+        BIRTH_DATE,
+      </if>
+      <if test="idType != null">
+        ID_TYPE,
+      </if>
+      <if test="idNo != null">
+        ID_NO,
+      </if>
+      <if test="personType != null">
+        PERSON_TYPE,
+      </if>
+      <if test="examDate != null">
+        EXAM_DATE,
+      </if>
+      <if test="examScore != null">
+        EXAM_SCORE,
+      </if>
+      <if test="telephone != null">
+        TELEPHONE,
+      </if>
+      <if test="companyId != null">
+        COMPANY_ID,
+      </if>
+      <if test="qualLevel != null">
+        QUAL_LEVEL,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="postCode != null">
+        POST_CODE,
+      </if>
+      <if test="mail != null">
+        MAIL,
+      </if>
+      <if test="gardSchool != null">
+        GARD_SCHOOL,
+      </if>
+      <if test="gardDate != null">
+        GARD_DATE,
+      </if>
+      <if test="major != null">
+        MAJOR,
+      </if>
+      <if test="titleLevel != null">
+        TITLE_LEVEL,
+      </if>
+      <if test="titleType != null">
+        TITLE_TYPE,
+      </if>
+      <if test="degree != null">
+        DEGREE,
+      </if>
+      <if test="education != null">
+        EDUCATION,
+      </if>
+      <if test="workingDate != null">
+        WORKING_DATE,
+      </if>
+      <if test="workExpe != null">
+        WORK_EXPE,
+      </if>
+      <if test="learnExpe != null">
+        LEARN_EXPE,
+      </if>
+      <if test="certExpe != null">
+        CERT_EXPE,
+      </if>
+      <if test="pathId != null">
+        PATH_ID,
+      </if>
+      <if test="rsrvStr1 != null">
+        RSRV_STR1,
+      </if>
+      <if test="rsrvStr2 != null">
+        RSRV_STR2,
+      </if>
+      <if test="rsrvStr3 != null">
+        RSRV_STR3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="soid != null">
+        #{soid,jdbcType=VARCHAR},
+      </if>
+      <if test="actType != null">
+        #{actType,jdbcType=CHAR},
+      </if>
+
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null">
+        #{birthDate,jdbcType=DATE},
+      </if>
+      <if test="idType != null">
+        #{idType,jdbcType=VARCHAR},
+      </if>
+      <if test="idNo != null">
+        #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="personType != null">
+        #{personType,jdbcType=VARCHAR},
+      </if>
+      <if test="examDate != null">
+        #{examDate,jdbcType=DATE},
+      </if>
+      <if test="examScore != null">
+        #{examScore,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="qualLevel != null">
+        #{qualLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null">
+        #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="gardSchool != null">
+        #{gardSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="gardDate != null">
+        #{gardDate,jdbcType=DATE},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="titleLevel != null">
+        #{titleLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="titleType != null">
+        #{titleType,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="workingDate != null">
+        #{workingDate,jdbcType=DATE},
+      </if>
+      <if test="workExpe != null">
+        #{workExpe,jdbcType=INTEGER},
+      </if>
+      <if test="learnExpe != null">
+        #{learnExpe,jdbcType=VARCHAR},
+      </if>
+      <if test="certExpe != null">
+        #{certExpe,jdbcType=VARCHAR},
+      </if>
+      <if test="pathId != null">
+        #{pathId,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr1 != null">
+        #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null">
+        #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null">
+        #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+    <!-- 调用见 SoCpController 方法 -->
+    <select id="findSoCpBaseBySoid" resultType="SoCpBase" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from so_cp_base a
+        where a.soid = #{soid}
+    </select>
+
+    <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.cp.entity.SoCpBase">
+        update so_cp_base
+       <set>
+        <if test="actType != null">
+            ACT_TYPE = #{actType,jdbcType=CHAR},
+        </if>
+        <if test="name != null">
+            NAME = #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="sex != null">
+            SEX = #{sex,jdbcType=VARCHAR},
+        </if>
+        <if test="birthDate != null">
+            BIRTH_DATE = #{birthDate,jdbcType=DATE},
+        </if>
+        <if test="idType != null">
+            ID_TYPE = #{idType,jdbcType=VARCHAR},
+        </if>
+        <if test="idNo != null">
+            ID_NO = #{idNo,jdbcType=VARCHAR},
+        </if>
+        <if test="personType != null">
+            PERSON_TYPE = #{personType,jdbcType=VARCHAR},
+        </if>
+        <if test="examDate != null">
+            EXAM_DATE = #{examDate,jdbcType=DATE},
+        </if>
+        <if test="examScore != null">
+            EXAM_SCORE = #{examScore,jdbcType=VARCHAR},
+        </if>
+        <if test="telephone != null">
+            TELEPHONE = #{telephone,jdbcType=VARCHAR},
+        </if>
+        <if test="companyId != null">
+            COMPANY_ID = #{companyId,jdbcType=INTEGER},
+        </if>
+        <if test="qualLevel != null">
+            QUAL_LEVEL = #{qualLevel,jdbcType=VARCHAR},
+        </if>
+        <if test="address != null">
+            ADDRESS = #{address,jdbcType=VARCHAR},
+        </if>
+        <if test="postCode != null">
+            POST_CODE = #{postCode,jdbcType=VARCHAR},
+        </if>
+        <if test="mail != null">
+            MAIL = #{mail,jdbcType=VARCHAR},
+        </if>
+        <if test="gardSchool != null">
+            GARD_SCHOOL = #{gardSchool,jdbcType=VARCHAR},
+        </if>
+        <if test="gardDate != null">
+            GARD_DATE = #{gardDate,jdbcType=DATE},
+        </if>
+        <if test="major != null">
+            MAJOR = #{major,jdbcType=VARCHAR},
+        </if>
+        <if test="titleLevel != null">
+            TITLE_LEVEL = #{titleLevel,jdbcType=VARCHAR},
+        </if>
+        <if test="titleType != null">
+            TITLE_TYPE = #{titleType,jdbcType=VARCHAR},
+        </if>
+        <if test="degree != null">
+            DEGREE = #{degree,jdbcType=VARCHAR},
+        </if>
+        <if test="education != null">
+            EDUCATION = #{education,jdbcType=VARCHAR},
+        </if>
+        <if test="workingDate != null">
+            WORKING_DATE = #{workingDate,jdbcType=DATE},
+        </if>
+        <if test="workExpe != null">
+            WORK_EXPE = #{workExpe,jdbcType=INTEGER},
+        </if>
+        <if test="learnExpe != null">
+            LEARN_EXPE = #{learnExpe,jdbcType=VARCHAR},
+        </if>
+        <if test="certExpe != null">
+            CERT_EXPE = #{certExpe,jdbcType=VARCHAR},
+        </if>
+        <if test="pathId != null">
+            PATH_ID = #{pathId,jdbcType=VARCHAR},
+        </if>
+        <if test="rsrvStr1 != null">
+            RSRV_STR1 = #{rsrvStr1,jdbcType=VARCHAR},
+        </if>
+        <if test="rsrvStr2 != null">
+            RSRV_STR2 = #{rsrvStr2,jdbcType=VARCHAR},
+        </if>
+        <if test="rsrvStr3 != null">
+            RSRV_STR3 = #{rsrvStr3,jdbcType=VARCHAR},
+        </if>
+    </set>
+        where soid = #{soid,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

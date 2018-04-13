@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.se.dao.SafetyEngineeringMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.se.entity.SafetyEngineering" >
+    <result column="SERVID" property="servid" jdbcType="INTEGER" />
+    <result column="COMPANY_ID" property="companyId" jdbcType="INTEGER" />
+    <result column="LICENCE_NO" property="licenceNo" jdbcType="VARCHAR" />
+    <result column="ECONOMIC_TYPE" property="economicType" jdbcType="VARCHAR" />
+    <result column="REG_ADDR" property="regAddr" jdbcType="VARCHAR" />
+    <result column="EFF_DATE" property="effDate" jdbcType="DATE" />
+    <result column="FAX" property="fax" jdbcType="VARCHAR" />
+    <result column="MAIL" property="mail" jdbcType="VARCHAR" />
+    <result column="COMPANY_MAIL" property="companyMail" jdbcType="VARCHAR" />
+    <result column="REGULAR_NUM" property="regularNum" jdbcType="INTEGER" />
+    <result column="MAIN_QUAL_TYPE" property="mainQualType" jdbcType="VARCHAR" />
+    <result column="MAIN_QUAL_LEVEL" property="mainQualLevel" jdbcType="VARCHAR" />
+    <result column="INCR_QUAL_TYPE" property="incrQualType" jdbcType="VARCHAR" />
+    <result column="INCR_QUAL_LEVEL" property="incrQualLevel" jdbcType="VARCHAR" />
+    <result column="PATH_ID" property="pathId" jdbcType="VARCHAR" />
+    <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+    <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+    <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+    <result column="STS" property="sts" jdbcType="CHAR" />
+    <result column="STS_DATE" property="stsDate" jdbcType="DATE" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.zhongxin.cims.modules.se.entity.SafetyEngineering" >
+    insert into serv_se_base (SERVID, COMPANY_ID, LICENCE_NO, 
+      ECONOMIC_TYPE, REG_ADDR, EFF_DATE, 
+      FAX, MAIL, COMPANY_MAIL, 
+      REGULAR_NUM, MAIN_QUAL_TYPE, MAIN_QUAL_LEVEL, 
+      INCR_QUAL_TYPE, INCR_QUAL_LEVEL, PATH_ID, 
+      RSRV_STR1, RSRV_STR2, RSRV_STR3, 
+      STS, STS_DATE, REMARKS)
+    values (#{servid,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{licenceNo,jdbcType=VARCHAR}, 
+      #{economicType,jdbcType=VARCHAR}, #{regAddr,jdbcType=VARCHAR}, #{effDate,jdbcType=DATE}, 
+      #{fax,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, #{companyMail,jdbcType=VARCHAR}, 
+      #{regularNum,jdbcType=INTEGER}, #{mainQualType,jdbcType=VARCHAR}, #{mainQualLevel,jdbcType=VARCHAR}, 
+      #{incrQualType,jdbcType=VARCHAR}, #{incrQualLevel,jdbcType=VARCHAR}, #{pathId,jdbcType=VARCHAR}, 
+      #{rsrvStr1,jdbcType=VARCHAR}, #{rsrvStr2,jdbcType=VARCHAR}, #{rsrvStr3,jdbcType=VARCHAR}, 
+      #{sts,jdbcType=CHAR}, #{stsDate,jdbcType=DATE}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.se.entity.SafetyEngineering" >
+    insert into serv_se_base
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="servid != null" >
+        SERVID,
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID,
+      </if>
+      <if test="licenceNo != null" >
+        LICENCE_NO,
+      </if>
+      <if test="economicType != null" >
+        ECONOMIC_TYPE,
+      </if>
+      <if test="regAddr != null" >
+        REG_ADDR,
+      </if>
+      <if test="effDate != null" >
+        EFF_DATE,
+      </if>
+      <if test="fax != null" >
+        FAX,
+      </if>
+      <if test="mail != null" >
+        MAIL,
+      </if>
+      <if test="companyMail != null" >
+        COMPANY_MAIL,
+      </if>
+      <if test="regularNum != null" >
+        REGULAR_NUM,
+      </if>
+      <if test="mainQualType != null" >
+        MAIN_QUAL_TYPE,
+      </if>
+      <if test="mainQualLevel != null" >
+        MAIN_QUAL_LEVEL,
+      </if>
+      <if test="incrQualType != null" >
+        INCR_QUAL_TYPE,
+      </if>
+      <if test="incrQualLevel != null" >
+        INCR_QUAL_LEVEL,
+      </if>
+      <if test="pathId != null" >
+        PATH_ID,
+      </if>
+      <if test="rsrvStr1 != null" >
+        RSRV_STR1,
+      </if>
+      <if test="rsrvStr2 != null" >
+        RSRV_STR2,
+      </if>
+      <if test="rsrvStr3 != null" >
+        RSRV_STR3,
+      </if>
+      <if test="sts != null" >
+        STS,
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="servid != null" >
+        #{servid,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="licenceNo != null" >
+        #{licenceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="economicType != null" >
+        #{economicType,jdbcType=VARCHAR},
+      </if>
+      <if test="regAddr != null" >
+        #{regAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="effDate != null" >
+        #{effDate,jdbcType=DATE},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMail != null" >
+        #{companyMail,jdbcType=VARCHAR},
+      </if>
+      <if test="regularNum != null" >
+        #{regularNum,jdbcType=INTEGER},
+      </if>
+      <if test="mainQualType != null" >
+        #{mainQualType,jdbcType=VARCHAR},
+      </if>
+      <if test="mainQualLevel != null" >
+        #{mainQualLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="incrQualType != null" >
+        #{incrQualType,jdbcType=VARCHAR},
+      </if>
+      <if test="incrQualLevel != null" >
+        #{incrQualLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="pathId != null" >
+        #{pathId,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr1 != null" >
+        #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        #{stsDate,jdbcType=DATE},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

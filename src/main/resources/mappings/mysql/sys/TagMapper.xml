@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.sys.dao.TagMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.sys.entity.Tag" >
+    <result column="TAG_CODE" property="tagCode" jdbcType="VARCHAR" />
+    <result column="TAG_NAME" property="tagName" jdbcType="VARCHAR" />
+    <result column="TAG_CHAR" property="tagChar" jdbcType="CHAR" />
+    <result column="TAG_INFO" property="tagInfo" jdbcType="VARCHAR" />
+    <result column="TAG_USE" property="tagUse" jdbcType="CHAR" />
+    <result column="PROVINCE_ID" property="provinceId" jdbcType="VARCHAR" />
+    <result column="LOCAL_ID" property="localId" jdbcType="INTEGER" />
+    <result column="AREA_ID" property="areaId" jdbcType="INTEGER" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+    <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+    <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TAG_CODE, TAG_NAME, TAG_CHAR, TAG_INFO, TAG_USE, PROVINCE_ID, LOCAL_ID, AREA_ID,
+    CREATE_BY, CREATE_DATE, UPDATE_BY, UPDATE_DATE, RSRV_STR1, RSRV_STR2, RSRV_STR3
+  </sql>
+
+    <select id="findAll" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from sys_tag
+        where tag_use = '0'
+    </select>
+
+    <select id="find" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_tag a
+        <where>
+            <if test="tagCode != null and tagCode != ''">
+                and a.tag_code = #{tagCode}
+            </if>
+            <if test="provinceId != null and provinceId != ''">
+                and (a.province_id = #${provinceId} or a.province_id = 'ZZ')
+            </if>
+            <if test="localId != null">
+                and (a.local_id = #${localId} or a.local_id = -1)
+            </if>
+            <if test="areaId != null">
+                and (a.area_id = #${areaId} or a.area_id = -1)
+            </if>
+            and a.tag_use = '0'
+        </where>
+    </select>
+</mapper>

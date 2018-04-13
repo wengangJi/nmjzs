@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.common.dao.SynJxjyCaseMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.common.entity.SynJxjyCase" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="xm" property="xm" jdbcType="VARCHAR" />
+    <result column="zjhm" property="zjhm" jdbcType="VARCHAR" />
+    <result column="zcbh" property="zcbh" jdbcType="VARCHAR" />
+    <result column="zylb" property="zylb" jdbcType="VARCHAR" />
+    <result column="hgzbh" property="hgzbh" jdbcType="VARCHAR" />
+    <result column="qfrq" property="qfrq" jdbcType="TIMESTAMP" />
+    <result column="bxxs" property="bxxs" jdbcType="INTEGER" />
+    <result column="xxxs" property="xxxs" jdbcType="INTEGER" />
+    <result column="gzdw" property="gzdw" jdbcType="VARCHAR" />
+    <result column="pxsjq" property="pxsjq" jdbcType="TIMESTAMP" />
+    <result column="pxsjz" property="pxsjz" jdbcType="TIMESTAMP" />
+    <result column="zhgxsj" property="zhgxsj" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="pass" property="pass" jdbcType="VARCHAR" />
+    <result column="createBy" property="createby" jdbcType="VARCHAR" />
+    <result column="creaetDate" property="creaetdate" jdbcType="TIMESTAMP" />
+    <result column="updateBy" property="updateby" jdbcType="VARCHAR" />
+    <result column="updateDate" property="updatedate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, xm, zjhm, zcbh, zylb, hgzbh, qfrq, bxxs, xxxs, gzdw, pxsjq, pxsjz, zhgxsj, state, 
+    pass, createBy, creaetDate, updateBy, updateDate
+  </sql>
+    <select id="list" resultMap="BaseResultMap"  >
+        select
+        <include refid="Base_Column_List" />
+        from jxjycase a
+        <where>
+            <if test="xm != null and xm != ''" >
+                and a.xm like '%${xm}%'
+            </if>
+            <if test="zjhm != null and zjhm != ''" >
+                and a.zjhm like '%${zjhm}%'
+            </if>
+            <if test="pass != null and pass != ''" >
+                and a.pass = #{pass}
+            </if>
+        </where>
+
+        order by a.id,pass desc
+    </select>
+
+
+    <update id="syn" parameterType="java.lang.Integer" >
+        update jxjycase set pass ='2', qfrq= now() where id = #{id,jdbcType=INTEGER}
+    </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from jxjycase
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from jxjycase
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhongxin.cims.modules.common.entity.SynJxjyCase" >
+    insert into jxjycase (id, xm, zjhm, 
+      zcbh, zylb, hgzbh, 
+      qfrq, bxxs, xxxs, 
+      gzdw, pxsjq, pxsjz, 
+      zhgxsj, state, pass, 
+      createBy, creaetDate, updateBy, 
+      updateDate)
+    values (#{id,jdbcType=INTEGER}, #{xm,jdbcType=VARCHAR}, #{zjhm,jdbcType=VARCHAR}, 
+      #{zcbh,jdbcType=VARCHAR}, #{zylb,jdbcType=VARCHAR}, #{hgzbh,jdbcType=VARCHAR}, 
+      #{qfrq,jdbcType=TIMESTAMP}, #{bxxs,jdbcType=INTEGER}, #{xxxs,jdbcType=INTEGER}, 
+      #{gzdw,jdbcType=VARCHAR}, #{pxsjq,jdbcType=TIMESTAMP}, #{pxsjz,jdbcType=TIMESTAMP}, 
+      #{zhgxsj,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}, #{pass,jdbcType=VARCHAR}, 
+      #{createby,jdbcType=VARCHAR}, #{creaetdate,jdbcType=TIMESTAMP}, #{updateby,jdbcType=VARCHAR}, 
+      #{updatedate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.common.entity.SynJxjyCase" >
+    insert into jxjycase
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="xm != null" >
+        xm,
+      </if>
+      <if test="zjhm != null" >
+        zjhm,
+      </if>
+      <if test="zcbh != null" >
+        zcbh,
+      </if>
+      <if test="zylb != null" >
+        zylb,
+      </if>
+      <if test="hgzbh != null" >
+        hgzbh,
+      </if>
+      <if test="qfrq != null" >
+        qfrq,
+      </if>
+      <if test="bxxs != null" >
+        bxxs,
+      </if>
+      <if test="xxxs != null" >
+        xxxs,
+      </if>
+      <if test="gzdw != null" >
+        gzdw,
+      </if>
+      <if test="pxsjq != null" >
+        pxsjq,
+      </if>
+      <if test="pxsjz != null" >
+        pxsjz,
+      </if>
+      <if test="zhgxsj != null" >
+        zhgxsj,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="pass != null" >
+        pass,
+      </if>
+      <if test="createby != null" >
+        createBy,
+      </if>
+      <if test="creaetdate != null" >
+        creaetDate,
+      </if>
+      <if test="updateby != null" >
+        updateBy,
+      </if>
+      <if test="updatedate != null" >
+        updateDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="xm != null" >
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="zjhm != null" >
+        #{zjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="zcbh != null" >
+        #{zcbh,jdbcType=VARCHAR},
+      </if>
+      <if test="zylb != null" >
+        #{zylb,jdbcType=VARCHAR},
+      </if>
+      <if test="hgzbh != null" >
+        #{hgzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="qfrq != null" >
+        #{qfrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bxxs != null" >
+        #{bxxs,jdbcType=INTEGER},
+      </if>
+      <if test="xxxs != null" >
+        #{xxxs,jdbcType=INTEGER},
+      </if>
+      <if test="gzdw != null" >
+        #{gzdw,jdbcType=VARCHAR},
+      </if>
+      <if test="pxsjq != null" >
+        #{pxsjq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pxsjz != null" >
+        #{pxsjz,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zhgxsj != null" >
+        #{zhgxsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="pass != null" >
+        #{pass,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null" >
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="creaetdate != null" >
+        #{creaetdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateby != null" >
+        #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.common.entity.SynJxjyCase" >
+    update jxjycase
+    <set >
+      <if test="xm != null" >
+        xm = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="zjhm != null" >
+        zjhm = #{zjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="zcbh != null" >
+        zcbh = #{zcbh,jdbcType=VARCHAR},
+      </if>
+      <if test="zylb != null" >
+        zylb = #{zylb,jdbcType=VARCHAR},
+      </if>
+      <if test="hgzbh != null" >
+        hgzbh = #{hgzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="qfrq != null" >
+        qfrq = #{qfrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bxxs != null" >
+        bxxs = #{bxxs,jdbcType=INTEGER},
+      </if>
+      <if test="xxxs != null" >
+        xxxs = #{xxxs,jdbcType=INTEGER},
+      </if>
+      <if test="gzdw != null" >
+        gzdw = #{gzdw,jdbcType=VARCHAR},
+      </if>
+      <if test="pxsjq != null" >
+        pxsjq = #{pxsjq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pxsjz != null" >
+        pxsjz = #{pxsjz,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zhgxsj != null" >
+        zhgxsj = #{zhgxsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="pass != null" >
+        pass = #{pass,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null" >
+        createBy = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="creaetdate != null" >
+        creaetDate = #{creaetdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateby != null" >
+        updateBy = #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        updateDate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.common.entity.SynJxjyCase" >
+    update jxjycase
+    set xm = #{xm,jdbcType=VARCHAR},
+      zjhm = #{zjhm,jdbcType=VARCHAR},
+      zcbh = #{zcbh,jdbcType=VARCHAR},
+      zylb = #{zylb,jdbcType=VARCHAR},
+      hgzbh = #{hgzbh,jdbcType=VARCHAR},
+      qfrq = #{qfrq,jdbcType=TIMESTAMP},
+      bxxs = #{bxxs,jdbcType=INTEGER},
+      xxxs = #{xxxs,jdbcType=INTEGER},
+      gzdw = #{gzdw,jdbcType=VARCHAR},
+      pxsjq = #{pxsjq,jdbcType=TIMESTAMP},
+      pxsjz = #{pxsjz,jdbcType=TIMESTAMP},
+      zhgxsj = #{zhgxsj,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=INTEGER},
+      pass = #{pass,jdbcType=VARCHAR},
+      createBy = #{createby,jdbcType=VARCHAR},
+      creaetDate = #{creaetdate,jdbcType=TIMESTAMP},
+      updateBy = #{updateby,jdbcType=VARCHAR},
+      updateDate = #{updatedate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.alipay.dao.AlipayDao">
+    <resultMap id="myResultMap" type="com.zhongxin.cims.modules.alipay.entity.Ipsorder">
+        <result column="id"  property="id"/>
+        <result column="soid" jdbcType="VARCHAR" property="soid"/>
+        <result column="pay_Id" jdbcType="VARCHAR" property="alipayId"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="sts" jdbcType="VARCHAR" property="status"/>
+        <result column="sts_date" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <result column="fee_type" jdbcType="VARCHAR" property="feeType"/>
+        <result column="fee" jdbcType="VARCHAR" property="fee"/>
+        <result column="rsp_code" jdbcType="VARCHAR" property="rspCode"/>
+        <result column="rsp_desc" jdbcType="VARCHAR" property="rspDesc"/>
+        <result column="rsp_date" jdbcType="TIMESTAMP" property="rspDate"/>
+        <result column="rsrv_str1" jdbcType="VARCHAR" property="rsrvStr1"/>
+        <result column="rsrv_str2" jdbcType="VARCHAR" property="rsrvStr2"/>
+        <result column="rsrv_str3" jdbcType="VARCHAR" property="rsrvStr3"/>
+        <result column="plan_id" jdbcType="VARCHAR" property="planId"/>
+        <result column="fee_state" jdbcType="VARCHAR" property="feeState"/>
+        <result column="local_id" jdbcType="VARCHAR" property="localId"/>
+
+
+
+    </resultMap>
+
+
+
+    <insert id="makeDataIntoAlipayTable" parameterType="com.zhongxin.cims.modules.alipay.entity.Ipsorder">
+     insert  into so_pay(
+     soid,
+     pay_Id,
+     user_id,
+     sts,
+     create_date,
+     sts_date,
+     fee
+     )
+     values(
+     #{soid},
+     #{alipayId},
+     #{userId},
+     #{status},
+     #{createTime},
+     #{modifyTime},
+     #{fee}
+     )
+    </insert>
+
+    <select id="getIpsorderList" parameterType="com.zhongxin.cims.modules.ac.entity.SoPlan" resultMap="myResultMap">
+   select
+        a.soid,
+        a.pay_id,
+        a.user_id,
+        a.sts,
+        a.create_date,
+        a.sts_date,
+        a.fee,
+        a.fee_type,
+        a.rsrv_str1,
+        a.rsrv_str3,
+        b.plan_id,
+        b.fee_state,
+        b.company_id as rsrvStr2
+       from
+        so_pay a  , so_plan b
+    <where>
+       a.sts ='0'  and  a.soid =b.soid and b.sts ='0'  and b.fee_state ='1' and a.rsp_code ='TRADE_SUCCESS'
+        <if test="localId!=null and localId!=''">
+            and  b.local_Id=#{localId}
+        </if>
+        <if test="companyId!=null and companyId!=''">
+            and  b.company_id=#{companyId}
+        </if>
+        <if test="planId!=null and planId!=''">
+            and   b.plan_Id=#{planId}
+        </if>
+        <if test="soid!=null and soid!=''">
+            and   a.soid=#{soid}
+        </if>
+        <if test="startTime != null and startTime != ''">
+            <![CDATA[
+                and a.create_Date >= #{startTime}
+                ]]>
+        </if>
+        <if test="endTime != null and endTime != ''">
+            <![CDATA[
+                and a.create_Date <= #{endTime}
+                ]]>
+        </if>
+
+        <if test="rsrvStr1!=null and rsrvStr1!=''">
+            and   b.user_id in ( select user_id from t_serv where  id_no like '%${rsrvStr1}%' )
+        </if>
+
+        <if test="rsrvStr2!=null and rsrvStr2!=''">
+            and   b.company_id in ( select company_id from t_company where  company_name like '%${rsrvStr2}%' )
+        </if>
+    </where>
+        ORDER BY a.create_date
+  </select>
+
+
+    <select id="getNoIpsorderList" parameterType="com.zhongxin.cims.modules.ac.entity.SoPlan" resultMap="myResultMap">
+        select
+        a.soid,
+        a.pay_id,
+        a.user_id,
+        a.sts,
+        a.create_date,
+        a.sts_date,
+        a.fee,
+        a.fee_type,
+        a.rsrv_str1,
+        a.rsrv_str2,
+        a.rsrv_str3,
+        b.plan_id,
+        b.fee_state
+        from
+        so_pay a  , so_plan b
+        <where>
+            a.sts ='0'  and  a.soid =b.soid and b.sts ='0'  and b.fee_state ='0'
+            <if test="localId!=null and localId!=''">
+                and  b.local_Id=#{localId}
+            </if>
+            <if test="companyId!=null and companyId!=''">
+                and  b.company_id=#{companyId}
+            </if>
+            <if test="planId!=null and planId!=''">
+                and   b.plan_Id=#{planId}
+            </if>
+            <if test="soid!=null and soid!=''">
+                and   a.soid=#{soid}
+            </if>
+            <if test="startTime != null and startTime != ''">
+                <![CDATA[
+                and a.create_Date >= #{startTime}
+                ]]>
+            </if>
+            <if test="endTime != null and endTime != ''">
+                <![CDATA[
+                and a.create_Date <= #{endTime}
+                ]]>
+            </if>
+        </where>
+        ORDER BY b.plan_id,a.soid
+    </select>
+
+    <select id="getIpsorderListByUser" parameterType="com.zhongxin.cims.modules.alipay.entity.Ipsorder" resultMap="myResultMap">
+        select
+        a.soid,
+        a.pay_id,
+        a.user_id,
+        a.sts,
+        a.create_date,
+        a.sts_date,
+        a.fee,
+        a.fee_type,
+        a.rsrv_str1,
+        a.rsrv_str2,
+        a.rsrv_str3,
+        b.plan_id,
+        b.fee_state
+        from
+        so_pay a  , so_plan b
+        <where>
+            a.sts ='0'  and  a.soid =b.soid and b.sts ='0'  and b.fee_state ='1' and b.user_id =#{userId} and a.rsp_code ='TRADE_SUCCESS'
+
+        </where>
+        ORDER BY b.plan_id,a.soid
+    </select>
+
+
+
+    <select id="getNoIpsorderListByUser"  resultMap="myResultMap">
+        select
+        a.soid,
+        a.pay_id,
+        a.user_id,
+        a.sts,
+        a.create_date,
+        a.sts_date,
+        a.fee,
+        a.fee_type,
+        a.rsrv_str1,
+        a.rsrv_str2,
+        a.rsrv_str3,
+        b.plan_id,
+        b.fee_state
+        from
+        so_pay a  , so_plan b
+        <where>
+            a.sts ='0'  and  a.soid =b.soid and b.sts ='0'  and b.fee_state ='0' and b.user_id =#{userId}
+        </where>
+        ORDER BY b.plan_id,a.soid
+    </select>
+    
+    <update id="updateAlipayStatus"  parameterType="com.zhongxin.cims.modules.alipay.entity.Ipsorder">
+        update so_pay set rsrv_str1=#{status} where pay_id=#{alipayId}
+    </update>
+
+
+    <select id="selectByPrimaryKey" parameterType="com.zhongxin.cims.modules.alipay.entity.Ipsorder" resultMap="myResultMap">
+        select
+        a.soid,
+        a.pay_id,
+        a.user_id,
+        a.sts,
+        a.create_date,
+        a.sts_date,
+        a.fee,
+        a.fee_type,
+        a.rsrv_str1,
+        a.rsrv_str2,
+        a.rsrv_str3
+        from
+        so_pay a  where a.sts ='0' and a.pay_id =#{alipayId}
+    </select>
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.alipay.entity.Ipsorder" >
+        update so_pay
+        <set >
+            <if test="userId != null" >
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                sts = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyTime != null" >
+                sts_date = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fee != null" >
+                fee = #{fee,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr1 != null" >
+                RSRV_STR1 = #{rsrvStr1,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr2 != null" >
+                RSRV_STR2 = #{rsrvStr2,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr3 != null" >
+                RSRV_STR3 = #{rsrvStr3,jdbcType=VARCHAR},
+            </if>
+            <if test="rspCode != null" >
+                rsp_code = #{rspCode,jdbcType=VARCHAR},
+            </if>
+            <if test="rspDesc != null" >
+                rsp_desc = #{rspDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="rspDate != null" >
+                rsp_date = #{rspDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditTag != null" >
+                audit_tag = #{auditTag,jdbcType=VARCHAR},
+            </if>
+            <if test="auditBy != null" >
+                audit_by = #{auditBy,jdbcType=VARCHAR},
+            </if>
+            <if test="auditDate != null" >
+                audit_date = #{auditDate,jdbcType=TIMESTAMP},
+            </if>
+
+        </set>
+        where pay_Id = #{alipayId,jdbcType=VARCHAR}
+    </update>
+
+
+    <select id="getIpsorderTotleByUser" parameterType="com.zhongxin.cims.modules.alipay.entity.Ipsorder" resultMap="myResultMap">
+        select
+        b.plan_id,b.user_id,a.fee_type,a.rsp_code,ROUND(SUM(a.fee),2) as fee
+        from
+        so_pay a  , so_plan b
+        <where>
+            a.sts ='0'  and  a.soid =b.soid and b.sts ='0'  and b.fee_state ='1' and b.user_id =#{userId} and a.rsp_code ='TRADE_SUCCESS'
+
+        </where>
+
+        GROUP BY B.PLAN_ID
+    </select>
+
+    <select id="getIpsorderTotle" parameterType="com.zhongxin.cims.modules.ac.entity.SoPlan" resultMap="myResultMap">
+        select
+        b.plan_id,b.local_id,a.fee_type,a.rsp_code,ROUND(SUM(a.fee),2) as fee
+        from
+        so_pay a  , so_plan b
+        <where>
+            a.sts ='0'  and  a.soid =b.soid and b.sts ='0'  and b.fee_state ='1' and a.rsp_code ='TRADE_SUCCESS'
+            <if test="localId!=null and localId!=''">
+                and  b.local_Id=#{localId}
+            </if>
+            <if test="planId!=null and planId!=''">
+                and   b.plan_Id=#{planId}
+            </if>
+            <if test="startTime != null and startTime != ''">
+                <![CDATA[
+                and a.create_Date >= #{startTime}
+                ]]>
+            </if>
+            <if test="endTime != null and endTime != ''">
+                <![CDATA[
+                and a.create_Date <= #{endTime}
+                ]]>
+            </if>
+        </where>
+        GROUP BY B.PLAN_ID
+    </select>
+
+
+
+
+
+
+</mapper>

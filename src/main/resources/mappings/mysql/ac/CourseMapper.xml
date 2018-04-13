@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.ac.dao.CourseMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.ac.entity.Course" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="course_name" property="courseName" jdbcType="VARCHAR" />
+    <result column="plan_id" property="planId" jdbcType="BIGINT" />
+    <result column="major_id" property="majorId" jdbcType="VARCHAR" />
+    <result column="course_type" property="courseType" jdbcType="VARCHAR" />
+    <result column="course_hours" property="courseHours" jdbcType="VARCHAR" />
+    <result column="course_info" property="courseInfo" jdbcType="VARCHAR" />
+    <result column="teacher_id" property="teacherId" jdbcType="VARCHAR" />
+    <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
+    <result column="teacher_info" property="teacherInfo" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="image_path" property="imagePath" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+    <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+    <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+    <result column="STS" property="sts" jdbcType="CHAR" />
+    <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+    <resultMap id="ProcessResultMap" type="com.zhongxin.cims.modules.ac.entity.Course" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="course_id" property="courseId" jdbcType="BIGINT" />
+        <result column="course_name" property="courseName" jdbcType="VARCHAR" />
+        <result column="plan_id" property="planId" jdbcType="BIGINT" />
+        <result column="major_id" property="majorId" jdbcType="VARCHAR" />
+        <result column="course_type" property="courseType" jdbcType="VARCHAR" />
+        <result column="course_hours" property="courseHours" jdbcType="VARCHAR" />
+        <result column="course_info" property="courseInfo" jdbcType="VARCHAR" />
+        <result column="teacher_id" property="teacherId" jdbcType="VARCHAR" />
+        <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
+        <result column="teacher_info" property="teacherInfo" jdbcType="VARCHAR" />
+        <result column="size" property="size" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+        <result column="path" property="path" jdbcType="VARCHAR" />
+        <result column="image" property="image" jdbcType="VARCHAR" />
+        <result column="image_path" property="imagePath" jdbcType="VARCHAR" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+        <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+        <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+        <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+        <result column="STS" property="sts" jdbcType="CHAR" />
+        <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+        <collection property="lessons" ofType="Lesson" resultMap="lessonMap"/>
+
+    </resultMap>
+
+    <resultMap id="lessonMap" type="com.zhongxin.cims.modules.ac.entity.Lesson" >
+        <id column="lesson_id" property="lessonId" jdbcType="BIGINT" />
+        <result column="course_id" property="courseId" jdbcType="BIGINT" />
+        <result column="lesson_name" property="lessonName" jdbcType="VARCHAR" />
+        <result column="lesson_info" property="lessonInfo" jdbcType="VARCHAR" />
+        <result column="pay_tag" property="payTag" jdbcType="CHAR" />
+        <result column="watch_times" property="watchTimes" jdbcType="INTEGER" />
+        <result column="file_type" property="fileType" jdbcType="VARCHAR" />
+        <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
+        <result column="play_time" property="playTime" jdbcType="VARCHAR" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+        <result column="show_index" property="showIndex" jdbcType="INTEGER" />
+        <result column="rsrv_str1" property="rsrvStr1" jdbcType="VARCHAR" />
+        <result column="rsrv_str2" property="rsrvStr2" jdbcType="VARCHAR" />
+        <result column="rsrv_str3" property="rsrvStr3" jdbcType="VARCHAR" />
+        <result column="sts" property="sts" jdbcType="CHAR" />
+        <result column="sts_date" property="stsDate" jdbcType="TIMESTAMP" />
+        <result column="soid" property="soid" jdbcType="VARCHAR" />
+        <result column="hours" property="hours" jdbcType="INTEGER" />
+        <result column="video_Time" property="videoTime" jdbcType="INTEGER" />
+        <result column="played_Time" property="playedTime" jdbcType="INTEGER" />
+        <result column="audit_Tag" property="auditTag" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <resultMap id="CourseMap" type="com.zhongxin.cims.modules.ac.entity.Course" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="course_id" property="courseId" jdbcType="BIGINT" />
+        <result column="course_name" property="courseName" jdbcType="VARCHAR" />
+        <result column="plan_id" property="planId" jdbcType="BIGINT" />
+        <result column="major_id" property="majorId" jdbcType="VARCHAR" />
+        <result column="course_type" property="courseType" jdbcType="VARCHAR" />
+        <result column="course_hours" property="courseHours" jdbcType="VARCHAR" />
+        <result column="course_info" property="courseInfo" jdbcType="VARCHAR" />
+        <result column="teacher_id" property="teacherId" jdbcType="VARCHAR" />
+        <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
+        <result column="teacher_info" property="teacherInfo" jdbcType="VARCHAR" />
+        <result column="size" property="size" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+        <result column="path" property="path" jdbcType="VARCHAR" />
+        <result column="image" property="image" jdbcType="VARCHAR" />
+        <result column="image_path" property="imagePath" jdbcType="VARCHAR" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+        <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+        <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+        <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+        <result column="STS" property="sts" jdbcType="CHAR" />
+        <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+        <association property="plan" javaType="Plan">
+            <id column="plan_id" property="planId" jdbcType="BIGINT" />
+            <result column="plan_name" property="planName" jdbcType="VARCHAR" />
+            <result column="plan_type" property="planType" jdbcType="VARCHAR" />
+            <result column="major_id" property="majorId" jdbcType="VARCHAR" />
+            <result column="plan_hours" property="planHours" jdbcType="VARCHAR" />
+            <result column="charge_type" property="chargeType" jdbcType="VARCHAR" />
+            <result column="charge" property="charge" jdbcType="INTEGER" />
+            <result column="start_date" property="startDate" jdbcType="DATE" />
+            <result column="end_date" property="endDate" jdbcType="DATE" />
+            <result column="audit_sts" property="auditSts" jdbcType="CHAR" />
+            <result column="audit_date" property="auditDate" jdbcType="TIMESTAMP" />
+            <result column="year" property="year" jdbcType="VARCHAR" />
+            <result column="month" property="month" jdbcType="VARCHAR" />
+            <result column="day" property="day" jdbcType="VARCHAR" />
+            <result column="local_id" property="localId" jdbcType="INTEGER" />
+            <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+            <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+            <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+            <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+            <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+            <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+            <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+            <result column="STS" property="sts" jdbcType="CHAR" />
+            <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+        </association>
+        <collection property="lessons" ofType="Lesson" >
+            <id column="lesson_id" property="lessonId" jdbcType="BIGINT" />
+            <result column="course_id" property="courseId" jdbcType="BIGINT" />
+            <result column="lesson_name" property="lessonName" jdbcType="VARCHAR" />
+            <result column="lesson_info" property="lessonInfo" jdbcType="VARCHAR" />
+            <result column="pay_tag" property="payTag" jdbcType="CHAR" />
+            <result column="watch_times" property="watchTimes" jdbcType="INTEGER" />
+            <result column="file_type" property="fileType" jdbcType="VARCHAR" />
+            <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
+            <result column="play_time" property="playTime" jdbcType="VARCHAR" />
+            <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+            <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+            <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+            <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+            <result column="show_index" property="showIndex" jdbcType="INTEGER" />
+            <result column="rsrv_str1" property="rsrvStr1" jdbcType="VARCHAR" />
+            <result column="rsrv_str2" property="rsrvStr2" jdbcType="VARCHAR" />
+            <result column="rsrv_str3" property="rsrvStr3" jdbcType="VARCHAR" />
+            <result column="sts" property="sts" jdbcType="CHAR" />
+            <result column="sts_date" property="stsDate" jdbcType="TIMESTAMP" />
+            <result column="soid" property="soid" jdbcType="VARCHAR" />
+            <result column="hours" property="hours" jdbcType="INTEGER" />
+            <result column="video_Time" property="videoTime" jdbcType="INTEGER" />
+            <result column="played_Time" property="playedTime" jdbcType="INTEGER" />
+            <result column="audit_Tag" property="auditTag" jdbcType="VARCHAR" />
+        </collection>
+    </resultMap>
+
+  <sql id="Base_Column_List" >
+    id,course_id, course_name, plan_id, major_id, course_type, course_hours, course_info,
+    teacher_id, teacher_name, teacher_info, size, type, path, image, image_path, create_by, 
+    create_date, update_by, update_date, RSRV_STR1, RSRV_STR2, RSRV_STR3, STS, STS_DATE
+  </sql>
+  <select id="selectSoCourseByPlanId" resultMap="CourseMap" parameterType="java.lang.String" >
+    select 
+    *
+    from t_course a INNER JOIN t_plan b on a.plan_id = b.plan_id
+    left JOIN t_course_lesson c on a.course_id = c.course_id and c.sts = '0'
+    where a.course_id = #{courseId,jdbcType=BIGINT} and a.sts = '0' and a.plan_id =#{planId,jdbcType=BIGINT}
+
+    order by c.show_index
+  </select>
+
+    <select id="selectByPrimaryKey" resultMap="CourseMap" parameterType="java.lang.Long" >
+        select
+        *
+        from t_course a
+        where a.id = #{id,jdbcType=BIGINT} and a.sts = '0'
+    </select>
+
+    <select id="selectByCourseId" resultMap="CourseMap" parameterType="java.lang.Long" >
+        select
+        *
+        from t_course a
+        where a.course_id = #{courseId,jdbcType=BIGINT} and a.sts = '0'
+    </select>
+
+    <select id="findNoCourseByPlanId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from t_course c  where c.plan_id =#{planId,jdbcType=BIGINT} and  c.sts ='0' and c.course_id not in (select course_id from so_course where soid = #{soid,jdbcType =VARCHAR} and sts ='0')
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_course
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zhongxin.cims.modules.ac.entity.Course" >
+    insert into t_course (course_Id,course_name, plan_id,
+      major_id, course_type, course_hours, 
+      course_info, teacher_id, teacher_name, 
+      teacher_info, size, type, 
+      path, image, image_path, 
+      create_by, create_date, update_by, 
+      update_date, RSRV_STR1, RSRV_STR2, 
+      RSRV_STR3, STS, STS_DATE
+      )
+    values (#{courseId,jdbcType=BIGINT}, #{courseName,jdbcType=VARCHAR}, #{planId,jdbcType=BIGINT},
+      #{majorId,jdbcType=VARCHAR}, #{courseType,jdbcType=VARCHAR}, #{courseHours,jdbcType=VARCHAR}, 
+      #{courseInfo,jdbcType=VARCHAR}, #{teacherId,jdbcType=VARCHAR}, #{teacherName,jdbcType=VARCHAR}, 
+      #{teacherInfo,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{path,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{imagePath,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{rsrvStr1,jdbcType=VARCHAR}, #{rsrvStr2,jdbcType=VARCHAR}, 
+      #{rsrvStr3,jdbcType=VARCHAR}, #{sts,jdbcType=CHAR}, #{stsDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.ac.entity.Course" >
+    insert into t_course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="courseName != null" >
+        course_name,
+      </if>
+      <if test="planId != null" >
+        plan_id,
+      </if>
+      <if test="majorId != null" >
+        major_id,
+      </if>
+      <if test="courseType != null" >
+        course_type,
+      </if>
+      <if test="courseHours != null" >
+        course_hours,
+      </if>
+      <if test="courseInfo != null" >
+        course_info,
+      </if>
+      <if test="teacherId != null" >
+        teacher_id,
+      </if>
+      <if test="teacherName != null" >
+        teacher_name,
+      </if>
+      <if test="teacherInfo != null" >
+        teacher_info,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="imagePath != null" >
+        image_path,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="rsrvStr1 != null" >
+        RSRV_STR1,
+      </if>
+      <if test="rsrvStr2 != null" >
+        RSRV_STR2,
+      </if>
+      <if test="rsrvStr3 != null" >
+        RSRV_STR3,
+      </if>
+      <if test="sts != null" >
+        STS,
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="courseName != null" >
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="planId != null" >
+        #{planId,jdbcType=BIGINT},
+      </if>
+      <if test="majorId != null" >
+        #{majorId,jdbcType=VARCHAR},
+      </if>
+      <if test="courseType != null" >
+        #{courseType,jdbcType=VARCHAR},
+      </if>
+      <if test="courseHours != null" >
+        #{courseHours,jdbcType=VARCHAR},
+      </if>
+      <if test="courseInfo != null" >
+        #{courseInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherId != null" >
+        #{teacherId,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherName != null" >
+        #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherInfo != null" >
+        #{teacherInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePath != null" >
+        #{imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rsrvStr1 != null" >
+        #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.ac.entity.Course" >
+    update t_course
+    <set >
+        <if test="courseId != null" >
+            course_id = #{courseId,jdbcType=BIGINT},
+        </if>
+      <if test="courseName != null" >
+        course_name = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="planId != null" >
+        plan_id = #{planId,jdbcType=BIGINT},
+      </if>
+      <if test="majorId != null" >
+        major_id = #{majorId,jdbcType=VARCHAR},
+      </if>
+      <if test="courseType != null" >
+        course_type = #{courseType,jdbcType=VARCHAR},
+      </if>
+      <if test="courseHours != null" >
+        course_hours = #{courseHours,jdbcType=VARCHAR},
+      </if>
+      <if test="courseInfo != null" >
+        course_info = #{courseInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherId != null" >
+        teacher_id = #{teacherId,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherName != null" >
+        teacher_name = #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherInfo != null" >
+        teacher_info = #{teacherInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePath != null" >
+        image_path = #{imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rsrvStr1 != null" >
+        RSRV_STR1 = #{rsrvStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr2 != null" >
+        RSRV_STR2 = #{rsrvStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrvStr3 != null" >
+        RSRV_STR3 = #{rsrvStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        STS = #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null" >
+        STS_DATE = #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where course_id = #{courseId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.ac.entity.Course" >
+    update t_course
+    set course_name = #{courseName,jdbcType=VARCHAR},
+      plan_id = #{planId,jdbcType=BIGINT},
+      major_id = #{majorId,jdbcType=VARCHAR},
+      course_type = #{courseType,jdbcType=VARCHAR},
+      course_hours = #{courseHours,jdbcType=VARCHAR},
+      course_info = #{courseInfo,jdbcType=VARCHAR},
+      teacher_id = #{teacherId,jdbcType=VARCHAR},
+      teacher_name = #{teacherName,jdbcType=VARCHAR},
+      teacher_info = #{teacherInfo,jdbcType=VARCHAR},
+      size = #{size,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      image_path = #{imagePath,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      RSRV_STR1 = #{rsrvStr1,jdbcType=VARCHAR},
+      RSRV_STR2 = #{rsrvStr2,jdbcType=VARCHAR},
+      RSRV_STR3 = #{rsrvStr3,jdbcType=VARCHAR},
+      STS = #{sts,jdbcType=CHAR},
+      STS_DATE = #{stsDate,jdbcType=TIMESTAMP}
+    where course_id = #{courseId,jdbcType=BIGINT}
+  </update>
+
+    <select id="findByPlanId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from t_course a
+        where a.plan_id = #{planId} and a.sts = '0'
+    </select>
+
+    <select id="listAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_course a
+        where a.sts = '0'
+    </select>
+<!--    <select id="list" resultMap="CourseMap">
+        select
+        a.course_id, a.course_name, a.plan_id, a.major_id, a.course_type, a.course_hours, a.course_info,
+        a.teacher_id, a.teacher_name, a.teacher_info, a.size, a.type, a.path, a.image, a.image_path, a.create_by,
+        a.create_date, a.update_by, a.update_date, a.RSRV_STR1, a.RSRV_STR2, a.RSRV_STR3, a.STS, a.STS_DATE
+        from t_course a inner JOIN t_plan b on a.plan_id = b.plan_id
+        <where>
+            a.sts = '0'
+            <if test="courseName != null and courseName != ''" >
+                and course_name like '%${courseName}%'
+            </if>
+            <if test="majorId != null and majorId != ''" >
+                and major_id = #{majorId,jdbcType=VARCHAR}
+            </if>
+            <if test="courseType != null and courseType != ''" >
+                and course_type = #{courseType,jdbcType=VARCHAR}
+            </if>
+            <if test="year != null and year != ''" >
+                and b.year = #{year,jdbcType=VARCHAR}
+            </if>
+            <if test="planId != null" >
+                and a.plan_id = #{planId,jdbcType=BIGINT}
+            </if>
+        </where>
+    </select>-->
+
+    <select id="list" resultMap="CourseMap">
+        select *
+        from t_course a inner JOIN t_plan b on a.plan_id = b.plan_id
+        left JOIN t_course_lesson c on a.course_id = c.course_id and c.sts = '0'
+        <where>
+            a.sts = '0'
+            <if test="courseName != null and courseName != ''" >
+                and a.course_name like '%${courseName}%'
+            </if>
+            <if test="majorId != null and majorId != ''" >
+                and a.major_id = #{majorId,jdbcType=VARCHAR}
+            </if>
+            <if test="courseType != null and courseType != ''" >
+                and a.course_type = #{courseType,jdbcType=VARCHAR}
+            </if>
+            <if test="plan.year != null and plan.year != ''" >
+                and b.year = #{plan.year,jdbcType=VARCHAR}
+            </if>
+            <if test="planId != null" >
+                and a.plan_id = #{planId,jdbcType=BIGINT}
+            </if>
+        </where>
+        order by c.show_index
+    </select>
+
+
+
+    <select id="findCourseList" resultMap="BaseResultMap">
+        select *
+        from t_course a
+        <where>
+            a.sts = '0'
+            <if test="courseName != null and courseName != ''" >
+                and a.course_name like '%${courseName}%'
+            </if>
+            <if test="majorId != null and majorId != ''" >
+                and a.major_id = #{majorId,jdbcType=VARCHAR}
+            </if>
+            <if test="courseType != null and courseType != ''" >
+                and a.course_type = #{courseType,jdbcType=VARCHAR}
+            </if>
+            <if test="planId != null" >
+                and a.plan_id = #{planId,jdbcType=BIGINT}
+            </if>
+            <if test="courseId != null" >
+                and a.course_id = #{courseId,jdbcType=BIGINT}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="findProcessHoursBySoid" resultMap="ProcessResultMap" parameterType="java.lang.String" >
+        select
+            c.id,c.course_id, c.course_name, c.plan_id, c.major_id, c.course_type, c.course_hours,  c.course_info, c.teacher_id, c.teacher_name,
+            c.teacher_info, c.size, c.type,  c.path, c.image, c.image_path, c.create_by, c.create_date, c.update_by,  c.update_date, c.RSRV_STR1, c.RSRV_STR2,  c.RSRV_STR3, c.STS, c.STS_DATE,
+            a.lesson_id, a.course_id, a.lesson_name, a.lesson_info, a.pay_tag, a.watch_times, a.file_type, a.file_url, a.play_time, a.create_by, a.create_date, a.update_by, a.update_date, a.show_index,
+            a.rsrv_str1, a.rsrv_str2, a.rsrv_str3, a.sts, a.sts_date,b.soid,b.hours,b.video_time,b.played_time,b.audit_tag
+        from  t_course c left  join t_course_lesson a on a.course_id=c.course_id LEFT JOIN so_hours b ON a.course_id=b.course_id
+            AND a.lesson_id=b.lesson_id AND   b.soid =#{soid} AND b.type='1' AND b.sts='0' AND b.audit_tag in ('0','1')/* IN ('0','1','2')*/
+        where c.plan_id=#{planId}
+        order by a.show_index
+    </select>
+</mapper>

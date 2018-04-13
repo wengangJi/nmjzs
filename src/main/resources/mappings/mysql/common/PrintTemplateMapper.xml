@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.common.dao.PrintTemplateMapper" >
+    <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.common.entity.PrintTemplate" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="cert_type" property="certType" jdbcType="VARCHAR" />
+        <result column="so_type" property="soType" jdbcType="VARCHAR" />
+        <result column="page_num" property="pageNum" jdbcType="INTEGER" />
+        <result column="index_item" property="indexItem" jdbcType="INTEGER" />
+        <result column="para_type" property="paraType" jdbcType="VARCHAR" />
+        <result column="para_num" property="paraNum" jdbcType="INTEGER" />
+        <result column="para_name" property="paraName" jdbcType="VARCHAR" />
+        <result column="para_code1" property="paraCode1" jdbcType="VARCHAR" />
+        <result column="para_code2" property="paraCode2" jdbcType="VARCHAR" />
+        <result column="para_code3" property="paraCode3" jdbcType="VARCHAR" />
+        <result column="para_code4" property="paraCode4" jdbcType="VARCHAR" />
+        <result column="para_code5" property="paraCode5" jdbcType="VARCHAR" />
+        <result column="para_code6" property="paraCode6" jdbcType="VARCHAR" />
+        <result column="para_code7" property="paraCode7" jdbcType="VARCHAR" />
+        <result column="para_code8" property="paraCode8" jdbcType="VARCHAR" />
+        <result column="para_code9" property="paraCode9" jdbcType="VARCHAR" />
+        <result column="para_code10" property="paraCode10" jdbcType="VARCHAR" />
+        <result column="sts" property="sts" jdbcType="CHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, cert_type, so_type, page_num, index_item, para_type, para_num, para_name, para_code1,
+        para_code2, para_code3, para_code4, para_code5, para_code6, para_code7, para_code8,
+        para_code9, para_code10, sts, remark
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from sys_print_template
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from sys_print_template
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.zhongxin.cims.modules.common.entity.PrintTemplate" >
+        insert into sys_print_template (id, cert_type, so_type,
+        page_num, index_item, para_type,
+        para_num, para_name, para_code1,
+        para_code2, para_code3, para_code4,
+        para_code5, para_code6, para_code7,
+        para_code8, para_code9, para_code10,
+        sts, remark)
+        values (#{id,jdbcType=BIGINT}, #{certType,jdbcType=VARCHAR}, #{soType,jdbcType=VARCHAR},
+        #{pageNum,jdbcType=INTEGER}, #{indexItem,jdbcType=INTEGER}, #{paraType,jdbcType=VARCHAR},
+        #{paraNum,jdbcType=INTEGER}, #{paraName,jdbcType=VARCHAR}, #{paraCode1,jdbcType=VARCHAR},
+        #{paraCode2,jdbcType=VARCHAR}, #{paraCode3,jdbcType=VARCHAR}, #{paraCode4,jdbcType=VARCHAR},
+        #{paraCode5,jdbcType=VARCHAR}, #{paraCode6,jdbcType=VARCHAR}, #{paraCode7,jdbcType=VARCHAR},
+        #{paraCode8,jdbcType=VARCHAR}, #{paraCode9,jdbcType=VARCHAR}, #{paraCode10,jdbcType=VARCHAR},
+        #{sts,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.common.entity.PrintTemplate" >
+        insert into sys_print_template
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="certType != null" >
+                cert_type,
+            </if>
+            <if test="soType != null" >
+                so_type,
+            </if>
+            <if test="pageNum != null" >
+                page_num,
+            </if>
+            <if test="indexItem != null" >
+                index_item,
+            </if>
+            <if test="paraType != null" >
+                para_type,
+            </if>
+            <if test="paraNum != null" >
+                para_num,
+            </if>
+            <if test="paraName != null" >
+                para_name,
+            </if>
+            <if test="paraCode1 != null" >
+                para_code1,
+            </if>
+            <if test="paraCode2 != null" >
+                para_code2,
+            </if>
+            <if test="paraCode3 != null" >
+                para_code3,
+            </if>
+            <if test="paraCode4 != null" >
+                para_code4,
+            </if>
+            <if test="paraCode5 != null" >
+                para_code5,
+            </if>
+            <if test="paraCode6 != null" >
+                para_code6,
+            </if>
+            <if test="paraCode7 != null" >
+                para_code7,
+            </if>
+            <if test="paraCode8 != null" >
+                para_code8,
+            </if>
+            <if test="paraCode9 != null" >
+                para_code9,
+            </if>
+            <if test="paraCode10 != null" >
+                para_code10,
+            </if>
+            <if test="sts != null" >
+                sts,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="certType != null" >
+                #{certType,jdbcType=VARCHAR},
+            </if>
+            <if test="soType != null" >
+                #{soType,jdbcType=VARCHAR},
+            </if>
+            <if test="pageNum != null" >
+                #{pageNum,jdbcType=INTEGER},
+            </if>
+            <if test="indexItem != null" >
+                #{indexItem,jdbcType=INTEGER},
+            </if>
+            <if test="paraType != null" >
+                #{paraType,jdbcType=VARCHAR},
+            </if>
+            <if test="paraNum != null" >
+                #{paraNum,jdbcType=INTEGER},
+            </if>
+            <if test="paraName != null" >
+                #{paraName,jdbcType=VARCHAR},
+            </if>
+            <if test="paraCode1 != null" >
+                #{paraCode1,jdbcType=VARCHAR},
+            </if>
+            <if test="paraCode2 != null" >
+                #{paraCode2,jdbcType=VARCHAR},
+            </if>
+            <if test="paraCode3 != null" >
+                #{paraCode3,jdbcType=VARCHAR},
+            </if>
+            <if test="paraCode4 != null" >
+                #{paraCode4,jdbcType=VARCHAR},
+            </if>
+            <if test="paraCode5 != null" >
+                #{paraCode5,jdbcType=VARCHAR},
+            </if>
+            <if test="paraCode6 != null" >
+                #{paraCode6,jdbcType=VARCHAR},
+            </if>
+            <if test="paraCode7 != null" >
+                #{paraCode7,jdbcType=VARCHAR},
+            </if>
+            <if test="paraCode8 != null" >
+                #{paraCode8,jdbcType=VARCHAR},
+            </if>
+            <if test="paraCode9 != null" >
+                #{paraCode9,jdbcType=VARCHAR},
+            </if>
+            <if test="paraCode10 != null" >
+                #{paraCode10,jdbcType=VARCHAR},
+            </if>
+            <if test="sts != null" >
+                #{sts,jdbcType=CHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.common.entity.PrintTemplate" >
+        update sys_print_template
+        <set >
+            <if test="certType != null" >
+                cert_type = #{certType,jdbcType=VARCHAR},
+            </if>
+            <if test="soType != null" >
+                so_type = #{soType,jdbcType=VARCHAR},
+            </if>
+            <if test="pageNum != null" >
+                page_num = #{pageNum,jdbcType=INTEGER},
+            </if>
+            <if test="indexItem != null" >
+                index_item = #{indexItem,jdbcType=INTEGER},
+            </if>
+            <if test="paraType != null" >
+                para_type = #{paraType,jdbcType=VARCHAR},
+            </if>
+            <if test="paraNum != null" >
+                para_num = #{paraNum,jdbcType=INTEGER},
+            </if>
+            <if test="paraName != null" >
+                para_name = #{paraName,jdbcType=VARCHAR},
+            </if>
+            <if test="paraCode1 != null" >
+                para_code1 = #{paraCode1,jdbcType=VARCHAR},
+            </if>
+            <if test="paraCode2 != null" >
+                para_code2 = #{paraCode2,jdbcType=VARCHAR},
+            </if>
+            <if test="paraCode3 != null" >
+                para_code3 = #{paraCode3,jdbcType=VARCHAR},
+            </if>
+            <if test="paraCode4 != null" >
+                para_code4 = #{paraCode4,jdbcType=VARCHAR},
+            </if>
+            <if test="paraCode5 != null" >
+                para_code5 = #{paraCode5,jdbcType=VARCHAR},
+            </if>
+            <if test="paraCode6 != null" >
+                para_code6 = #{paraCode6,jdbcType=VARCHAR},
+            </if>
+            <if test="paraCode7 != null" >
+                para_code7 = #{paraCode7,jdbcType=VARCHAR},
+            </if>
+            <if test="paraCode8 != null" >
+                para_code8 = #{paraCode8,jdbcType=VARCHAR},
+            </if>
+            <if test="paraCode9 != null" >
+                para_code9 = #{paraCode9,jdbcType=VARCHAR},
+            </if>
+            <if test="paraCode10 != null" >
+                para_code10 = #{paraCode10,jdbcType=VARCHAR},
+            </if>
+            <if test="sts != null" >
+                sts = #{sts,jdbcType=CHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.common.entity.PrintTemplate" >
+        update sys_print_template
+        set cert_type = #{certType,jdbcType=VARCHAR},
+        so_type = #{soType,jdbcType=VARCHAR},
+        page_num = #{pageNum,jdbcType=INTEGER},
+        index_item = #{indexItem,jdbcType=INTEGER},
+        para_type = #{paraType,jdbcType=VARCHAR},
+        para_num = #{paraNum,jdbcType=INTEGER},
+        para_name = #{paraName,jdbcType=VARCHAR},
+        para_code1 = #{paraCode1,jdbcType=VARCHAR},
+        para_code2 = #{paraCode2,jdbcType=VARCHAR},
+        para_code3 = #{paraCode3,jdbcType=VARCHAR},
+        para_code4 = #{paraCode4,jdbcType=VARCHAR},
+        para_code5 = #{paraCode5,jdbcType=VARCHAR},
+        para_code6 = #{paraCode6,jdbcType=VARCHAR},
+        para_code7 = #{paraCode7,jdbcType=VARCHAR},
+        para_code8 = #{paraCode8,jdbcType=VARCHAR},
+        para_code9 = #{paraCode9,jdbcType=VARCHAR},
+        para_code10 = #{paraCode10,jdbcType=VARCHAR},
+        sts = #{sts,jdbcType=CHAR},
+        remark = #{remark,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="findByCertTypeAndSoTypeAndPageNum" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_print_template
+        where sts = '0' and cert_type = #{certType} and so_type = #{soType} and page_num = #{pageNum} order by index_item
+    </select>
+
+    <select id="findByCertTypeAndSoType" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_print_template
+        where sts = '0' and cert_type = #{certType} and so_type = #{soType} order by page_num,index_item
+    </select>
+</mapper>

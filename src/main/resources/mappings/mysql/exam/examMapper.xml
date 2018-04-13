@@ -1,0 +1,984 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.exam.dao.ExamMapper">
+    <resultMap id="myResultMap" type="com.zhongxin.cims.modules.exam.entiy.Question">
+        <result column="question" jdbcType="VARCHAR" property="question"/>
+        <result column="levels" jdbcType="VARCHAR" property="level"/>
+        <result column="delFlag" jdbcType="VARCHAR" property="delFlag"/>
+        <result column="UserAnswer" jdbcType="VARCHAR" property="userAnswer"/>
+        <result column="IsCorrect" jdbcType="VARCHAR" property="trueFlag"/>
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="QuestionStyle" jdbcType="VARCHAR" property="QuestionStyle"/>
+        <collection property="answer" javaType="ArrayList" ofType="com.zhongxin.cims.modules.exam.entiy.AnswerDetail"
+                    select="getAnswer" column="{qustionId = id}">
+        </collection>
+        <collection property="detail" javaType="ArrayList"
+                    ofType="com.zhongxin.cims.modules.exam.entiy.QuestionAndAnswerDetail" select="getQuestionSub"
+                    column="{qustionId = id}">
+
+        </collection>
+       </resultMap>
+    <sql id="Base_Column_List">
+         soid, userName, profession,  StartTime, RequireTime, EndTime,  id, p_type,  userId, questionTotals,  createTime, sts, sts_date
+    </sql>
+    <resultMap id="QuestionAndAnswerDetailMap" type="com.zhongxin.cims.modules.exam.entiy.QuestionAndAnswerDetail">
+        <result column="question_choice" jdbcType="VARCHAR" property="questionChoice"/>
+        <result column="index_sub" jdbcType="VARCHAR" property="index"/>
+    </resultMap>
+
+
+    <resultMap id="answerResultMap" type="com.zhongxin.cims.modules.exam.entiy.AnswerDetail">
+        <result column="answer" jdbcType="VARCHAR" property="answer"/>
+    </resultMap>
+    <resultMap id="examInfoRm" type="com.zhongxin.cims.modules.exam.entiy.ExamInfo">
+        <result column="userName" jdbcType="VARCHAR" property="userName"/>
+        <result column="StarTtime" jdbcType="VARCHAR" property="startTime"/>
+        <result column="EndTime" jdbcType="VARCHAR" property="endTime"/>
+
+    </resultMap>
+
+    <resultMap id="SoExamInfoResultMap" type="com.zhongxin.cims.modules.exam.entiy.ExamInfo">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="soid" jdbcType="VARCHAR" property="soId"/>
+        <result column="userid" jdbcType="VARCHAR" property="userId"/>
+        <result column="userName" jdbcType="VARCHAR" property="userName"/>
+        <result column="profession" jdbcType="VARCHAR" property="profession"/>
+        <result column="p_type" jdbcType="VARCHAR" property="type"/>
+        <result column="starttime" jdbcType="VARCHAR" property="startTime"/>
+        <result column="endtime" jdbcType="VARCHAR" property="endTime"/>
+        <result column="questionTotals" jdbcType="VARCHAR" property="questionTotals"/>
+        <result column="createtime" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="requireTime" jdbcType="INTEGER" property="requireTime"/>
+        <result column="cores" jdbcType="VARCHAR" property="cores"/>
+        <result column="sts" jdbcType="VARCHAR" property="sts"/>
+        <result column="sts_date" jdbcType="TIMESTAMP" property="stsDate"/>
+        <result column="exam_type" jdbcType="VARCHAR" property="examType"/>
+        <result column="exam_state" jdbcType="VARCHAR" property="examState"/>
+        <result column="audit_tag" property="auditTag" jdbcType="VARCHAR" />
+        <result column="audit_level" property="auditLevel" jdbcType="VARCHAR" />
+        <result column="audit_by" property="auditBy" jdbcType="VARCHAR" />
+        <result column="audit_date" property="auditDate" jdbcType="TIMESTAMP" />
+        <result column="pass_tag" property="passTag" jdbcType="VARCHAR" />
+        <result column="rsrv_str1" property="rsrvStr1" jdbcType="VARCHAR" />
+        <result column="rsrv_str2" property="rsrvStr2" jdbcType="VARCHAR" />
+        <result column="rsrv_str3" property="rsrvStr3" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="getQuestionList" resultMap="myResultMap" parameterType="com.zhongxin.cims.modules.exam.entiy.Question">
+        select id,
+        question,
+        profession,
+        QuestionStyle,
+        delFlag,
+        type_que
+
+        from t_question_lib
+        <where>
+            <if test="QuestionStyle!=null and QuestionStyle!=''">
+               and QuestionStyle =#{QuestionStyle}
+            </if>
+            <if test="type!=null and type!=''">
+                and  type_que =#{type}
+            </if>
+            <if test="profession!=null and profession!=''">
+                and profession =#{profession}
+            </if>
+        </where>
+    </select>
+   <update id="updExamInfoCheckLevel" parameterType="map">
+       update so_exam_info
+       <set>
+       checkLevel=#{checkLevel}
+       </set>
+      where soid  in
+       <foreach collection="list" index="index" item="listId" open="(" separator="," close=")">
+           #{listId}
+       </foreach>
+   </update>
+    <select id="getQuestionListById" resultMap="myResultMap">
+        select id,
+        question,
+        profession,
+        QuestionStyle,
+        delFlag,
+        type_que
+
+        from t_question_lib
+        <where>
+            id in
+            <foreach collection="list" index="index" item="listId" open="(" separator="," close=")">
+                #{listId}
+            </foreach>
+        </where>
+    </select>
+       <select id="getQuestionListByType" resultMap="myResultMap" parameterType="java.util.HashMap">
+        select a.id,
+        question,
+        a.profession,
+        QuestionStyle,
+        delFlag,
+        type_que,
+        c.UserAnswer,
+        c.IsCorrect
+
+        from t_question_lib a, so_exam_info b, so_exam_detail c
+        <where>
+            a.id=c.QuestionId
+            and b.id=c.ExaminfoId
+            and b.id=#{examInfoId}
+        </where>
+
+           union all
+           select a.id,
+           question,
+           a.profession,
+           QuestionStyle,
+           delFlag,
+           type_que,
+           c.UserAnswer,
+           c.IsCorrect
+
+           from t_question_lib a, so_exam_info_again b, so_exam_detail c
+           <where>
+               a.id=c.QuestionId
+               and b.id=c.ExaminfoId
+               and b.id=#{examInfoId}
+           </where>
+
+
+
+
+    </select>
+
+    <select id="getQuestionListByTypeAgain" resultMap="myResultMap" parameterType="java.util.HashMap">
+        select a.id,
+        question,
+        a.profession,
+        QuestionStyle,
+        delFlag,
+        type_que,
+        c.UserAnswer,
+        c.IsCorrect
+
+        from t_question_lib a, so_exam_info_again b, so_exam_detail c
+        <where>
+            a.id=c.QuestionId
+            and b.id=c.ExaminfoId
+            and b.id=#{examInfoId}
+        </where>
+
+
+
+    </select>
+    <select id="getCoresByExamInfoId" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+
+        select cores from so_exam_info where id=#{examInfoId}
+    </select>
+
+    <select id="getAnswer" parameterType="java.util.HashMap" resultMap="answerResultMap">
+         select answer
+        from t_answer where questionId=#{qustionId}
+    </select>
+
+    <select id="getQuestionSub" parameterType="java.util.HashMap" resultMap="QuestionAndAnswerDetailMap">
+      select
+        question_choice,
+        index_sub
+    from t_question_lib_sub where questionId=#{qustionId}
+    </select>
+    <insert id="addExamInfo" parameterType="com.zhongxin.cims.modules.exam.entiy.ExamInfo">
+    INSERT INTO
+     so_exam_info (
+     soid,
+       userName,
+       profession,
+       StartTime,
+       RequireTime,
+       EndTime,
+       id,
+       p_type,
+       userId,
+       questionTotals,
+       createTime,
+        sts,
+        sts_date,
+        audit_tag,
+        audit_level,
+        audit_by,
+        audit_date
+       )
+     VALUES
+      (
+      #{soId},
+      #{userName},
+      #{profession},
+      #{startTime},
+      #{requireTime},
+      #{endTime},
+       #{id},
+      #{type},
+      #{userId},
+       #{questionTotals},
+       #{createTime},
+        #{sts},
+        #{stsDate},
+         #{auditTag},
+       #{auditLevel},
+        #{auditBy},
+        #{auditDate}
+      )
+
+
+   </insert>
+
+    <insert id="addExamInfoAgain" parameterType="com.zhongxin.cims.modules.exam.entiy.ExamInfo">
+        INSERT INTO
+        so_exam_info_again (
+        soid,
+        userName,
+        profession,
+        StartTime,
+        RequireTime,
+        EndTime,
+        id,
+        p_type,
+        userId,
+        questionTotals,
+        createTime,
+        sts,
+        sts_date,
+        audit_tag,
+        audit_level,
+        audit_by,
+        audit_date
+        )
+        VALUES
+        (
+        #{soId},
+        #{userName},
+        #{profession},
+        #{startTime},
+        #{requireTime},
+        #{endTime},
+        #{id},
+        #{type},
+        #{userId},
+        #{questionTotals},
+        #{createTime},
+        #{sts},
+        #{stsDate},
+        #{auditTag},
+        #{auditLevel},
+        #{auditBy},
+        #{auditDate}
+        )
+
+
+    </insert>
+    <insert id="addExamInfoDetail" parameterType="com.zhongxin.cims.modules.exam.entiy.ExamInfoDetail">
+        insert into
+        so_exam_detail
+        (
+        ExaminfoId,
+        QuestionId,
+        UserAnswer,
+        IsCorrect,
+        userId,
+        userName,
+        soid,
+        sts,
+        sts_date
+        )
+        VALUES
+        (
+        #{examinfoId},
+        #{questionId},
+        #{userAnswer},
+        #{isCorrect},
+        #{userId},
+        #{userName},
+        #{soId},
+        #{sts},
+        #{stsDate}
+        )
+    </insert>
+    <insert id="addQuestionLib" parameterType="com.zhongxin.cims.modules.exam.entiy.Question">
+        insert into t_question_lib
+        (
+        id,
+        question,
+        QuestionStyle,
+        delFlag,
+        type_que,
+        profession
+        )
+        VALUES
+        (
+        #{id},
+       #{question},
+        #{QuestionStyle},
+       #{delFlag},
+       #{type},
+       #{profession}
+        )
+    </insert>
+    <insert id="addQuestionSub" parameterType="com.zhongxin.cims.modules.exam.entiy.QuestionAndAnswerDetail">
+        insert into t_question_lib_sub
+        (
+        id,
+        questionId,
+        question_choice,
+        index_sub
+        )
+        VALUES
+        (
+        #{id},
+        #{questionId},
+        #{questionChoice},
+        #{index}
+        )
+    </insert>
+    <insert id="addAnswer" parameterType="com.zhongxin.cims.modules.exam.entiy.AnswerDetail">
+        insert into t_answer
+        (
+        id,
+        questionId,
+        answer
+        )
+        VALUES
+        (
+        #{id},
+        #{questionId},
+        #{answer}
+        )
+    </insert>
+
+    <select id="getExamInfoId" resultType="int" parameterType="string">
+select NEXTVAL('EXAM_SEQ')
+    </select>
+    <select id="getQuestionId" resultType="int" parameterType="string">
+        select NEXTVAL('QUESTION_SEQ')
+    </select>
+    <select id="getAnswerId" resultType="int" parameterType="string">
+        select NEXTVAL('ANSWER_SEQ')
+    </select>
+    <select id="getSubQuestionId" resultType="int" parameterType="string">
+        select NEXTVAL('SUB_QUESTION_SEQ')
+    </select>
+    <select id="getAnswerByQuestionId" resultType="string" parameterType="long">
+        select answer from t_answer where id=#{questionId}
+    </select>
+
+    <!--考试列表-->
+    <select id="getExamDetailInfoList" resultType="com.zhongxin.cims.modules.exam.entiy.ExamInfo" parameterType="map">
+        select
+
+        StartTime,
+        endTime
+        from so_exam_info
+        <where>
+            1=1
+
+
+            <if test="startTime!=null and startTime!=''">
+                and startTime =#{startTime}
+            </if>
+            <if test="endTime!=null and endTime!=''">
+                and endTime =#{endTime}
+            </if>
+        </where>
+    </select>
+<!-- 考试成绩-->
+    <select id="getCoresByUserName" parameterType="java.lang.String" resultType="java.util.HashMap">
+
+        select
+        a.id,
+        a.questionTotals ,
+        a.createTime,
+        a.EndTime,
+        a.questionTotals,
+        b.userName,
+        sum(
+        case when b.IsCorrect='0'
+        then 2
+        ELSE
+        0
+        end
+        ) as rightSum,
+
+        sum(
+        case when b.IsCorrect='0'
+        then 2
+        ELSE
+        0
+        end
+        )
+        as cores
+        from so_exam_info a , so_exam_detail b,t_question_lib c where a.id=b.ExaminfoId
+        and b.QuestionId=c.id
+        <if test="userName!=null and userName!=''">
+            and a.userName=#{userName}
+        </if>
+        group by a.id,a.questionTotals ,a.createTime,a.EndTime,a.questionTotals
+    </select>
+
+    <!-- 考试成绩-->
+    <select id="getCoresByUserId" parameterType="java.lang.String" resultType="com.zhongxin.cims.modules.exam.entiy.ExamInfo">
+
+        select
+        a.id,
+        a.soid,
+        a.questionTotals ,
+        a.startTime,
+        a.EndTime,
+        a.questionTotals,
+        b.userName,
+        d.plan_id,
+        d.exam_state,
+        sum(
+        case when b.IsCorrect='0'
+        then 2
+        ELSE
+        0
+        end
+        ) as rightSum,
+
+        sum(
+        case when b.IsCorrect='0'
+        then 2
+        ELSE
+        0
+        end
+        )
+        as cores
+        from so_exam_info a , so_exam_detail b,t_question_lib c ,so_plan d where a.soid =d.soid and  d.sts='0' and d.exam_state not in ('0','2') and  a.id=b.ExaminfoId
+        and b.QuestionId=c.id and a.userId =#{userId}
+        group by a.id,a.questionTotals ,a.startTime,a.EndTime,a.questionTotals
+
+        union all
+
+          select
+        a.id,
+        a.soid,
+        a.questionTotals ,
+        a.startTime,
+        a.EndTime,
+        a.questionTotals,
+        b.userName,
+        d.plan_id,
+        d.exam_state,
+        sum(
+        case when b.IsCorrect='0'
+        then 2
+        ELSE
+        0
+        end
+        ) as rightSum,
+
+        sum(
+        case when b.IsCorrect='0'
+        then 2
+        ELSE
+        0
+        end
+        )
+        as cores
+        from so_exam_info_again a , so_exam_detail b,t_question_lib c ,so_plan d where a.soid =d.soid and  d.sts='0' and d.exam_state not in ('0','2') and  a.id=b.ExaminfoId
+        and b.QuestionId=c.id and a.userId =#{userId}
+        group by a.id,a.questionTotals ,a.startTime,a.EndTime,a.questionTotals
+    </select>
+
+    <select id="getCoresByExamId" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+
+        SELECT
+        SUM(
+        CASE WHEN  d.IsCorrect='0'
+        THEN 2
+        ELSE
+        0
+        END
+        )
+        AS cores FROM (
+        SELECT DISTINCT b.soid,b.examinfoid,b.questionid,b.UserAnswer,b.IsCorrect,b.userid,b.username
+           FROM so_exam_info a , so_exam_detail b,t_question_lib c WHERE a.id=b.ExaminfoId
+           AND b.QuestionId=c.id
+           AND a.id=#{examId}
+        )AS d
+    </select>
+    <select id="getCoresByExamIdAgain" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+
+         SELECT
+        SUM(
+        CASE WHEN  d.IsCorrect='0'
+        THEN 2
+        ELSE
+        0
+        END
+        )
+        AS cores FROM (
+        SELECT DISTINCT b.soid,b.examinfoid,b.questionid,b.UserAnswer,b.IsCorrect,b.userid,b.username
+           FROM so_exam_info_again a , so_exam_detail b,t_question_lib c WHERE a.id=b.ExaminfoId
+           AND b.QuestionId=c.id
+           AND a.id=#{examId}
+        )AS d
+
+    </select>
+    <update id="updExamInfoCores" parameterType="java.util.HashMap">
+
+        update so_exam_info
+        <set>
+            <if test="cores!=null">
+               cores=#{cores},
+            </if>
+            <if test="endTime">
+               EndTime=#{endTime},
+            </if>
+            <if test="passTag!=null">
+               pass_tag=#{passTag}
+            </if>
+        </set>
+
+        where id=#{examInfoId}
+    </update>
+    <update id="updExamInfoCoresAgain" parameterType="java.util.HashMap">
+
+        update so_exam_info_again
+        <set>
+            <if test="cores!=null">
+                cores=#{cores},
+            </if>
+            <if test="endTime">
+                EndTime=#{endTime},
+            </if>
+            <if test="passTag!=null">
+                pass_tag=#{passTag}
+            </if>
+        </set>
+
+        where id=#{examInfoId}
+    </update>
+
+
+    <update id="updExamInfoAgain" parameterType="java.util.HashMap">
+
+        update so_exam_info_again set sts ='7' ,sts_date = now()   where id=#{examInfoId}
+    </update>
+<!--考试成绩结束-->
+    <!--题库列表-->
+
+
+    <!--考试成绩查询-->
+    <select id="getMyexamQuestionId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+    select id from so_exam_info a where a.id=#{examInfoId}
+</select>
+    <!--end-->
+
+    <!-- 删除考试试题-->
+    <delete id="deleteQuestionById" parameterType="java.lang.Integer">
+    delete from t_question_lib where id=#{questionId}
+   </delete>
+    <delete id="deleteQuestionBySubId" parameterType="java.lang.Integer">
+    delete from t_question_lib_sub  where questionId=#{questionId}
+    </delete>
+    <delete id="deleteAnswerByQuestionId" parameterType="java.lang.Integer">
+    delete  from t_answer  where questionId=#{questionId}
+    </delete>
+    <!--删除考试题结束-->
+
+    <!--得到题库所有题的序列号分类-->
+    <select id="getCountByQuestionType" resultType="java.util.HashMap">
+    select questionStyle,sum(1) from t_question_lib group by questionStyle
+</select>
+  <!--  <select id="getIdFromQuestionLib" resultType="java.lang.Integer">
+        select id  from t_question_lib where   profession =#{majorId}
+    </select>-->
+
+    <select id="getIdFromQuestionLib" resultType="java.lang.Integer">
+    select id  from t_question_lib where   profession =#{majorId}      and QuestionStyle =#{QuestionStyle}
+    </select>
+
+    <!--得到题库所有题的序列号分类-->
+
+
+    <!--考试资格校验-->
+    <select id="findResultCountBySoid" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(1) as resultCount  from so_exam_info a where a.soid=#{soid} and sts ='0'
+    </select>
+
+    <select id="findAgainResultCountBySoid" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(1) as resultCount  from so_exam_info_again a where a.soid=#{soid} and sts ='0'
+    </select>
+    <select id="findCountBySoid" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(1) as resultCount  from so_plan a where a.soid=#{soid} and exam_state !='0'
+    </select>
+    <!--试题情况查询-->
+    <select id="getSoExamInfoByUser" parameterType="java.lang.String" resultType="com.zhongxin.cims.modules.exam.entiy.ExamInfo">
+      select a.soid, a.userName, a.profession,  a.StartTime, a.RequireTime, a.EndTime,  a.id, a.p_type,  a.userId, a.questionTotals,  a.createTime,a.cores,
+       b.plan_id,b.exam_state
+      from so_exam_info a ,so_plan b where a.userId=#{userId} and a.sts ='0' and a.soid =b.soid and b.sts ='0' and b.exam_state in ('2','1','0','4')
+
+    </select>
+
+
+
+    <select id="getSoExamInfo" resultMap="SoExamInfoResultMap">
+        select a.soid, a.userName, a.profession, a.exam_type, a.StartTime, a.RequireTime, a.EndTime,  a.id, a.p_type,  a.userId, a.questionTotals,  a.createTime,a.cores,
+        a.pass_tag,a.audit_tag,a.audit_level,a.audit_by,a.audit_date,b.plan_id,b.exam_state
+        from so_exam_info a left join so_plan b  on a.soid =b.soid  and b.sts ='0'
+        <where>
+             a.sts ='0'
+            <if test="localId!=null and localId!=''">
+                and  b.local_Id=#{localId}
+            </if>
+
+            <if test="userId!=null and userId!=''">
+                and  b.user_id=#{userId}
+            </if>
+
+            <if test="soid!=null and soid!=''">
+                and  a.soid=#{soid}
+            </if>
+            <if test="companyId!=null and companyId!=''">
+                and  b.company_id=#{companyId}
+            </if>
+            <if test="planId!=null and planId!=''">
+                and   b.plan_Id=#{planId}
+            </if>
+            <if test="examType!=null and examType!=''">
+                and   a.exam_Type=#{examType}
+            </if>
+            <if test="rsrvStr2 != null and rsrvStr2 != ''">
+                and a.username  like  '%${rsrvStr2}%'
+            </if>
+            <if test="passTag!=null and passTag!=''">
+                and   a.pass_Tag=#{passTag}
+            </if>
+            <if test="startTime != null and startTime != ''">
+                <![CDATA[
+                and a.createTime >= #{startTime}
+                ]]>
+            </if>
+            <if test="endTime != null and endTime != ''">
+                <![CDATA[
+                and a.createTime <= #{endTime}
+                ]]>
+            </if>
+        </where>
+
+        union all
+
+        select a.soid, a.userName, a.profession, a.exam_type, a.StartTime, a.RequireTime, a.EndTime,  a.id, a.p_type,  a.userId, a.questionTotals,  a.createTime,a.cores,
+        a.pass_tag,a.audit_tag,a.audit_level,a.audit_by,a.audit_date,b.plan_id,b.exam_state
+        from so_exam_info_again a left join so_plan b  on a.soid =b.soid  and b.sts ='0'
+        <where>
+             a.sts ='0'
+            <if test="localId!=null and localId!=''">
+                and  b.local_Id=#{localId}
+            </if>
+
+            <if test="userId!=null and userId!=''">
+                and  b.user_id=#{userId}
+            </if>
+            <if test="soid!=null and soid!=''">
+                and  a.soid=#{soid}
+            </if>
+            <if test="rsrvStr2 != null and rsrvStr2 != ''">
+                and a.username  like  '%${rsrvStr2}%'
+            </if>
+            <if test="companyId!=null and companyId!=''">
+                and  b.company_id=#{companyId}
+            </if>
+            <if test="planId!=null and planId!=''">
+                and   b.plan_Id=#{planId}
+            </if>
+            <if test="examType!=null and examType!=''">
+                and   a.exam_Type=#{examType}
+            </if>
+            <if test="passTag!=null and passTag!=''">
+                and   a.pass_Tag=#{passTag}
+            </if>
+            <if test="startTime != null and startTime != ''">
+                <![CDATA[
+                and a.createTime >= #{startTime}
+                ]]>
+            </if>
+            <if test="endTime != null and endTime != ''">
+                <![CDATA[
+                and a.createTime <= #{endTime}
+                ]]>
+            </if>
+        </where>
+
+        order by soid,createtime
+
+
+    </select>
+ <update id="updQuestionById"  parameterType="string" >
+update t_question_lib set question=#{newQuestion} where id=#{questionId}
+ </update>
+    <update id="updQuestionChoiceById"  parameterType="string" >
+        update t_question_lib_sub set question_choice=#{newQuestion} where questionId=#{questionId} and index_sub=#{choiceId}
+    </update>
+
+
+    <select id="findAuditExamList" resultMap="SoExamInfoResultMap">
+        select  soid,
+        userName,
+        profession,
+        StartTime,
+        RequireTime,
+        EndTime,
+        id,
+        p_type,
+        userId,
+        questionTotals,
+        createTime,
+        sts,
+        sts_date,
+        cores,
+        exam_type,
+        audit_tag,
+        audit_level,
+        audit_by,
+        audit_date,
+        pass_tag,
+        rsrv_str1,
+        rsrv_str2,
+        rsrv_str3
+        from so_exam_info
+        <where>
+            sts = '0' and audit_tag ='0'
+            <if test="auditTag != null and auditTag != ''" >
+                and audit_tag = #{auditTag,jdbcType=CHAR}
+            </if>
+            <if test="auditLevel != null and auditLevel != ''" >
+                and audit_level = #{auditLevel,jdbcType=CHAR}
+            </if>
+        </where>
+        union all
+        select  soid,
+        userName,
+        profession,
+        StartTime,
+        RequireTime,
+        EndTime,
+        id,
+        p_type,
+        userId,
+        questionTotals,
+        createTime,
+        sts,
+        sts_date,
+        cores,
+        exam_type,
+        audit_tag,
+        audit_level,
+        audit_by,
+        audit_date,
+        pass_tag,
+        rsrv_str1,
+        rsrv_str2,
+        rsrv_str3
+        from so_exam_info_again
+        <where>
+            sts = '0' and audit_tag ='0'
+            <if test="auditTag != null and auditTag != ''" >
+                and audit_tag = #{auditTag,jdbcType=CHAR}
+            </if>
+            <if test="auditLevel != null and auditLevel != ''" >
+                and audit_level = #{auditLevel,jdbcType=CHAR}
+            </if>
+        </where>
+
+        order by createTime desc
+
+    </select>
+
+
+    <select id="findHisAuditExamList" resultMap="SoExamInfoResultMap">
+        select  soid,
+        userName,
+        profession,
+        StartTime,
+        RequireTime,
+        EndTime,
+        id,
+        p_type,
+        userId,
+        questionTotals,
+        createTime,
+        sts,
+        sts_date,
+        cores,
+        exam_type,
+        audit_tag,
+        audit_level,
+        audit_by,
+        audit_date,
+        pass_tag,
+        rsrv_str1,
+        rsrv_str2,
+        rsrv_str3
+        from so_exam_info
+        <where>
+            sts = '0'
+            <if test="qryStr3 != null and qryStr3 != ''" >
+                and audit_tag = #{qryStr3,jdbcType=CHAR}
+            </if>
+            <if test="qryStr4 != null and qryStr4 != ''" >
+                and audit_level = #{qryStr4,jdbcType=CHAR}
+            </if>
+
+            <if test="qryStr1 != null and qryStr1 != ''" >
+                and username    like  '%${qryStr1}%'
+            </if>
+
+            <if test="qryStr2 !=null and qryStr2!=''">
+                and soid = #{qryStr2}
+            </if>
+        </where>
+        union all
+        select  soid,
+        userName,
+        profession,
+        StartTime,
+        RequireTime,
+        EndTime,
+        id,
+        p_type,
+        userId,
+        questionTotals,
+        createTime,
+        sts,
+        sts_date,
+        cores,
+        exam_type,
+        audit_tag,
+        audit_level,
+        audit_by,
+        audit_date,
+        pass_tag,
+        rsrv_str1,
+        rsrv_str2,
+        rsrv_str3
+        from so_exam_info_again
+        <where>
+            sts = '0'
+
+            <if test="qryStr3 != null and qryStr3 != ''" >
+                and audit_tag = #{qryStr3,jdbcType=CHAR}
+            </if>
+            <if test="qryStr4 != null and qryStr4 != ''" >
+                and audit_level = #{qryStr4,jdbcType=CHAR}
+            </if>
+
+            <if test="qryStr1 != null and qryStr1 != ''" >
+                and username    like  '%${qryStr1}%'
+            </if>
+
+            <if test="qryStr2 !=null and qryStr2!=''">
+                and soid = #{qryStr2}
+            </if>
+        </where>
+
+        order by createTime desc
+
+    </select>
+
+
+
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.exam.entiy.ExamInfo" >
+        update so_exam_info
+        <set >
+            <if test="auditTag != null" >
+                audit_tag = #{auditTag,jdbcType=VARCHAR},
+            </if>
+            <if test="auditLevel != null" >
+                audit_level = #{auditLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="auditBy != null" >
+                audit_by = #{auditBy,jdbcType=VARCHAR},
+            </if>
+            <if test="auditDate != null" >
+                audit_date = #{auditDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateAgainByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.exam.entiy.ExamInfo" >
+        update so_exam_info_again
+        <set >
+            <if test="auditTag != null" >
+                audit_tag = #{auditTag,jdbcType=VARCHAR},
+            </if>
+            <if test="auditLevel != null" >
+                audit_level = #{auditLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="auditBy != null" >
+                audit_by = #{auditBy,jdbcType=VARCHAR},
+            </if>
+            <if test="auditDate != null" >
+                audit_date = #{auditDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectByPrimaryKey" resultMap="SoExamInfoResultMap" parameterType="java.lang.Long" >
+        select  soid,
+        userName,
+        profession,
+        StartTime,
+        RequireTime,
+        EndTime,
+        id,
+        p_type,
+        userId,
+        questionTotals,
+        createTime,
+        sts,
+        sts_date,
+        cores,
+        exam_type,
+        audit_tag,
+        audit_level,
+        audit_by,
+        audit_date,
+        pass_tag,
+        rsrv_str1,
+        rsrv_str2,
+        rsrv_str3
+        from so_exam_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectAgainByPrimaryKey" resultMap="SoExamInfoResultMap" parameterType="java.lang.Long" >
+        select  soid,
+        userName,
+        profession,
+        StartTime,
+        RequireTime,
+        EndTime,
+        id,
+        p_type,
+        userId,
+        questionTotals,
+        createTime,
+        sts,
+        sts_date,
+        cores,
+        exam_type,
+        audit_tag,
+        audit_level,
+        audit_by,
+        audit_date,
+        pass_tag,
+        rsrv_str1,
+        rsrv_str2,
+        rsrv_str3
+        from so_exam_info_again
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+</mapper>

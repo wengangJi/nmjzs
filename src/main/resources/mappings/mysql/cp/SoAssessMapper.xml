@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.cp.dao.SoAssessMapper">
+
+    <resultMap id="AssessResultMap" type="com.zhongxin.cims.modules.cp.entity.SoAssess">
+        <result column="S_SOID" property="soid" jdbcType="VARCHAR"/>
+        <association property="so" javaType="So" resultMap="SoResultMap"/>
+        <association property="soCpBase" javaType="SoCpBase" resultMap="SoCpBaseResultMap"/>
+    </resultMap>
+    <resultMap id="SoResultMap" type="com.zhongxin.cims.modules.common.entity.So">
+        <id column="S_SOID" property="soid" jdbcType="VARCHAR"/>
+        <result column="S_QR_ID" property="qrId" jdbcType="VARCHAR"/>
+        <result column="S_APP_ID" property="appId" jdbcType="VARCHAR"/>
+        <result column="S_SO_TYPE" property="soType" jdbcType="VARCHAR"/>
+        <result column="S_FLOW_ID" property="flowId" jdbcType="VARCHAR"/>
+        <result column="S_BPM_ID" property="bpmId" jdbcType="VARCHAR"/>
+        <result column="S_BATCH_ID" property="batchId" jdbcType="VARCHAR"/>
+        <result column="S_COMPANY_ID" property="companyId" jdbcType="INTEGER"/>
+        <result column="S_USER_ID" property="userId" jdbcType="VARCHAR"/>
+        <result column="S_PROVINCE_ID" property="provinceId" jdbcType="VARCHAR"/>
+        <result column="S_LOCAL_ID" property="localId" jdbcType="INTEGER"/>
+        <result column="S_AREA_ID" property="areaId" jdbcType="INTEGER"/>
+        <result column="S_APPL_PERSON" property="applPerson" jdbcType="VARCHAR"/>
+        <result column="S_APPL_DATE" property="applDate" jdbcType="DATE"/>
+        <result column="S_APPL_ID_NO" property="applIdNo" jdbcType="VARCHAR"/>
+        <result column="S_AUDI_FLAG" property="audiFlag" jdbcType="VARCHAR"/>
+        <result column="S_AUDI_DATE" property="audiDate" jdbcType="DATE"/>
+        <result column="S_REPO_FLAG" property="repoFlag" jdbcType="VARCHAR"/>
+        <result column="S_REPO_DATE" property="repoDate" jdbcType="DATE"/>
+        <result column="S_NOTI_FLAG" property="notiFlag" jdbcType="VARCHAR"/>
+        <result column="S_NOTI_DATE" property="notiDate" jdbcType="DATE"/>
+        <result column="S_APPE_FLAG" property="appeFlag" jdbcType="VARCHAR"/>
+        <result column="S_APPE_DATE" property="appeDate" jdbcType="DATE"/>
+        <result column="S_WARN_FLAG" property="warnFlag" jdbcType="VARCHAR"/>
+        <result column="S_WARN_DATE" property="warnDate" jdbcType="DATE"/>
+        <result column="S_BATCH_FLAG" property="batchFlag" jdbcType="VARCHAR"/>
+        <result column="S_BATCH_DATE" property="batchDate" jdbcType="DATE"/>
+        <result column="S_PROCESS_STS" property="processSts" jdbcType="VARCHAR"/>
+        <result column="S_PROCESS_DATE" property="processDate" jdbcType="DATE"/>
+        <result column="S_SERVID" property="servid" jdbcType="INTEGER"/>
+        <result column="S_CREATE_DATE" property="createDate" jdbcType="DATE"/>
+        <result column="S_COMP_DATE" property="compDate" jdbcType="DATE"/>
+        <result column="S_RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR"/>
+        <result column="S_RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR"/>
+        <result column="S_RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR"/>
+        <result column="S_REMARKS" property="remarks" jdbcType="VARCHAR"/>
+        <result column="S_STS" property="sts" jdbcType="CHAR"/>
+        <result column="S_STS_DATE" property="stsDate" jdbcType="DATE"/>
+    </resultMap>
+
+    <resultMap id="SoCpBaseResultMap" type="com.zhongxin.cims.modules.cp.entity.SoCpBase">
+        <id column="B_SOID" property="soid" jdbcType="VARCHAR"/>
+        <result column="B_ACT_TYPE" property="actType" jdbcType="CHAR"/>
+        <result column="B_NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="B_SEX" property="sex" jdbcType="VARCHAR"/>
+        <result column="B_BIRTH_DATE" property="birthDate" jdbcType="DATE"/>
+        <result column="B_ID_TYPE" property="idType" jdbcType="VARCHAR"/>
+        <result column="B_ID_NO" property="idNo" jdbcType="VARCHAR"/>
+        <result column="B_PERSON_TYPE" property="personType" jdbcType="VARCHAR"/>
+        <result column="B_EXAM_DATE" property="examDate" jdbcType="DATE"/>
+        <result column="B_EXAM_SCORE" property="examScore" jdbcType="VARCHAR"/>
+        <result column="B_TELEPHONE" property="telephone" jdbcType="VARCHAR"/>
+        <result column="B_COMPANY_ID" property="companyId" jdbcType="INTEGER"/>
+        <result column="B_ADDRESS" property="address" jdbcType="VARCHAR"/>
+        <result column="B_POST_CODE" property="postCode" jdbcType="VARCHAR"/>
+        <result column="B_MAIL" property="mail" jdbcType="VARCHAR"/>
+        <result column="B_GARD_SCHOOL" property="gardSchool" jdbcType="VARCHAR"/>
+        <result column="B_GARD_DATE" property="gardDate" jdbcType="DATE"/>
+        <result column="B_MAJOR" property="major" jdbcType="VARCHAR"/>
+        <result column="B_TITLE_LEVEL" property="titleLevel" jdbcType="VARCHAR"/>
+        <result column="B_TITLE_TYPE" property="titleType" jdbcType="VARCHAR"/>
+        <result column="B_DEGREE" property="degree" jdbcType="VARCHAR"/>
+        <result column="B_EDUCATION" property="education" jdbcType="VARCHAR"/>
+        <result column="B_WORKING_DATE" property="workingDate" jdbcType="DATE"/>
+        <result column="B_WORK_EXPE" property="workExpe" jdbcType="INTEGER"/>
+        <result column="B_LEARN_EXPE" property="learnExpe" jdbcType="VARCHAR"/>
+        <result column="B_CERT_EXPE" property="certExpe" jdbcType="VARCHAR"/>
+        <result column="B_PATH_ID" property="pathId" jdbcType="VARCHAR"/>
+        <result column="B_RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR"/>
+        <result column="B_RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR"/>
+        <result column="B_RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 调用见 PersonnelService.findTodoTasks 方法 -->
+    <select id="findTodoTasks" resultMap="AssessResultMap">
+        select
+        a.SOID S_SOID,
+        a.QR_ID S_QR_ID,
+        a.APP_ID S_APP_ID,
+        a.SO_TYPE S_SO_TYPE,
+        a.FLOW_ID S_FLOW_ID,
+        a.BPM_ID S_BPM_ID,
+        a.BATCH_ID S_BATCH_ID,
+        a.COMPANY_ID S_COMPANY_ID,
+        a.USER_ID S_USER_ID,
+        a.PROVINCE_ID S_PROVINCE_ID,
+        a.LOCAL_ID S_LOCAL_ID,
+        a.AREA_ID S_AREA_ID,
+        a.APPL_PERSON S_APPL_PERSON,
+        a.APPL_DATE S_APPL_DATE,
+        a.APPL_ID_NO S_APPL_ID_NO,
+        a.AUDI_FLAG S_AUDI_FLAG,
+        a.AUDI_DATE S_AUDI_DATE,
+        a.REPO_FLAG S_REPO_FLAG,
+        a.REPO_DATE S_REPO_DATE,
+        a.NOTI_FLAG S_NOTI_FLAG,
+        a.NOTI_DATE S_NOTI_DATE,
+        a.APPE_FLAG S_APPE_FLAG,
+        a.APPE_DATE S_APPE_DATE,
+        a.WARN_FLAG S_WARN_FLAG,
+        a.WARN_DATE S_WARN_DATE,
+        a.BATCH_FLAG S_BATCH_FLAG,
+        a.BATCH_DATE S_BATCH_DATE,
+        a.PROCESS_STS S_PROCESS_STS,
+        a.PROCESS_DATE S_PROCESS_DATE,
+        a.SERVID S_SERVID,
+        a.COMP_DATE S_COMP_DATE,
+        a.CREATE_DATE S_CREATE_DATE,
+        a.RSRV_STR1 S_RSRV_STR1,
+        a.RSRV_STR2 S_RSRV_STR2,
+        a.RSRV_STR3 S_RSRV_STR3,
+        a.REMARKS S_REMARKS,
+        a.STS S_STS,
+        a.STS_DATE S_STS_DATE,
+        b.ACT_TYPE B_ACT_TYPE,
+        b.NAME B_NAME,
+        b.SEX B_SEX,
+        b.BIRTH_DATE B_BIRTH_DATE,
+        b.ID_TYPE B_ID_TYPE,
+        b.ID_NO B_ID_NO,
+        b.PERSON_TYPE B_PERSON_TYPE,
+        b.EXAM_DATE B_EXAM_DATE,
+        b.EXAM_SCORE B_EXAM_SCORE,
+        b.TELEPHONE B_TELEPHONE,
+        b.COMPANY_ID B_COMPANY_ID,
+        b.ADDRESS B_ADDRESS,
+        b.POST_CODE B_POST_CODE,
+        b.MAIL B_MAIL,
+        b.GARD_SCHOOL B_GARD_SCHOOL,
+        b.GARD_DATE B_GARD_DATE,
+        b.MAJOR B_MAJOR,
+        b.TITLE_LEVEL B_TITLE_LEVEL,
+        b.TITLE_TYPE B_TITLE_TYPE,
+        b.DEGREE B_DEGREE,
+        b.EDUCATION B_EDUCATION,
+        b.WORKING_DATE B_WORKING_DATE,
+        b.WORK_EXPE B_WORK_EXPE,
+        b.LEARN_EXPE B_LEARN_EXPE,
+        b.CERT_EXPE B_CERT_EXPE,
+        b.PATH_ID B_PATH_ID,
+        b.RSRV_STR1 B_RSRV_STR1,
+        b.RSRV_STR2 B_RSRV_STR2,
+        b.RSRV_STR3 B_RSRV_STR3
+        from t_so a inner join so_cp_base b on a.soid = b.soid       and a.sts not in('7','8','9')
+        <if test="soCpBase != null">
+            <if test="soCpBase.major != null and soCpBase.major != ''">
+                and b.major = #{soCpBase.major}
+            </if>
+            <if test="soCpBase.personType != null and soCpBase.personType != ''">
+                and b.PERSON_TYPE = #{soCpBase.personType}
+            </if>
+        </if>
+        <where>
+            <if test="so != null">
+                <if test="so.localId != null and so.localId != ''">
+                    a.local_id = #{so.localId}
+                </if>
+                <if test="so.batchId != null and so.batchId != ''">
+                    and a.batch_id = #{so.batchId}
+                </if>
+                <if test="so.soType != null and so.soType != ''">
+                    and a.so_type = #{so.soType}
+                </if>
+                <if test="so.warnFlag != null and so.warnFlag != ''">
+                    and a.warn_flag = #{so.warnFlag}
+                </if>
+            </if>
+
+            <if test="startTime != null and startTime != ''">
+                <![CDATA[
+                and a.appl_date >= #{startTime}
+                ]]>
+            </if>
+            <if test="endTime != null and endTime != ''">
+                <![CDATA[
+                and a.appl_date <= #{endTime}
+                ]]>
+            </if>
+
+        </where>
+
+        order by a.create_date desc
+
+    </select>
+
+
+    <select id="findDoneTasks" resultMap="AssessResultMap">
+        select
+        a.SOID S_SOID,
+        a.QR_ID S_QR_ID,
+        a.APP_ID S_APP_ID,
+        a.SO_TYPE S_SO_TYPE,
+        a.FLOW_ID S_FLOW_ID,
+        a.BPM_ID S_BPM_ID,
+        a.BATCH_ID S_BATCH_ID,
+        a.COMPANY_ID S_COMPANY_ID,
+        a.USER_ID S_USER_ID,
+        a.PROVINCE_ID S_PROVINCE_ID,
+        a.LOCAL_ID S_LOCAL_ID,
+        a.AREA_ID S_AREA_ID,
+        a.APPL_PERSON S_APPL_PERSON,
+        a.APPL_DATE S_APPL_DATE,
+        a.APPL_ID_NO S_APPL_ID_NO,
+        a.AUDI_FLAG S_AUDI_FLAG,
+        a.AUDI_DATE S_AUDI_DATE,
+        a.REPO_FLAG S_REPO_FLAG,
+        a.REPO_DATE S_REPO_DATE,
+        a.NOTI_FLAG S_NOTI_FLAG,
+        a.NOTI_DATE S_NOTI_DATE,
+        a.APPE_FLAG S_APPE_FLAG,
+        a.APPE_DATE S_APPE_DATE,
+        a.WARN_FLAG S_WARN_FLAG,
+        a.WARN_DATE S_WARN_DATE,
+        a.BATCH_FLAG S_BATCH_FLAG,
+        a.BATCH_DATE S_BATCH_DATE,
+        a.PROCESS_STS S_PROCESS_STS,
+        a.PROCESS_DATE S_PROCESS_DATE,
+        a.SERVID S_SERVID,
+        a.COMP_DATE S_COMP_DATE,
+        a.CREATE_DATE S_CREATE_DATE,
+        a.RSRV_STR1 S_RSRV_STR1,
+        a.RSRV_STR2 S_RSRV_STR2,
+        a.RSRV_STR3 S_RSRV_STR3,
+        a.REMARKS S_REMARKS,
+        a.STS S_STS,
+        a.STS_DATE S_STS_DATE,
+        b.ACT_TYPE B_ACT_TYPE,
+        b.NAME B_NAME,
+        b.SEX B_SEX,
+        b.BIRTH_DATE B_BIRTH_DATE,
+        b.ID_TYPE B_ID_TYPE,
+        b.ID_NO B_ID_NO,
+        b.PERSON_TYPE B_PERSON_TYPE,
+        b.EXAM_DATE B_EXAM_DATE,
+        b.EXAM_SCORE B_EXAM_SCORE,
+        b.TELEPHONE B_TELEPHONE,
+        b.COMPANY_ID B_COMPANY_ID,
+        b.ADDRESS B_ADDRESS,
+        b.POST_CODE B_POST_CODE,
+        b.MAIL B_MAIL,
+        b.GARD_SCHOOL B_GARD_SCHOOL,
+        b.GARD_DATE B_GARD_DATE,
+        b.MAJOR B_MAJOR,
+        b.TITLE_LEVEL B_TITLE_LEVEL,
+        b.TITLE_TYPE B_TITLE_TYPE,
+        b.DEGREE B_DEGREE,
+        b.EDUCATION B_EDUCATION,
+        b.WORKING_DATE B_WORKING_DATE,
+        b.WORK_EXPE B_WORK_EXPE,
+        b.LEARN_EXPE B_LEARN_EXPE,
+        b.CERT_EXPE B_CERT_EXPE,
+        b.PATH_ID B_PATH_ID,
+        b.RSRV_STR1 B_RSRV_STR1,
+        b.RSRV_STR2 B_RSRV_STR2,
+        b.RSRV_STR3 B_RSRV_STR3
+        from t_so a inner join so_cp_base b on a.soid = b.soid       and a.sts !='7'
+        <if test="soCpBase != null">
+            <if test="soCpBase.major != null and soCpBase.major != ''">
+                and b.major = #{soCpBase.major}
+            </if>
+            <if test="soCpBase.personType != null and soCpBase.personType != ''">
+                and b.PERSON_TYPE = #{soCpBase.personType}
+            </if>
+        </if>
+        <where>
+            1=1 and a.soid in (select soid from so_cp_approve where appr_user_id =#{so.userId})
+            <if test="so != null">
+                <if test="so.localId != null and so.localId != ''">
+                    and a.local_id = #{so.localId}
+                </if>
+                <if test="so.batchId != null and so.batchId != ''">
+                    and a.batch_id = #{so.batchId}
+                </if>
+                <if test="so.soType != null and so.soType != ''">
+                    and a.so_type = #{so.soType}
+                </if>
+                <if test="so.warnFlag != null and so.warnFlag != ''">
+                    and a.warn_flag = #{so.warnFlag}
+                </if>
+            </if>
+
+            <if test="startTime != null and startTime != ''">
+                <![CDATA[
+                and a.appl_date >= #{startTime}
+                ]]>
+            </if>
+            <if test="endTime != null and endTime != ''">
+                <![CDATA[
+                and a.appl_date <= #{endTime}
+                ]]>
+            </if>
+
+        </where>
+
+        order by a.create_date desc
+
+    </select>
+
+
+    <!-- 调用见 PersonnelService.findTodoTasks 方法 -->
+    <select id="findBySoid" resultType="SoAssess" resultMap="AssessResultMap">
+        select
+        a.SOID          S_SOID,
+        a.QR_ID         S_QR_ID,
+        a.APP_ID        S_APP_ID,
+        a.SO_TYPE       S_SO_TYPE,
+        a.FLOW_ID       S_FLOW_ID,
+        a.BPM_ID        S_BPM_ID,
+        a.BATCH_ID      S_BATCH_ID,
+        a.COMPANY_ID    S_COMPANY_ID,
+        a.USER_ID       S_USER_ID,
+        a.PROVINCE_ID   S_PROVINCE_ID,
+        a.LOCAL_ID      S_LOCAL_ID,
+        a.AREA_ID       S_AREA_ID,
+        a.APPL_PERSON   S_APPL_PERSON,
+        a.APPL_DATE     S_APPL_DATE,
+        a.APPL_ID_NO    S_APPL_ID_NO,
+        a.AUDI_FLAG     S_AUDI_FLAG,
+        a.AUDI_DATE     S_AUDI_DATE,
+        a.REPO_FLAG     S_REPO_FLAG,
+        a.REPO_DATE     S_REPO_DATE,
+        a.NOTI_FLAG     S_NOTI_FLAG,
+        a.NOTI_DATE     S_NOTI_DATE,
+        a.APPE_FLAG     S_APPE_FLAG,
+        a.APPE_DATE     S_APPE_DATE,
+        a.WARN_FLAG     S_WARN_FLAG,
+        a.WARN_DATE     S_WARN_DATE,
+        a.BATCH_FLAG    S_BATCH_FLAG,
+        a.BATCH_DATE    S_BATCH_DATE,
+        a.PROCESS_STS   S_PROCESS_STS,
+        a.PROCESS_DATE  S_PROCESS_DATE,
+        a.SERVID        S_SERVID,
+        a.COMP_DATE     S_COMP_DATE,
+        a.CREATE_DATE   S_CREATE_DATE,
+        a.RSRV_STR1     S_RSRV_STR1,
+        a.RSRV_STR2     S_RSRV_STR2,
+        a.RSRV_STR3     S_RSRV_STR3,
+        a.REMARKS       S_REMARKS,
+        a.STS           S_STS,
+        a.STS_DATE      S_STS_DATE,
+        b.ACT_TYPE      B_ACT_TYPE,
+        b.NAME          B_NAME,
+        b.SEX           B_SEX,
+        b.BIRTH_DATE    B_BIRTH_DATE,
+        b.ID_TYPE       B_ID_TYPE,
+        b.ID_NO         B_ID_NO,
+        b.PERSON_TYPE   B_PERSON_TYPE,
+        b.EXAM_DATE     B_EXAM_DATE,
+        b.EXAM_SCORE    B_EXAM_SCORE,
+        b.TELEPHONE     B_TELEPHONE,
+        b.COMPANY_ID    B_COMPANY_ID,
+        b.ADDRESS       B_ADDRESS,
+        b.POST_CODE     B_POST_CODE,
+        b.MAIL          B_MAIL,
+        b.GARD_SCHOOL   B_GARD_SCHOOL,
+        b.GARD_DATE     B_GARD_DATE,
+        b.MAJOR         B_MAJOR,
+        b.TITLE_LEVEL   B_TITLE_LEVEL,
+        b.TITLE_TYPE    B_TITLE_TYPE,
+        b.DEGREE        B_DEGREE,
+        b.EDUCATION     B_EDUCATION,
+        b.WORKING_DATE  B_WORKING_DATE,
+        b.WORK_EXPE     B_WORK_EXPE,
+        b.LEARN_EXPE    B_LEARN_EXPE,
+        b.CERT_EXPE     B_CERT_EXPE,
+        b.PATH_ID       B_PATH_ID,
+        b.RSRV_STR1     B_RSRV_STR1,
+        b.RSRV_STR2     B_RSRV_STR2,
+        b.RSRV_STR3     B_RSRV_STR3
+        from t_so a left outer join so_cp_base b on a.soid = b.soid
+       where a.sts!='7' and  a.soid = #{soid}
+    </select>
+
+
+    <!-- 调用见 PersonnelService.findTodoTasks 方法 -->
+    <select id="findAssessList" resultMap="AssessResultMap">
+        select
+        a.SOID S_SOID,
+        a.QR_ID S_QR_ID,
+        a.APP_ID S_APP_ID,
+        a.SO_TYPE S_SO_TYPE,
+        a.FLOW_ID S_FLOW_ID,
+        a.BPM_ID S_BPM_ID,
+        a.BATCH_ID S_BATCH_ID,
+        a.COMPANY_ID S_COMPANY_ID,
+        a.USER_ID S_USER_ID,
+        a.PROVINCE_ID S_PROVINCE_ID,
+        a.LOCAL_ID S_LOCAL_ID,
+        a.AREA_ID S_AREA_ID,
+        a.APPL_PERSON S_APPL_PERSON,
+        a.APPL_DATE S_APPL_DATE,
+        a.APPL_ID_NO S_APPL_ID_NO,
+        a.AUDI_FLAG S_AUDI_FLAG,
+        a.AUDI_DATE S_AUDI_DATE,
+        a.REPO_FLAG S_REPO_FLAG,
+        a.REPO_DATE S_REPO_DATE,
+        a.NOTI_FLAG S_NOTI_FLAG,
+        a.NOTI_DATE S_NOTI_DATE,
+        a.APPE_FLAG S_APPE_FLAG,
+        a.APPE_DATE S_APPE_DATE,
+        a.WARN_FLAG S_WARN_FLAG,
+        a.WARN_DATE S_WARN_DATE,
+        a.BATCH_FLAG S_BATCH_FLAG,
+        a.BATCH_DATE S_BATCH_DATE,
+        a.PROCESS_STS S_PROCESS_STS,
+        a.PROCESS_DATE S_PROCESS_DATE,
+        a.SERVID S_SERVID,
+        a.CREATE_DATE S_CREATE_DATE,
+        a.COMP_DATE S_COMP_DATE,
+        a.RSRV_STR1 S_RSRV_STR1,
+        a.RSRV_STR2 S_RSRV_STR2,
+        a.RSRV_STR3 S_RSRV_STR3,
+        a.REMARKS S_REMARKS,
+        a.STS S_STS,
+        a.STS_DATE S_STS_DATE,
+        b.ACT_TYPE B_ACT_TYPE,
+        b.NAME B_NAME,
+        b.SEX B_SEX,
+        b.BIRTH_DATE B_BIRTH_DATE,
+        b.ID_TYPE B_ID_TYPE,
+        b.ID_NO B_ID_NO,
+        b.PERSON_TYPE B_PERSON_TYPE,
+        b.EXAM_DATE B_EXAM_DATE,
+        b.EXAM_SCORE B_EXAM_SCORE,
+        b.TELEPHONE B_TELEPHONE,
+        b.COMPANY_ID B_COMPANY_ID,
+        b.ADDRESS B_ADDRESS,
+        b.POST_CODE B_POST_CODE,
+        b.MAIL B_MAIL,
+        b.GARD_SCHOOL B_GARD_SCHOOL,
+        b.GARD_DATE B_GARD_DATE,
+        b.MAJOR B_MAJOR,
+        b.TITLE_LEVEL B_TITLE_LEVEL,
+        b.TITLE_TYPE B_TITLE_TYPE,
+        b.DEGREE B_DEGREE,
+        b.EDUCATION B_EDUCATION,
+        b.WORKING_DATE B_WORKING_DATE,
+        b.WORK_EXPE B_WORK_EXPE,
+        b.LEARN_EXPE B_LEARN_EXPE,
+        b.CERT_EXPE B_CERT_EXPE,
+        b.PATH_ID B_PATH_ID,
+        b.RSRV_STR1 B_RSRV_STR1,
+        b.RSRV_STR2 B_RSRV_STR2,
+        b.RSRV_STR3 B_RSRV_STR3
+        from t_so a inner join so_cp_base b on a.soid = b.soid     and a.sts!='7'
+        <if test="soCpBase != null">
+            <if test="soCpBase.personType != null and soCpBase.personType != ''">
+                and b.PERSON_TYPE = #{soCpBase.personType}
+            </if>
+        </if>
+        <where>
+            <if test="so != null">
+                <if test="so.localId != null and so.localId != ''">
+                    a.local_id = #{so.localId}
+                </if>
+                <if test="so.processSts != null and so.processSts != ''">
+                    and a.process_sts = #{so.processSts}
+                </if>
+                <if test="so.soType != null and so.soType != ''">
+                    and a.so_type = #{so.soType}
+                </if>
+                <if test="so.batchId != null and so.batchId != ''">
+                    and a.batch_id = #{so.batchId}
+                </if>
+                <if test="so.userId != null and so.userId != ''">
+                  and  a.user_id = #{so.userId}
+                </if>
+            </if>
+            <if test="startTime != null and startTime != ''">
+                <![CDATA[
+                and a.appl_date >= #{startTime}
+                ]]>
+            </if>
+            <if test="endTime != null and endTime != ''">
+                <![CDATA[
+                and a.appl_date <= #{endTime}
+                ]]>
+            </if>
+        </where>
+
+          order by  a.create_date desc
+
+    </select>
+</mapper>

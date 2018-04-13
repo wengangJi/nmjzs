@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.common.dao.SoMapper">
+    <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.common.entity.So">
+        <id column="soid" property="soid" jdbcType="VARCHAR"/>
+        <result column="qr_id" property="qrId" jdbcType="VARCHAR"/>
+        <result column="app_id" property="appId" jdbcType="VARCHAR"/>
+        <result column="so_type" property="soType" jdbcType="VARCHAR"/>
+        <result column="flow_id" property="flowId" jdbcType="VARCHAR"/>
+        <result column="bpm_id" property="bpmId" jdbcType="VARCHAR"/>
+        <result column="batch_id" property="batchId" jdbcType="INTEGER"/>
+        <result column="company_id" property="companyId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="province_id" property="provinceId" jdbcType="VARCHAR"/>
+        <result column="local_id" property="localId" jdbcType="INTEGER"/>
+        <result column="area_id" property="areaId" jdbcType="INTEGER"/>
+        <result column="appl_person" property="applPerson" jdbcType="VARCHAR"/>
+        <result column="appl_date" property="applDate" jdbcType="DATE"/>
+        <result column="appl_id_no" property="applIdNo" jdbcType="VARCHAR"/>
+        <result column="audi_flag" property="audiFlag" jdbcType="VARCHAR"/>
+        <result column="audi_date" property="audiDate" jdbcType="TIMESTAMP"/>
+        <result column="repo_flag" property="repoFlag" jdbcType="VARCHAR"/>
+        <result column="repo_date" property="repoDate" jdbcType="TIMESTAMP"/>
+        <result column="noti_flag" property="notiFlag" jdbcType="VARCHAR"/>
+        <result column="noti_date" property="notiDate" jdbcType="TIMESTAMP"/>
+        <result column="appe_flag" property="appeFlag" jdbcType="VARCHAR"/>
+        <result column="appe_date" property="appeDate" jdbcType="TIMESTAMP"/>
+        <result column="warn_flag" property="warnFlag" jdbcType="VARCHAR"/>
+        <result column="warn_date" property="warnDate" jdbcType="TIMESTAMP"/>
+        <result column="batch_flag" property="batchFlag" jdbcType="VARCHAR"/>
+        <result column="batch_date" property="batchDate" jdbcType="TIMESTAMP"/>
+        <result column="process_sts" property="processSts" jdbcType="VARCHAR"/>
+        <result column="process_date" property="processDate" jdbcType="TIMESTAMP"/>
+        <result column="servid" property="servid" jdbcType="INTEGER"/>
+        <result column="comp_date" property="compDate" jdbcType="TIMESTAMP"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="rsrv_str1" property="rsrvStr1" jdbcType="VARCHAR"/>
+        <result column="rsrv_str2" property="rsrvStr2" jdbcType="VARCHAR"/>
+        <result column="rsrv_str3" property="rsrvStr3" jdbcType="VARCHAR"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="sts" property="sts" jdbcType="CHAR"/>
+        <result column="sts_date" property="stsDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        soid, qr_id, app_id, so_type, flow_id, bpm_id, batch_id, company_id, user_id, province_id,
+        local_id, area_id, appl_person, appl_date, appl_id_no, audi_flag, audi_date, repo_flag,
+        repo_date, noti_flag, noti_date, appe_flag, appe_date, warn_flag, warn_date, batch_flag,
+        batch_date, process_sts, process_date, servid, create_date,comp_date, rsrv_str1, rsrv_str2, rsrv_str3,
+        remarks, sts, sts_date
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from t_so
+        where sts !='7' and  soid = #{soid,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from t_so
+        where soid = #{soid,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.zhongxin.cims.modules.common.entity.So">
+        insert into t_so (soid, qr_id, app_id,
+        so_type, flow_id, bpm_id,
+        batch_id, company_id, user_id,
+        province_id, local_id, area_id,
+        appl_person, appl_date, appl_id_no,
+        audi_flag, audi_date, repo_flag,
+        repo_date, noti_flag, noti_date,
+        appe_flag, appe_date, warn_flag,
+        warn_date, batch_flag, batch_date,
+        process_sts, process_date, servid, create_date,
+        comp_date, rsrv_str1, rsrv_str2,
+        rsrv_str3, remarks, sts,
+        sts_date)
+        values (#{soid,jdbcType=VARCHAR}, #{qrId,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR},
+        #{soType,jdbcType=VARCHAR}, #{flowId,jdbcType=VARCHAR}, #{bpmId,jdbcType=VARCHAR},
+        #{batchId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+        #{provinceId,jdbcType=VARCHAR}, #{localId,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER},
+        #{applPerson,jdbcType=VARCHAR}, #{applDate,jdbcType=DATE}, #{applIdNo,jdbcType=VARCHAR},
+        #{audiFlag,jdbcType=VARCHAR}, #{audiDate,jdbcType=TIMESTAMP}, #{repoFlag,jdbcType=VARCHAR},
+        #{repoDate,jdbcType=TIMESTAMP}, #{notiFlag,jdbcType=VARCHAR}, #{notiDate,jdbcType=TIMESTAMP},
+        #{appeFlag,jdbcType=VARCHAR}, #{appeDate,jdbcType=TIMESTAMP}, #{warnFlag,jdbcType=VARCHAR},
+        #{warnDate,jdbcType=TIMESTAMP}, #{batchFlag,jdbcType=VARCHAR}, #{batchDate,jdbcType=TIMESTAMP},
+        #{processSts,jdbcType=VARCHAR}, #{processDate,jdbcType=TIMESTAMP}, #{servid,jdbcType=INTEGER},
+         #{createDate,jdbcType=TIMESTAMP},#{compDate,jdbcType=TIMESTAMP}, #{rsrvStr1,jdbcType=VARCHAR}, #{rsrvStr2,jdbcType=VARCHAR},
+        #{rsrvStr3,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{sts,jdbcType=CHAR},
+        #{stsDate,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.common.entity.So">
+        insert into t_so
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="soid != null">
+                soid,
+            </if>
+            <if test="qrId != null">
+                qr_id,
+            </if>
+            <if test="appId != null">
+                app_id,
+            </if>
+            <if test="soType != null">
+                so_type,
+            </if>
+            <if test="flowId != null">
+                flow_id,
+            </if>
+            <if test="bpmId != null">
+                bpm_id,
+            </if>
+            <if test="batchId != null">
+                batch_id,
+            </if>
+            <if test="companyId != null">
+                company_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="provinceId != null">
+                province_id,
+            </if>
+            <if test="localId != null">
+                local_id,
+            </if>
+            <if test="areaId != null">
+                area_id,
+            </if>
+            <if test="applPerson != null">
+                appl_person,
+            </if>
+            <if test="applDate != null">
+                appl_date,
+            </if>
+            <if test="applIdNo != null">
+                appl_id_no,
+            </if>
+            <if test="audiFlag != null">
+                audi_flag,
+            </if>
+            <if test="audiDate != null">
+                audi_date,
+            </if>
+            <if test="repoFlag != null">
+                repo_flag,
+            </if>
+            <if test="repoDate != null">
+                repo_date,
+            </if>
+            <if test="notiFlag != null">
+                noti_flag,
+            </if>
+            <if test="notiDate != null">
+                noti_date,
+            </if>
+            <if test="appeFlag != null">
+                appe_flag,
+            </if>
+            <if test="appeDate != null">
+                appe_date,
+            </if>
+            <if test="warnFlag != null">
+                warn_flag,
+            </if>
+            <if test="warnDate != null">
+                warn_date,
+            </if>
+            <if test="batchFlag != null">
+                batch_flag,
+            </if>
+            <if test="batchDate != null">
+                batch_date,
+            </if>
+            <if test="processSts != null">
+                process_sts,
+            </if>
+            <if test="processDate != null">
+                process_date,
+            </if>
+            <if test="servid != null">
+                servid,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="compDate != null">
+                comp_date,
+            </if>
+            <if test="rsrvStr1 != null">
+                rsrv_str1,
+            </if>
+            <if test="rsrvStr2 != null">
+                rsrv_str2,
+            </if>
+            <if test="rsrvStr3 != null">
+                rsrv_str3,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="sts != null">
+                sts,
+            </if>
+            <if test="stsDate != null">
+                sts_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="soid != null">
+                #{soid,jdbcType=VARCHAR},
+            </if>
+            <if test="qrId != null">
+                #{qrId,jdbcType=VARCHAR},
+            </if>
+            <if test="appId != null">
+                #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="soType != null">
+                #{soType,jdbcType=VARCHAR},
+            </if>
+            <if test="flowId != null">
+                #{flowId,jdbcType=VARCHAR},
+            </if>
+            <if test="bpmId != null">
+                #{bpmId,jdbcType=VARCHAR},
+            </if>
+            <if test="batchId != null">
+                #{batchId,jdbcType=INTEGER},
+            </if>
+            <if test="companyId != null">
+                #{companyId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="provinceId != null">
+                #{provinceId,jdbcType=VARCHAR},
+            </if>
+            <if test="localId != null">
+                #{localId,jdbcType=INTEGER},
+            </if>
+            <if test="areaId != null">
+                #{areaId,jdbcType=INTEGER},
+            </if>
+            <if test="applPerson != null">
+                #{applPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="applDate != null">
+                #{applDate,jdbcType=DATE},
+            </if>
+            <if test="applIdNo != null">
+                #{applIdNo,jdbcType=VARCHAR},
+            </if>
+            <if test="audiFlag != null">
+                #{audiFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="audiDate != null">
+                #{audiDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="repoFlag != null">
+                #{repoFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="repoDate != null">
+                #{repoDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="notiFlag != null">
+                #{notiFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="notiDate != null">
+                #{notiDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="appeFlag != null">
+                #{appeFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="appeDate != null">
+                #{appeDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="warnFlag != null">
+                #{warnFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="warnDate != null">
+                #{warnDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="batchFlag != null">
+                #{batchFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="batchDate != null">
+                #{batchDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="processSts != null">
+                #{processSts,jdbcType=VARCHAR},
+            </if>
+            <if test="processDate != null">
+                #{processDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="servid != null">
+                #{servid,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="compDate != null">
+                #{compDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="rsrvStr1 != null">
+                #{rsrvStr1,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr2 != null">
+                #{rsrvStr2,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr3 != null">
+                #{rsrvStr3,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="sts != null">
+                #{sts,jdbcType=CHAR},
+            </if>
+            <if test="stsDate != null">
+                #{stsDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.common.entity.So">
+        update t_so
+        <set>
+            <if test="qrId != null">
+                qr_id = #{qrId,jdbcType=VARCHAR},
+            </if>
+            <if test="appId != null">
+                app_id = #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="soType != null">
+                so_type = #{soType,jdbcType=VARCHAR},
+            </if>
+            <if test="flowId != null">
+                flow_id = #{flowId,jdbcType=VARCHAR},
+            </if>
+            <if test="bpmId != null">
+                bpm_id = #{bpmId,jdbcType=VARCHAR},
+            </if>
+            <if test="batchId != null">
+                batch_id = #{batchId,jdbcType=INTEGER},
+            </if>
+            <if test="companyId != null">
+                company_id = #{companyId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="provinceId != null">
+                province_id = #{provinceId,jdbcType=VARCHAR},
+            </if>
+            <if test="localId != null">
+                local_id = #{localId,jdbcType=INTEGER},
+            </if>
+            <if test="areaId != null">
+                area_id = #{areaId,jdbcType=INTEGER},
+            </if>
+            <if test="applPerson != null">
+                appl_person = #{applPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="applDate != null">
+                appl_date = #{applDate,jdbcType=DATE},
+            </if>
+            <if test="applIdNo != null">
+                appl_id_no = #{applIdNo,jdbcType=VARCHAR},
+            </if>
+            <if test="audiFlag != null">
+                audi_flag = #{audiFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="audiDate != null">
+                audi_date = #{audiDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="repoFlag != null">
+                repo_flag = #{repoFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="repoDate != null">
+                repo_date = #{repoDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="notiFlag != null">
+                noti_flag = #{notiFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="notiDate != null">
+                noti_date = #{notiDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="appeFlag != null">
+                appe_flag = #{appeFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="appeDate != null">
+                appe_date = #{appeDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="warnFlag != null">
+                warn_flag = #{warnFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="warnDate != null">
+                warn_date = #{warnDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="batchFlag != null">
+                batch_flag = #{batchFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="batchDate != null">
+                batch_date = #{batchDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="processSts != null">
+                process_sts = #{processSts,jdbcType=VARCHAR},
+            </if>
+            <if test="processDate != null">
+                process_date = #{processDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="servid != null">
+                servid = #{servid,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="compDate != null">
+                comp_date = #{compDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="rsrvStr1 != null">
+                rsrv_str1 = #{rsrvStr1,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr2 != null">
+                rsrv_str2 = #{rsrvStr2,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr3 != null">
+                rsrv_str3 = #{rsrvStr3,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="sts != null">
+                sts = #{sts,jdbcType=CHAR},
+            </if>
+            <if test="stsDate != null">
+                sts_date = #{stsDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where soid = #{soid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zhongxin.cims.modules.common.entity.So">
+        update t_so
+        <set >
+            <if test="qrId != null" >
+                QR_ID = #{qrId,jdbcType=VARCHAR},
+            </if>
+            <if test="appId != null" >
+                APP_ID = #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="soType != null" >
+                SO_TYPE = #{soType,jdbcType=VARCHAR},
+            </if>
+            <if test="batchId != null" >
+                BATCH_ID = #{batchId,jdbcType=VARCHAR},
+            </if>
+            <if test="applPerson != null" >
+                APPL_PERSON = #{applPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="applDate != null" >
+                APPL_DATE = #{applDate,jdbcType=DATE},
+            </if>
+            <if test="applIdNo != null" >
+                APPL_ID_NO = #{applIdNo,jdbcType=VARCHAR},
+            </if>
+            <if test="audiFlag != null" >
+                AUDI_FLAG = #{audiFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="audiDate != null" >
+                AUDI_DATE = #{audiDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="repoFlag != null" >
+                REPO_FLAG = #{repoFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="repoDate != null" >
+                REPO_DATE = #{repoDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="notiFlag != null" >
+                NOTI_FLAG = #{notiFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="notiDate != null" >
+                NOTI_DATE = #{notiDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="appeFlag != null" >
+                APPE_FLAG = #{appeFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="appeDate != null" >
+                APPE_DATE = #{appeDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="warnFlag != null" >
+                WARN_FLAG = #{warnFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="warnDate != null" >
+                WARN_DATE = #{warnDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="batchFlag != null" >
+                BATCH_FLAG = #{batchFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="batchDate != null" >
+                BATCH_DATE = #{batchDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="servid != null" >
+                SERVID = #{servid,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null" >
+                CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="compDate != null" >
+                COMP_DATE = #{compDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="rsrvStr1 != null" >
+                RSRV_STR1 = #{rsrvStr1,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr2 != null" >
+                RSRV_STR2 = #{rsrvStr2,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr3 != null" >
+                RSRV_STR3 = #{rsrvStr3,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null" >
+                REMARKS = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="sts != null" >
+                STS = #{sts,jdbcType=CHAR},
+            </if>
+            <if test="stsDate != null" >
+                STS_DATE = #{stsDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where soid = #{soid,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateStsByPrimaryKey" parameterType="com.zhongxin.cims.modules.common.entity.So">
+        update t_so
+        <set>
+            STS = #{sts,jdbcType=CHAR},
+            STS_DATE = now()
+        </set>
+        where soid = #{soid,jdbcType=VARCHAR}
+    </update>
+
+    <select id="findBySts" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from t_so
+        where sts = #{sts,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findSoidByPara" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from t_so
+        where sts ='8' and  app_id = #{appId,jdbcType=VARCHAR}    and so_type =#{soType,jdbcType=VARCHAR} and user_id=#{userId,jdbcType=VARCHAR} and company_id =#{companyId,jdbcType=INTEGER} and local_id=#{localId,jdbcType=INTEGER}
+    </select>
+
+    <select id="findSoForCheckBefore" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from t_so
+        where app_id =#{appId,jdbcType=VARCHAR} and appl_id_no =#{idNo,jdbcType=VARCHAR} and so_type =#{soType,jdbcType=VARCHAR} and sts in ('1','2','3','4','5','6','8','9');
+    </select>
+</mapper>

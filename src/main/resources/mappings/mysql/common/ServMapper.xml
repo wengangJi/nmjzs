@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongxin.cims.modules.common.dao.ServMapper" >
+  <resultMap id="BaseResultMap" type="com.zhongxin.cims.modules.common.entity.Serv" >
+      <id column="SERVID" property="servid" jdbcType="INTEGER" />
+      <result column="QR_ID" property="qrId" jdbcType="VARCHAR" />
+      <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+      <result column="COMPANY_ID" property="companyId" jdbcType="INTEGER" />
+      <result column="BATCH_ID" property="batchId" jdbcType="VARCHAR" />
+      <result column="APP_ID" property="appId" jdbcType="VARCHAR" />
+      <result column="PROVINCE_ID" property="provinceId" jdbcType="VARCHAR" />
+      <result column="LOCAL_ID" property="localId" jdbcType="INTEGER" />
+      <result column="AREA_ID" property="areaId" jdbcType="INTEGER" />
+      <result column="MONGO_FLAG" property="mongoFlag" jdbcType="VARCHAR" />
+      <result column="BACKLIST_FLAG" property="backlistFlag" jdbcType="VARCHAR" />
+      <result column="RELATION_FLAG" property="relationFlag" jdbcType="VARCHAR" />
+      <result column="APPL_DATE" property="applDate" jdbcType="DATE" />
+      <result column="COMPL_DATE" property="complDate" jdbcType="TIMESTAMP" />
+      <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+      <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+      <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+      <result column="STS" property="sts" jdbcType="CHAR" />
+      <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+      <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+      <association property="company" javaType="Company" resultMap="companyRS"/>
+  </resultMap>
+
+    <resultMap id="BaseResultForCompl" type="com.zhongxin.cims.modules.common.entity.Serv" >
+        <id column="SERVID" property="servid" jdbcType="INTEGER" />
+        <result column="QR_ID" property="qrId" jdbcType="VARCHAR" />
+        <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+        <result column="COMPANY_ID" property="companyId" jdbcType="INTEGER" />
+        <result column="BATCH_ID" property="batchId" jdbcType="VARCHAR" />
+        <result column="APP_ID" property="appId" jdbcType="VARCHAR" />
+        <result column="PROVINCE_ID" property="provinceId" jdbcType="VARCHAR" />
+        <result column="LOCAL_ID" property="localId" jdbcType="INTEGER" />
+        <result column="AREA_ID" property="areaId" jdbcType="INTEGER" />
+        <result column="MONGO_FLAG" property="mongoFlag" jdbcType="VARCHAR" />
+        <result column="BACKLIST_FLAG" property="backlistFlag" jdbcType="VARCHAR" />
+        <result column="RELATION_FLAG" property="relationFlag" jdbcType="VARCHAR" />
+        <result column="APPL_DATE" property="applDate" jdbcType="DATE" />
+        <result column="COMPL_DATE" property="complDate" jdbcType="TIMESTAMP" />
+        <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+        <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+        <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+        <result column="STS" property="sts" jdbcType="CHAR" />
+        <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+        <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        servid, qr_id, user_id, company_id, BATCH_ID, APP_ID, PROVINCE_ID, LOCAL_ID, AREA_ID, MONGO_FLAG,
+        BACKLIST_FLAG, RELATION_FLAG, APPL_DATE, COMPL_DATE, RSRV_STR1, RSRV_STR2, RSRV_STR3, STS,
+        STS_DATE, REMARKS
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultForCompl" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List"/>
+        from t_serv
+        where SERVID = #{servid,jdbcType=INTEGER}      and sts='0'
+    </select>
+    <insert id="insert" parameterType="com.zhongxin.cims.modules.common.entity.Serv" >
+        insert into t_serv (SERVID, QR_ID, USER_ID,
+        COMPANY_ID, BATCH_ID, APP_ID,
+        PROVINCE_ID, LOCAL_ID, AREA_ID,
+        MONGO_FLAG, BACKLIST_FLAG, RELATION_FLAG,
+        APPL_DATE, COMPL_DATE, RSRV_STR1,
+        RSRV_STR2, RSRV_STR3, STS,
+        STS_DATE, REMARKS)
+        values (#{servid,jdbcType=INTEGER}, #{qrId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+        #{companyId,jdbcType=INTEGER}, #{batchId,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR},
+        #{provinceId,jdbcType=VARCHAR}, #{localId,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER},
+        #{mongoFlag,jdbcType=VARCHAR}, #{backlistFlag,jdbcType=VARCHAR}, #{relationFlag,jdbcType=VARCHAR},
+        #{applDate,jdbcType=DATE}, #{complDate,jdbcType=TIMESTAMP}, #{rsrvStr1,jdbcType=VARCHAR},
+        #{rsrvStr2,jdbcType=VARCHAR}, #{rsrvStr3,jdbcType=VARCHAR}, #{sts,jdbcType=CHAR},
+        #{stsDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.zhongxin.cims.modules.common.entity.Serv" >
+        insert into t_serv
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="servid != null" >
+                SERVID,
+            </if>
+            <if test="qrId != null" >
+                QR_ID,
+            </if>
+            <if test="userId != null" >
+                USER_ID,
+            </if>
+            <if test="companyId != null" >
+                COMPANY_ID,
+            </if>
+            <if test="batchId != null" >
+                BATCH_ID,
+            </if>
+            <if test="appId != null" >
+                APP_ID,
+            </if>
+            <if test="provinceId != null" >
+                PROVINCE_ID,
+            </if>
+            <if test="localId != null" >
+                LOCAL_ID,
+            </if>
+            <if test="areaId != null" >
+                AREA_ID,
+            </if>
+            <if test="mongoFlag != null" >
+                MONGO_FLAG,
+            </if>
+            <if test="backlistFlag != null" >
+                BACKLIST_FLAG,
+            </if>
+            <if test="relationFlag != null" >
+                RELATION_FLAG,
+            </if>
+            <if test="applDate != null" >
+                APPL_DATE,
+            </if>
+            <if test="complDate != null" >
+                COMPL_DATE,
+            </if>
+            <if test="rsrvStr1 != null" >
+                RSRV_STR1,
+            </if>
+            <if test="rsrvStr2 != null" >
+                RSRV_STR2,
+            </if>
+            <if test="rsrvStr3 != null" >
+                RSRV_STR3,
+            </if>
+            <if test="sts != null" >
+                STS,
+            </if>
+            <if test="stsDate != null" >
+                STS_DATE,
+            </if>
+            <if test="remarks != null" >
+                REMARKS,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="servid != null" >
+                #{servid,jdbcType=INTEGER},
+            </if>
+            <if test="qrId != null" >
+                #{qrId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null" >
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null" >
+                #{companyId,jdbcType=INTEGER},
+            </if>
+            <if test="batchId != null" >
+                #{batchId,jdbcType=VARCHAR},
+            </if>
+            <if test="appId != null" >
+                #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null" >
+                #{provinceId,jdbcType=VARCHAR},
+            </if>
+            <if test="localId != null" >
+                #{localId,jdbcType=INTEGER},
+            </if>
+            <if test="areaId != null" >
+                #{areaId,jdbcType=INTEGER},
+            </if>
+            <if test="mongoFlag != null" >
+                #{mongoFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="backlistFlag != null" >
+                #{backlistFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="relationFlag != null" >
+                #{relationFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="applDate != null" >
+                #{applDate,jdbcType=DATE},
+            </if>
+            <if test="complDate != null" >
+                #{complDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="rsrvStr1 != null" >
+                #{rsrvStr1,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr2 != null" >
+                #{rsrvStr2,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr3 != null" >
+                #{rsrvStr3,jdbcType=VARCHAR},
+            </if>
+            <if test="sts != null" >
+                #{sts,jdbcType=CHAR},
+            </if>
+            <if test="stsDate != null" >
+                #{stsDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null" >
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <resultMap id="FindResultMap" type="com.zhongxin.cims.modules.cp.entity.Personnel" >
+        <result column="SERVID" property="servid" jdbcType="INTEGER" />
+        <result column="CERT_TYPE" property="certType" jdbcType="VARCHAR" />
+        <result column="CERT_NO" property="certNo" jdbcType="VARCHAR" />
+        <result column="EFF_DATE" property="effDate" jdbcType="DATE" />
+        <result column="EXP_DATE" property="expDate" jdbcType="DATE" />
+        <result column="ISSUE_BY" property="issueBy" jdbcType="VARCHAR" />
+        <result column="ISSUE_DATE" property="issueDate" jdbcType="DATE" />
+        <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+        <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+        <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+        <result column="STS" property="sts" jdbcType="CHAR" />
+        <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+        <collection ofType="Company" property="company"  resultMap="companyRS"/>
+    </resultMap>
+    <resultMap id="companyRS" type="Company">
+        <id column="COMPANY_ID" property="companyId" jdbcType="INTEGER" />
+        <result column="COMPANY_NAME" property="companyName" jdbcType="VARCHAR" />
+        <result column="COMPANY_TYPE" property="companyType" jdbcType="VARCHAR" />
+        <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+        <result column="TAX_NO" property="taxNo" jdbcType="VARCHAR" />
+        <result column="LICENCE_NO" property="licenceNo" jdbcType="VARCHAR" />
+        <result column="ECONOMIC_TYPE" property="economicType" jdbcType="VARCHAR" />
+        <result column="QUAL_LEVEL" property="qualLevel" jdbcType="VARCHAR" />
+        <result column="QUAL_TYPE" property="qualType" jdbcType="VARCHAR" />
+        <result column="QUAL_CERT_NO" property="qualCertNo" jdbcType="VARCHAR" />
+        <result column="LEG_PERSON" property="legPerson" jdbcType="VARCHAR" />
+        <result column="LEG_ID_TYPE" property="legIdType" jdbcType="VARCHAR" />
+        <result column="LEG_NO" property="legNo" jdbcType="VARCHAR" />
+        <result column="REGISTER_TYPE" property="registerType" jdbcType="VARCHAR" />
+        <result column="REGISTER_ADDR" property="registerAddr" jdbcType="VARCHAR" />
+        <result column="REGISTER_CAPITAL" property="registerCapital" jdbcType="VARCHAR" />
+        <result column="EFF_DATE" property="effDate" jdbcType="DATE" />
+        <result column="EXP_DATE" property="expDate" jdbcType="DATE" />
+        <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+        <result column="POST_CODE" property="postCode" jdbcType="VARCHAR" />
+        <result column="CONTACT_PERSON" property="contactPerson" jdbcType="VARCHAR" />
+        <result column="CONTACT_PHONE" property="contactPhone" jdbcType="VARCHAR" />
+        <result column="FAX" property="fax" jdbcType="VARCHAR" />
+        <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+        <result column="PROFILE" property="profile" jdbcType="VARCHAR" />
+        <result column="PROVINCE_ID" property="provinceId" jdbcType="VARCHAR" />
+        <result column="LOCAL_ID" property="localId" jdbcType="INTEGER" />
+        <result column="AREA_ID" property="areaId" jdbcType="INTEGER" />
+        <result column="RSRV_STR1" property="rsrvStr1" jdbcType="VARCHAR" />
+        <result column="RSRV_STR2" property="rsrvStr2" jdbcType="VARCHAR" />
+        <result column="RSRV_STR3" property="rsrvStr3" jdbcType="VARCHAR" />
+        <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+        <result column="STS" property="sts" jdbcType="CHAR" />
+        <result column="STS_DATE" property="stsDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <!-- 调用见 PersonnelService.find 方法 -->
+    <select id="find" resultType="Serv" resultMap="BaseResultMap">
+        select a.SERVID,
+        a.NAME,
+        a.MAJOR,
+        a.TITLE_LEVEL,
+        a.TITLE_TYPE,
+        a.PERSON_TYPE,
+        a.SEX,
+        a.BIRTH_DATE,
+        a.ID_NO,
+        b.CERT_NO,
+        b.ISSUE_DATE,
+        b.ISSUE_BY,
+        b.EFF_DATE,
+        b.EXP_DATE,
+        b.STS
+        from serv_cp_base a inner join serv_main_cert b on a.SERVID = b.SERVID
+        inner join t_serv c on a.SERVID = c.SERVID
+        <where>
+            c.sts = '0' and c.app_id = 'CP'
+            and b.COMPANY_ID = #{companyId}
+        </where>
+    </select>
+
+
+    <select id="findServInfoBeforeSave" resultType="Serv">
+        select
+        c.servid s_servid, c.qr_id s_qr_id, c.user_id s_user_id,c.company_id s_company_id, c.batch_id s_batch_id, c.app_id s_app_id,c.local_id s_local_id,c.sts s_sts,c.sts_date s_sts_date
+        from t_serv c inner join serv_main_cert b on c.servid = b.servid
+        inner join serv_cp_base a  on a.servid = c.servid
+        <where>
+            a.sts='0' and c.sts='0'  and c.app_id =#{appId,jdbcType=VARCHAR} and a.id_no=#{idNo,jdbcType=VARCHAR} and a.person_type=#{personType,jdbcType=VARCHAR}
+        </where>
+    </select>
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhongxin.cims.modules.common.entity.Serv">
+        update t_serv
+        <set>
+            <if test="qrId != null">
+                QR_ID = #{qrId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                USER_ID = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                COMPANY_ID = #{companyId,jdbcType=INTEGER},
+            </if>
+            <if test="batchId != null">
+                BATCH_ID = #{batchId,jdbcType=VARCHAR},
+            </if>
+            <if test="appId != null">
+                APP_ID = #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null">
+                PROVINCE_ID = #{provinceId,jdbcType=VARCHAR},
+            </if>
+            <if test="localId != null">
+                LOCAL_ID = #{localId,jdbcType=INTEGER},
+            </if>
+            <if test="areaId != null">
+                AREA_ID = #{areaId,jdbcType=INTEGER},
+            </if>
+            <if test="mongoFlag != null">
+                MONGO_FLAG = #{mongoFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="backlistFlag != null">
+                BACKLIST_FLAG = #{backlistFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="relationFlag != null">
+                RELATION_FLAG = #{relationFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="applDate != null">
+                APPL_DATE = #{applDate,jdbcType=DATE},
+            </if>
+            <if test="complDate != null">
+                COMPL_DATE = #{complDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="rsrvStr1 != null">
+                RSRV_STR1 = #{rsrvStr1,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr2 != null">
+                RSRV_STR2 = #{rsrvStr2,jdbcType=VARCHAR},
+            </if>
+            <if test="rsrvStr3 != null">
+                RSRV_STR3 = #{rsrvStr3,jdbcType=VARCHAR},
+            </if>
+            <if test="sts != null">
+                STS = #{sts,jdbcType=CHAR},
+            </if>
+            <if test="stsDate != null">
+                STS_DATE = #{stsDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null">
+                REMARKS = #{remarks,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where servid = #{servid,jdbcType=INTEGER}
+
+    </update>
+
+</mapper>

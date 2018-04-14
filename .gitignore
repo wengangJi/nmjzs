@@ -1,0 +1,17 @@
+*.class
+
+# Package Files #
+*.war
+*.ear
+*.zip
+*.rar
+*.idea
+*.iml
+*.ids
+*.ipr
+.settings/*
+/indexes/*
+/doc/*
+/src/main/webapp/WEB-INF/classes/*
+*.iws
+/target/*

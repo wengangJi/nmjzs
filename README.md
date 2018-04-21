@@ -1,11 +1,6 @@
-Personal software copyright project - online education platform.
-
-该项目为个人登记软件著作权项目，提供在线教育学习、审核、考试、制证、财务等一些列在线教育功能。
-
-
 技术选型
 1、后端
-
+播 放 器：自研播放器，支持10000并发播放、限制前进后退、增加拍照、视频截取等业务个性化功能。
 核心框架：Spring Framework 4.0
 安全框架：Apache Shiro 1.2
 视图框架：Spring MVC 4.0

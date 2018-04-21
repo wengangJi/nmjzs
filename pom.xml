@@ -8,7 +8,7 @@
 	<version>1.0.0</version>
 	<packaging>war</packaging>
 	<name>nmjzs</name>
-	<url>http://thinkgem.github.com/jeesite</url>
+	<url></url>
     
 	<!-- 项目属性 -->
 	<properties>
@@ -964,10 +964,10 @@
 	<!-- 开发者信息 -->
 	<developers>  
 		<developer>
-			<id>thinkgem</id>
-			<name>WangZhen</name>
-			<email>thinkgem at 163.com</email>
-			<roles><role>Project lead</role></roles>
+			<id></id>
+			<name>wengangJi</name>
+			<email>28707699@qq.com</email>
+			<roles><role>Project builder</role></roles>
 			<timezone>+8</timezone>  
 		</developer>
 	</developers>
